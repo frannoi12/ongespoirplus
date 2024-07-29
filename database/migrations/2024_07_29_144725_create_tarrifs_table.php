@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('tarrifs', function (Blueprint $table) {
             $table->id();
+            $table->string('designation');
+            $table->integer('montant')->unsigned();
             $table->timestamps();
         });
     }

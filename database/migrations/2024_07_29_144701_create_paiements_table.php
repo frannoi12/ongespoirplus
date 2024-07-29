@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('paiements', function (Blueprint $table) {
             $table->id();
+            $table->integer('tarrif_id');
+            $table->foreign('tarrif_id')->references('id')->on('tarrifs');
+            $table->integer('personnel_id');
+            $table->foreign('personnel_id')->references('id')->on('personnels');
             $table->timestamps();
         });
     }

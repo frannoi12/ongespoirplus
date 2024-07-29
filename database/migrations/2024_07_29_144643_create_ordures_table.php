@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('ordures', function (Blueprint $table) {
             $table->id();
+            $table->string('type_ordure');//papier carton,sachet pure watter,sachet flottant,pastique solide,etc ...
+            $table->string('statut');//Savoir si l'ordure est toujours recyclé par l'entreprise où pas
             $table->timestamps();
         });
     }
