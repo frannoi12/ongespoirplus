@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('menages', function (Blueprint $table) {
             $table->id();
             $table->integer('code')->unique();
-            $table->text('personne_a_contacter');
+            $table->string('personne_a_contacter');
             $table->string('date_abonnement')->default(now());
             $table->string('date_prise_effet')->default(now());
             $table->integer('secteur_id');
