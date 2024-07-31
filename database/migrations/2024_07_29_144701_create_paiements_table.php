@@ -21,9 +21,6 @@ return new class extends Migration
             $table->foreign('personnel_id')->references('id')->on('personnels');
             $table->timestamps();
         });
-
-        // Ajout de la contrainte CHECK
-        DB::statement("ALTER TABLE paiements ADD CONSTRAINT chk_type_paiement CHECK (type_paiement IN ('espece', 'mobile_money'))");
     }
 
     /**
