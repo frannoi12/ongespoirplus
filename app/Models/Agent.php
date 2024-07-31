@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Agent extends Model
 {
@@ -14,5 +15,9 @@ class Agent extends Model
         "naissance",
         "permis"
     ];
+
+    public function personnel(): HasOne{
+        return $this->hasOne(Personnel::class);
+    }
 
 }

@@ -20,8 +20,7 @@ return new class extends Migration
             $table->foreign('secteur_id')->references('id')->on('secteurs');
             $table->integer('personnel_id');
             $table->foreign('personnel_id')->references('id')->on('personnels');
-            $table->integer('agent_id');
-            $table->foreign('agent_id')->references('id')->on('agents');
+            $table->integer('agent');
             $table->timestamps();
         });
     }
