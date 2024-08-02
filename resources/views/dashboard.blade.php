@@ -39,16 +39,50 @@
                                         <td class="border px-4 py-2">Contact</td>
                                         <td class="border px-4 py-2">{{ Auth::user()->contact }}</td>
                                     </tr>
-                                    @if (Auth::user()->personnel->role !== '')
+                                    @if (Auth::user()->personnel)
                                         <tr>
-                                            <td class="border px-4 py-2">Contact</td>
-                                            <td class="border px-4 py-2"></td>
+                                            <td class="border px-4 py-2">Etat</td>
+                                            <td class="border px-4 py-2">
+                                                {{ Auth::user()->personnel->etat }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border px-4 py-2">Role</td>
+                                            <td class="border px-4 py-2">
+                                                {{ Auth::user()->personnel->role }}
+                                            </td>
                                         </tr>
                                     @endif
-                                    @if (Auth::user()->id === Auth::user()->menage->user_id)
+                                    @if (Auth::user()->menage)
                                         <tr>
-                                            <td class="border px-4 py-2">Contact</td>
-                                            <td class="border px-4 py-2"></td>
+                                            <td class="border px-4 py-2">Code de votre maison</td>
+                                            <td class="border px-4 py-2">
+                                                {{ Auth::user()->menage->code }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border px-4 py-2">Personne à contacter</td>
+                                            <td class="border px-4 py-2">
+                                                {{ Auth::user()->menage->personne_a_contacter }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border px-4 py-2">Date d'abonnement</td>
+                                            <td class="border px-4 py-2">
+                                                {{ Auth::user()->menage->date_abonnement }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border px-4 py-2">Date de prise d'effet</td>
+                                            <td class="border px-4 py-2">
+                                                {{ Auth::user()->menage->date_prise_effet }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border px-4 py-2">Secteur</td>
+                                            <td class="border px-4 py-2">
+                                                {{ Auth::user()->menage->secteur->nomSecteur }}
+                                            </td>
                                         </tr>
                                     @endif
                                 </tbody>

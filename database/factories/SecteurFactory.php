@@ -17,7 +17,7 @@ class SecteurFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nomSecteur' => $this->faker->word(),
         ];
     }
 }
