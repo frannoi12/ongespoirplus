@@ -45,7 +45,7 @@
                                             <td class="border px-4 py-2"></td>
                                         </tr>
                                     @endif
-                                    @if (Auth::user()->menage->code != 0)
+                                    @if (Auth::user()->id === Auth::user()->menage->user_id)
                                         <tr>
                                             <td class="border px-4 py-2">Contact</td>
                                             <td class="border px-4 py-2"></td>
