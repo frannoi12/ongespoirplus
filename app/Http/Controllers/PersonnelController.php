@@ -25,7 +25,7 @@ class PersonnelController extends Controller
 
         } else {
             $users = User::paginate($pagination_number);
-            $personnels = Personnel::all();
+            $personnels = Personnel::paginate($pagination_number);
         }
 
         // $users = User::paginate($pagination_number);
