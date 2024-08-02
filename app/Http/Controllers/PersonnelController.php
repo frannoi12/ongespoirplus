@@ -5,15 +5,32 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePersonnelRequest;
 use App\Http\Requests\UpdatePersonnelRequest;
 use App\Models\Personnel;
-
+use App\Models\User;
+use Illuminate\Http\Request;
 class PersonnelController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->input("search");
+        $pagination_number = 5;
+        if ($search) {
+            $users = User::where("name", "like", "%" . $search . "%")
+                ->orWhere("prenom", "like", "%" . $search . "%")
+                ->orWhere("email", "like", "%" . $search . "%")
+                ->paginate($pagination_number);
+            $personnels = Personnel::all();
+
+        } else {
+            $users = User::paginate($pagination_number);
+            $personnels = Personnel::all();
+        }
+
+        // $users = User::paginate($pagination_number);
+
+        return view('personnels.index', compact('users','search','personnels'));
     }
 
     /**
@@ -59,8 +76,18 @@ class PersonnelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Personnel $personnel)
+    public function destroy(User $user)
     {
-        //
+        $user->load('personnel');
+
+        // dd($user, $user->personnel);
+
+        if ($user->personnel) {
+            $user->personnel->delete();
+        }
+
+        $user->delete();
+
+        return redirect()->route('personnels.index')->with('success', 'Produit supprimé avec succès');
     }
 }

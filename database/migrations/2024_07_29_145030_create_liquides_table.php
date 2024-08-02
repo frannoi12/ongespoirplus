@@ -16,10 +16,9 @@ return new class extends Migration
             $table->string('type_paiement'); // c'est-à-dire en espèce où par chèque.
             $table->string('statut'); //Un indicateur du statut du paiement (par exemple, "en attente", "confirmé", "annulé", etc.).
             $table->string('date_paiement')->default(now()); //Date du paiement.
-            $table->integer('personnel_id');//ici sa concerne un comptable (toute personne qui en caisse de l'argent d'un abonnement)
-            $table->foreign('personnel_id')->references('id')->on('personnels');
-            $table->integer('paiement_id');
-            $table->foreign('paiement_id')->references('id')->on('paiements'); //j'ai mis ceci en passant à comment récupéré l'attribut montant dans la table paiement
+            //ici sa concerne un comptable (toute personne qui en caisse de l'argent d'un abonnement)
+            $table->foreignId('personnel_id')->constrained('personnels')->onDelete('cascade');
+            $table->foreignId('paiement_id')->constrained('paiement')->onDelete('cascade');
             $table->timestamps();
         });
     }

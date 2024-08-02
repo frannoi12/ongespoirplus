@@ -27,7 +27,7 @@ class PersonnelSeeder extends Seeder
         ]);
         $personne2=Personnel::create([
             'etat'=>'Actif',
-            'role'=>$roles[1]->name,
+            'role'=>$roles[0]->name,
             'user_id'=>$users[1]->id,
         ]);
         $personne0=Personnel::create([

@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('poposer_ventes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('ordure_id');
             $table->integer('quantite');
             $table->string('statut');
-            $table->unsignedBigInteger('menage_vendeurs_id');
             $table->timestamps();
 
-            $table->foreign('ordure_id')->references('id')->on('ordures');
-            $table->foreign('menage_vendeurs_id')->references('id')->on('menages');
+            $table->foreignId('ordure_id')->constrained('ordures')->onDelete('cascade');
+            $table->foreignId('menage_vandeur_id')->constrained('menages')->onDelete('cascade');
         });
     }
 

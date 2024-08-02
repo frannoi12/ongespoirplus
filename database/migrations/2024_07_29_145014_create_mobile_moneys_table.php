@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('mobile_moneys', function (Blueprint $table) {
             $table->id();
             $table->string('type_mobile_money'); // pour savoir si c'est flooz où tmoney
-            $table->integer('paiement_id'); //grâce à l'id de paiement on connait la menage concerné
-            $table->foreign('paiement_id')->references('id')->on('paiement');
+            $table->foreignId('paiement_id')->constrained('paiements')->onDelete('cascade');
             $table->string('ref_transaction'); //ici on récupère les informations concernant une transaction
             $table->string('devise')->default('frcfa');
             $table->string('date_transaction')->default(now());

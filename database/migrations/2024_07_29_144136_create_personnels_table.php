@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('personnels', function (Blueprint $table) {
             $table->id();
             $table->string('etat'); // actif ou inactif
-            $table->string('role'); // se que la personne fait dans l'entreprise
-            $table->integer('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('role'); // ce que la personne fait dans l'entreprise
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Définir la clé étrangère avec suppression en cascade
             $table->timestamps();
         });
     }

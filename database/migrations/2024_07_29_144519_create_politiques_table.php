@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('politiques', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->integer('personnel_id');
-            $table->foreign('personnel_id')->references('id')->on('personnels');
+            $table->foreignId('personnel_id')->constrained('personnels')->onDelete('cascade');
             $table->timestamps();
         });
     }

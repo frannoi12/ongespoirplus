@@ -16,10 +16,8 @@ return new class extends Migration
             $table->string('type_tourne'); // général(pour l'agence) ou simple(pour les agents de terrain)
             $table->string('statut'); // accomplie, en cours,
             $table->string('date_jour')->default(now());
-            $table->integer('secteur_id');
-            $table->foreign('secteur_id')->references('id')->on('secteurs');
-            $table->integer('personnel_id');
-            $table->foreign('personnel_id')->references('id')->on('personnels');
+            $table->foreignId('secteur_id')->constrained('secteurs')->onDelete('cascade');// A un secteur on associe 1 où plusieurs menage
+            $table->foreignId('personnel_id')->constrained('personnels')->onDelete('cascade');
             $table->integer('agent');
             $table->timestamps();
         });

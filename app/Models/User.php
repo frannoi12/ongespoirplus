@@ -51,12 +51,12 @@ class User extends Authenticatable
     }
 
     public function personnel(): HasOne {
-        return $this->hasOne(Personnel::class, 'user_id');
+        return $this->hasOne(Personnel::class);
     }
 
 
     public function menage(): HasOne {
-        return $this->hasOne(Menage::class,'user_id');
+        return $this->hasOne(Menage::class);
     }
 
 

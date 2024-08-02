@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('localisationGps');
             $table->string('ville');
             $table->string('quartier');
-            $table->integer('personnel_id');
-            $table->foreign('personnel_id')->references('id')->on('personnels');
+            $table->foreignId('personnel_id')->constrained('personnels')->onDelete('cascade');
             $table->timestamps();
         });
     }
