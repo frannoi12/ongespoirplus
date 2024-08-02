@@ -11,6 +11,8 @@ class Paiement extends Model
 {
     use HasFactory;
 
+    protected $table = 'paiements';
+
     protected $fillable = [
         "tarrif_id",
         "personnel_id"

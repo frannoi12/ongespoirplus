@@ -79,13 +79,14 @@
                                             <button
                                                 class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Consulter</button>
                                         </a>
-                                        <form action="{{ route('personnels.destroy', $user->id) }}" method="POST"
-                                            onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
+                                        @if ($user->personnel)
+                                        <form action="{{ route('personnels.destroy', $user->personnel->id) }}" method="POST"
+                                            onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel ?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button
-                                                class="bg-red-600 hover:bg-red-500 text-white text-sm px-3 py-2 rounded-md">Supprimer</button>
+                                            <button type="submit" class="bg-red-600 hover:bg-red-500 text-white text-sm px-3 py-2 rounded-md">Supprimer</button>
                                         </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @empty

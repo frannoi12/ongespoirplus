@@ -24,9 +24,10 @@ class PersonnelController extends Controller
             $personnels = Personnel::all();
 
         } else {
-            $users = User::paginate($pagination_number);
-            $personnels = Personnel::all();
+            $users = User::with('personnel')->paginate($pagination_number);
+            $personnels = Personnel::paginate($pagination_number);
         }
+        //dd($users);
 
         // $users = User::paginate($pagination_number);
 
@@ -76,17 +77,17 @@ class PersonnelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(Personnel $personnel)
     {
-        $user->load('personnel');
+        //$personnel->load('personnel');
 
-        // dd($user, $user->personnel);
+        //dd($personnel, $personnel->user);
 
-        if ($user->personnel) {
-            $user->personnel->delete();
-        }
+        /*if ($personnel) {
+            $personnel->user->delete();
+        }*/
 
-        $user->delete();
+        $personnel->user->delete();
 
         return redirect()->route('personnels.index')->with('success', 'Produit supprimé avec succès');
     }
