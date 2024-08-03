@@ -14,23 +14,18 @@ class PersonnelController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->input("search");
-        $pagination_number = 5;
-        if ($search) {
-            $users = User::where("name", "like", "%" . $search . "%")
-                ->orWhere("prenom", "like", "%" . $search . "%")
-                ->orWhere("email", "like", "%" . $search . "%")
-                ->paginate($pagination_number);
-            $personnels = Personnel::all();
+        $search = $request->input('search');
+        $query = User::whereHas('personnel');
 
-        } else {
-            $users = User::paginate($pagination_number);
-            $personnels = Personnel::paginate($pagination_number);
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('prenom', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%");
         }
 
-        // $users = User::paginate($pagination_number);
+        $users = $query->paginate(10);
 
-        return view('personnels.index', compact('users','search','personnels'));
+        return view('personnels.index', compact('users','search'));
     }
 
     /**
@@ -76,17 +71,15 @@ class PersonnelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(Personnel $personnel)
     {
-        $user->load('personnel');
+        // dd($personnel->user);
 
-        // dd($user, $user->personnel);
-
-        if ($user->personnel) {
-            $user->personnel->delete();
+        if($personnel->user){
+            $personnel->user->delete();
         }
 
-        $user->delete();
+        $personnel->delete();
 
         return redirect()->route('personnels.index')->with('success', 'Produit supprimé avec succès');
     }

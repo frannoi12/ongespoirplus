@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('date_paiement')->default(now()); //Date du paiement.
             //ici sa concerne un comptable (toute personne qui en caisse de l'argent d'un abonnement)
             $table->foreignId('personnel_id')->constrained('personnels')->onDelete('cascade');
-            $table->foreignId('paiement_id')->constrained('paiement')->onDelete('cascade');
+            $table->foreignId('paiement_id')->constrained('paiements')->onDelete('cascade');
             $table->timestamps();
         });
     }

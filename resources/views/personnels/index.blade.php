@@ -45,52 +45,54 @@
                             <th class="py-3 px-6">Action</th>
                         </thead>
                         <tbody>
-                            @forelse ($personnels as $personnel)
+                            @forelse ($users as $user)
                                 <tr class="bg-gray-100">
                                     <td class="py-3 px-6">
-                                        {{ $personnel->user->name }}
+                                        {{ $user->name }}
                                     </td>
                                     <td class="py-3 px-6">
-                                        {{ $personnel->user->prenom }}
+                                        {{ $user->prenom }}
                                     </td>
                                     <td class="py-3 px-6">
-                                        {{ $personnel->user->email }}
+                                        {{ $user->email }}
                                     </td>
                                     <td class="py-3 px-6">
-                                        {{ $personnel->user->contact }}
+                                        {{ $user->contact }}
                                     </td>
                                     <td class="py-3 px-6">
-                                        {{ $personnel->etat }}
+                                        {{ $user->personnel->etat ?? ' ' }}
                                     </td>
                                     <td class="py-3 px-6">
-                                        {{ $personnel->role }}
+                                        {{ $user->personnel->role ?? ' ' }}
                                     </td>
                                     <td class="py-3 px-6">
-                                        <a href="{{ route('personnels.edit', $personnel->id) }}">
-                                            <button
-                                                class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">Editer</button>
-                                        </a>
-                                        <a href="{{ route('personnels.show', $personnel->id) }}">
-                                            @csrf
-                                            <button
-                                                class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Consulter</button>
-                                        </a>
-                                        <form action="{{ route('personnels.destroy', $personnel->id) }}" method="POST"
-                                            onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button
-                                                class="bg-red-600 hover:bg-red-500 text-white text-sm px-3 py-2 rounded-md">Supprimer</button>
-                                        </form>
+                                        @if ($user->personnel)
+                                            <a href="{{ route('personnels.edit', $user->personnel->id) }}">
+                                                <button
+                                                    class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">Editer</button>
+                                            </a>
+                                            <a href="{{ route('personnels.show', $user->personnel->id) }}">
+                                                @csrf
+                                                <button
+                                                    class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Consulter</button>
+                                            </a>
+                                            <form action="{{ route('personnels.destroy', $user->personnel->id) }}" method="POST"
+                                                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button
+                                                    class="bg-red-600 hover:bg-red-500 text-white text-sm px-3 py-2 rounded-md">Supprimer</button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @empty
-                                Aucun produit disponible
+                                Aucun personnels disponible
                             @endforelse
                         </tbody>
                     </table>
                     <div>
-                        {{ $personnels->links() }}
+                        {{ $users->links() }}
                     </div>
                 </div>
             </div>
