@@ -24,10 +24,10 @@ class RoleHasPermissionSeeder extends Seeder
 
         
         $Agent_terrain=$roles[1];
-        $menage = $roles[2];
-        $comptable = $roles[3];
-        $secretaire=$roles[4];
-        $Volontaire=$roles[5];
+        // $menage = $roles[2];
+        $comptable = $roles[2];
+        $secretaire=$roles[3];
+        $Volontaire=$roles[4];
         // dd($menage);
 
         $rollbak_permissions_client = [
