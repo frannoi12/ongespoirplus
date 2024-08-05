@@ -25,9 +25,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SecteurSeeder::class,
             PersonnelSeeder::class,
-            MenageSeeder::class,
             PolitiqueSeeder::class,
             TariffSeeder::class,
+            MenageSeeder::class,
             PermissionSeeder::class,
             RoleHasPermissionSeeder::class,
         ]);

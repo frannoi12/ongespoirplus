@@ -70,12 +70,15 @@ namespace App\Models{
  * 
  *
  * @property int $id
+ * @property string $type_menage
+ * @property bool $politique
  * @property string $code
  * @property string $personne_a_contacter
  * @property string $date_abonnement
  * @property string $date_prise_effet
  * @property int $secteur_id
  * @property int $user_id
+ * @property int $tariff_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Paiement> $paiements
@@ -94,7 +97,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereDatePriseEffet($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage wherePersonneAContacter($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menage wherePolitique($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereSecteurId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menage whereTariffId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menage whereTypeMenage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereUserId($value)
  */
@@ -171,6 +177,7 @@ namespace App\Models{
  * 
  *
  * @property int $id
+ * @property string $lieu_de_provenance
  * @property string $etat
  * @property string $role
  * @property int $user_id
@@ -190,6 +197,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Personnel whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Personnel whereEtat($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Personnel whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Personnel whereLieuDeProvenance($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Personnel whereRole($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Personnel whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Personnel whereUserId($value)

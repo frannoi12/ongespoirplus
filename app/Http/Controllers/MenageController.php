@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMenageRequest;
 use App\Http\Requests\UpdateMenageRequest;
 use App\Models\Menage;
+use App\Models\Secteur;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class MenageController extends Controller
 {
@@ -34,7 +36,8 @@ class MenageController extends Controller
      */
     public function create()
     {
-        //
+        $secteurs = Secteur::all();
+        return view("menages.create_or_update",compact('secteurs'));
     }
 
     /**
@@ -42,7 +45,24 @@ class MenageController extends Controller
      */
     public function store(StoreMenageRequest $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'contact' => 'required|string|max:15',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'prenom' => $request->prenom,
+            'email' => $request->email,
+            'contact' => $request->contact,
+            'password' => Hash::make($request->password),  // hash du mot de passe
+        ]);
+
+
+        return redirect()->route('menages.index')->with('success', 'Personnel ajouté avec succès');
     }
 
     /**
@@ -50,7 +70,8 @@ class MenageController extends Controller
      */
     public function show(Menage $menage)
     {
-        //
+        $menage = Menage::findOrFail($menage->id);
+        return view('menages.show',compact('menage'));
     }
 
     /**
@@ -58,7 +79,8 @@ class MenageController extends Controller
      */
     public function edit(Menage $menage)
     {
-        //
+        $menage = Menage::findOrFail($menage->id);
+        return view('menages.create_or_update', compact('menage'));
     }
 
     /**
@@ -66,7 +88,21 @@ class MenageController extends Controller
      */
     public function update(UpdateMenageRequest $request, Menage $menage)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $menage->user_id,
+            'contact' => 'required|string|max:15',
+        ]);
+
+        $menage->user->update([
+            'name' => $request->name,
+            'prenom' => $request->prenom,
+            'email' => $request->email,
+            'contact' => $request->contact,
+        ]);
+
+        return redirect()->route('menages.index')->with('success', 'Personnel mis à jour avec succès');
     }
 
     /**
@@ -74,6 +110,12 @@ class MenageController extends Controller
      */
     public function destroy(Menage $menage)
     {
-        //
+        if($menage->user){
+            $menage->user->delete();
+        }
+
+        $menage->delete();
+
+        return redirect()->route('menages.index')->with('success', 'Menage supprimé avec succès');
     }
 }

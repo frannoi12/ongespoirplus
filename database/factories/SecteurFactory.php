@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Menage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

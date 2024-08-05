@@ -15,7 +15,8 @@ class Menage extends Model
         "code",
         "personne_a_contacter",
         "secteur_id",
-        "user_id"
+        "user_id",
+        "tariff_id",
     ];
 
     public function user(): BelongsTo {

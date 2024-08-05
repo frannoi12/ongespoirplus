@@ -38,8 +38,9 @@
                         <thead class="text-lg font-semibold bg-gray-300">
                             <th class="py-3 px-6">Nom</th>
                             <th class="py-3 px-6">Prenom</th>
-                            <th class="py-3 px-6">Email</th>
+                            {{-- <th class="py-3 px-6">Email</th> --}}
                             <th class="py-3 px-6">Contact</th>
+                            <th class="py-3 px-6">Provenance</th>
                             <th class="py-3 px-6">Etat</th>
                             <th class="py-3 px-6">Role</th>
                             <th class="py-3 px-6">Action</th>
@@ -53,11 +54,14 @@
                                     <td class="py-3 px-6">
                                         {{ $user->prenom }}
                                     </td>
-                                    <td class="py-3 px-6">
+                                    {{-- <td class="py-3 px-6">
                                         {{ $user->email }}
-                                    </td>
+                                    </td> --}}
                                     <td class="py-3 px-6">
                                         {{ $user->contact }}
+                                    </td>
+                                    <td class="py-3 px-6">
+                                        {{ $user->personnel->lieu_de_provenance ?? '' }}
                                     </td>
                                     <td class="py-3 px-6">
                                         {{ $user->personnel->etat ?? ' ' }}

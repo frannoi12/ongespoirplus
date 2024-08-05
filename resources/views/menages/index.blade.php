@@ -37,11 +37,13 @@
                     <table class="w-full text-left">
                         <thead class="text-lg font-semibold bg-gray-300">
                             <th class="py-3 px-6">Nom</th>
-                            <th class="py-3 px-6">Prenom</th>
-                            <th class="py-3 px-6">Email</th>
                             <th class="py-3 px-6">Contact</th>
-                            {{-- <th class="py-3 px-6">Etat</th>
-                            <th class="py-3 px-6">Role</th> --}}
+                            <th class="py-3 px-6">code</th>
+                            <th class="py-3 px-6">Secteur</th>
+                            <th class="py-3 px-6">Service</th>
+                            <th class="py-3 px-6">Numéro à Contacter</th>
+                            <th class="py-3 px-6">Date d'abonnement</th>
+                            <th class="py-3 px-6">Date de prise d'effet</th>
                             <th class="py-3 px-6">Action</th>
                         </thead>
                         <tbody>
@@ -51,20 +53,28 @@
                                         {{ $user->name }}
                                     </td>
                                     <td class="py-3 px-6">
-                                        {{ $user->prenom }}
-                                    </td>
-                                    <td class="py-3 px-6">
-                                        {{ $user->email }}
-                                    </td>
-                                    <td class="py-3 px-6">
                                         {{ $user->contact }}
                                     </td>
-                                    {{-- <td class="py-3 px-6">
-                                        {{ $user->personnel->etat ?? ' ' }}
-                                    </td>
-                                    <td class="py-3 px-6">
-                                        {{ $user->personnel->role ?? ' ' }}
-                                    </td> --}}
+                                    @if ($user->menage)
+                                        <td class="py-3 px-6">
+                                            {{ $user->menage->code }}
+                                        </td>
+                                        <td class="py-3 px-6">
+                                            {{ $user->menage->secteur->nomSecteur }}
+                                        </td>
+                                        <td class="py-3 px-6">
+                                            {{ $user->menage->service }}
+                                        </td>
+                                        <td class="py-3 px-6">
+                                            {{ $user->menage->personne_a_contacter }}
+                                        </td>
+                                        <td class="py-3 px-6">
+                                            {{ $user->menage->date_abonnement }}
+                                        </td>
+                                        <td class="py-3 px-6">
+                                            {{ $user->menage->date_prise_effet }}
+                                        </td>
+                                    @endif
                                     <td class="py-3 px-6">
                                         @if ($user->menage)
                                             <a href="{{ route('menages.edit', $user->menage->id) }}">
@@ -76,7 +86,8 @@
                                                 <button
                                                     class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Consulter</button>
                                             </a>
-                                            <form action="{{ route('menages.destroy', $user->menage->id) }}" method="POST"
+                                            <form action="{{ route('menages.destroy', $user->menage->id) }}"
+                                                method="POST"
                                                 onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette menage ?');">
                                                 @csrf
                                                 @method('DELETE')

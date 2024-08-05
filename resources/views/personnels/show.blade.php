@@ -37,6 +37,11 @@
                         <legend class="text-lg font-medium text-gray-700 dark:text-gray-300">Information dans l'Entreprise</legend>
 
                         <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Provenance</label>
+                            <p>{{ $personnel->lieu_de_provenance }}</p>
+                        </div>
+
+                        <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Etat</label>
                             <p>{{ $personnel->etat }}</p>
                         </div>

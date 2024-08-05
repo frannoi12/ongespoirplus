@@ -72,6 +72,14 @@
 
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="lieu_de_provenance">Provenance</label>
+                                <input type="lieu_de_provenance" id="lieu_de_provenance" name="lieu_de_provenance"
+                                    value="{{ old('lieu_de_provenance', $personnel->lieu_de_provenance ?? '') }}"
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                                     for="etat">Etat</label>
                                 <select id="etat" name="etat" class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                                     <option value="actif"

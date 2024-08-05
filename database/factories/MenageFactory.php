@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Politique;
 use App\Models\Secteur;
+use App\Models\Tariff;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -28,6 +30,9 @@ class MenageFactory extends Factory
             'date_prise_effet' => $this->faker->date(),
             'user_id' => User::factory(), // Utilisation de la factory User pour attribuer un utilisateur au ménage
             'secteur_id' => Secteur::factory(), // Utilisation de la factory Secteur pour attribuer un secteur au ménage
+            "tariff_id" => Tariff::find(1),
+            "politique" => true,
+            "type_menage" => "menage"
         ];
     }
 }
