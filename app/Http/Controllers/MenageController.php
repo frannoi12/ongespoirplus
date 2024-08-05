@@ -5,15 +5,28 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMenageRequest;
 use App\Http\Requests\UpdateMenageRequest;
 use App\Models\Menage;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class MenageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->input('search');
+        $query = User::whereHas('menage');
+
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('prenom', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%");
+        }
+
+        $users = $query->paginate(10);
+
+        return view('menages.index', compact('users','search'));
     }
 
     /**

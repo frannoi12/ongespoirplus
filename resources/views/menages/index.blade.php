@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Personnel') }}
+            {{ __('Menages') }}
         </h2>
     </x-slot>
 
@@ -10,10 +10,10 @@
             <div
                 class="bg-white flex items-center justify-between mx-6 px-6 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __('Liste des personnels') }}
+                    {{ __('Liste des Menages') }}
                 </div>
                 <div>
-                    <a href="{{ route('personnels.create') }}">
+                    <a href="{{ route('menages.create') }}">
                         <button style="background: green"
                             class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">
                             Ajouter
@@ -25,7 +25,7 @@
                 class="bg-white flex items-center justify-between mx-6 px-6 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 w-full space-y-6">
                     <div class="w-full">
-                        <form action="{{ route('personnels.index') }}" method="get">
+                        <form action="{{ route('menages.index') }}" method="get">
                             <input type="text" name="search" placeholder="Rechercher"
                                 class="w-2/3 rounded-md border border-gray-300">
                             <button class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md"
@@ -40,8 +40,8 @@
                             <th class="py-3 px-6">Prenom</th>
                             <th class="py-3 px-6">Email</th>
                             <th class="py-3 px-6">Contact</th>
-                            <th class="py-3 px-6">Etat</th>
-                            <th class="py-3 px-6">Role</th>
+                            {{-- <th class="py-3 px-6">Etat</th>
+                            <th class="py-3 px-6">Role</th> --}}
                             <th class="py-3 px-6">Action</th>
                         </thead>
                         <tbody>
@@ -59,25 +59,25 @@
                                     <td class="py-3 px-6">
                                         {{ $user->contact }}
                                     </td>
-                                    <td class="py-3 px-6">
+                                    {{-- <td class="py-3 px-6">
                                         {{ $user->personnel->etat ?? ' ' }}
                                     </td>
                                     <td class="py-3 px-6">
                                         {{ $user->personnel->role ?? ' ' }}
-                                    </td>
+                                    </td> --}}
                                     <td class="py-3 px-6">
-                                        @if ($user->personnel)
-                                            <a href="{{ route('personnels.edit', $user->personnel->id) }}">
+                                        @if ($user->menage)
+                                            <a href="{{ route('menages.edit', $user->menage->id) }}">
                                                 <button
                                                     class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">Editer</button>
                                             </a>
-                                            <a href="{{ route('personnels.show', $user->personnel->id) }}">
+                                            <a href="{{ route('menages.show', $user->menage->id) }}">
                                                 @csrf
                                                 <button
                                                     class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Consulter</button>
                                             </a>
-                                            <form action="{{ route('personnels.destroy', $user->personnel->id) }}" method="POST"
-                                                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel ?');">
+                                            <form action="{{ route('menages.destroy', $user->menage->id) }}" method="POST"
+                                                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette menage ?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button
@@ -87,7 +87,7 @@
                                     </td>
                                 </tr>
                             @empty
-                                Aucun personnels disponible
+                                Aucun menages disponible
                             @endforelse
                         </tbody>
                     </table>
