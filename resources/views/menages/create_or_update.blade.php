@@ -180,9 +180,10 @@
                                         </li>
                                     @endforeach
                                 </div>
+
                                 <div class="mt-2">
                                     <x-input-label for="politique_acceptance" :value="__('Acceptez-vous les politiques de confidentialité?')" />
-                                    <select id="politique_acceptance" name="politique_acceptance"
+                                    <select id="politique_acceptance" name="politique_acceptance" required
                                         class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                                         <option value="" disabled
                                             {{ !isset($menage) || !isset($menage->politique) ? 'selected' : '' }}>
@@ -237,7 +238,15 @@
 
             var marker = L.marker([{{ old('latitude', $menage->latitude ?? 8.98732401440619) }},
                 {{ old('longitude', $menage->longitude ?? 1.103867358597653) }}
-            ]).addTo(map);
+            ], {
+                draggable: true
+            }).addTo(map);
+
+            marker.on('dragend', function(e) {
+                var latlng = marker.getLatLng();
+                document.getElementById('latitude').value = latlng.lat;
+                document.getElementById('longitude').value = latlng.lng;
+            });
 
             map.on('click', function(e) {
                 var latlng = e.latlng;
@@ -245,6 +254,38 @@
                 document.getElementById('latitude').value = latlng.lat;
                 document.getElementById('longitude').value = latlng.lng;
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const politiqueAcceptance = document.getElementById('politique_acceptance');
+            const submitBtn = document.getElementById('submitBtn');
+            const form = document.getElementById('menage-form');
+            const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
+
+            // Désactiver le bouton de soumission par défaut
+            submitBtn.disabled = true;
+
+            function checkFormValidity() {
+                let allFilled = true;
+
+                requiredFields.forEach(field => {
+                    if (!field.value) {
+                        allFilled = false;
+                    }
+                });
+
+                if (allFilled && politiqueAcceptance.value === '1') {
+                    submitBtn.disabled = false;
+                } else {
+                    submitBtn.disabled = true;
+                }
+            }
+
+            requiredFields.forEach(field => {
+                field.addEventListener('input', checkFormValidity);
+            });
+
+            politiqueAcceptance.addEventListener('change', checkFormValidity);
         });
     </script>
 </x-app-layout>

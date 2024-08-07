@@ -53,18 +53,20 @@ class MenageController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'prenom' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users',
-        //     'contact' => 'required|string|max:15',
-        //     'password' => 'required|string|min:8|confirmed',
-        //     'politique' => 'required|boolean',
-        //     'secteur_id' => 'required|exists:secteurs,id',
-        //     'user_id' => 'required|exists:users,id',
-        //     'tariff_id' => 'required|exists:tariffs,id',
-        //     'service_id' => 'required|exists:services,id',
-        // ]);
+
+        dd($request);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'contact' => 'required|string|max:15',
+            'password' => 'required|string|min:8|confirmed',
+            'politique' => 'required|boolean',
+            'secteur_id' => 'required|exists:secteurs,id',
+            'user_id' => 'required|exists:users,id',
+            'tariff_id' => 'required|exists:tariffs,id',
+            'service_id' => 'required|exists:services,id',
+        ]);
 
         $user = User::create([
             'name' => $request->name,
