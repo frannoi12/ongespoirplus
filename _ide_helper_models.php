@@ -86,6 +86,7 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProposerVente> $proposerVentes
  * @property-read int|null $proposer_ventes_count
  * @property-read \App\Models\Secteur $secteur
+ * @property-read \App\Models\Service|null $service
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\MenageFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Menage newModelQuery()
@@ -264,6 +265,19 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Secteur whereUpdatedAt($value)
  */
 	class Secteur extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Menage> $menages
+ * @property-read int|null $menages_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Service newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Service newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Service query()
+ */
+	class Service extends \Eloquent {}
 }
 
 namespace App\Models{

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SecteurSeeder::class,
             PersonnelSeeder::class,
+            ServiceSeeder::class,
             PolitiqueSeeder::class,
             TariffSeeder::class,
             MenageSeeder::class,

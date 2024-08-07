@@ -12,11 +12,14 @@ class Menage extends Model
     use HasFactory;
 
     protected $fillable = [
+        "type_menage",
+        "politique",
         "code",
         "personne_a_contacter",
         "secteur_id",
         "user_id",
         "tariff_id",
+        'service_id',
     ];
 
     public function user(): BelongsTo {
@@ -33,5 +36,10 @@ class Menage extends Model
 
     public function paiements(): HasMany{
         return $this->hasMany(Paiement::class);
+    }
+
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(Service::class); // Ajouter cette ligne
     }
 }

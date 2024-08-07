@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMenageRequest;
 use App\Http\Requests\UpdateMenageRequest;
 use App\Models\Menage;
+use App\Models\Politique;
 use App\Models\Secteur;
+use App\Models\Service;
+use App\Models\Tariff;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -37,21 +40,31 @@ class MenageController extends Controller
     public function create()
     {
         $secteurs = Secteur::all();
-        return view("menages.create_or_update",compact('secteurs'));
+        $services = Service::all();
+        $users = User::all();
+        $tariffs = Tariff::all();
+        $politiques = Politique::all();
+
+        return view('menages.create_or_update', compact('secteurs', 'services', 'users', 'tariffs','politiques'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMenageRequest $request)
+    public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'contact' => 'required|string|max:15',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'prenom' => 'required|string|max:255',
+        //     'email' => 'required|string|email|max:255|unique:users',
+        //     'contact' => 'required|string|max:15',
+        //     'password' => 'required|string|min:8|confirmed',
+        //     'politique' => 'required|boolean',
+        //     'secteur_id' => 'required|exists:secteurs,id',
+        //     'user_id' => 'required|exists:users,id',
+        //     'tariff_id' => 'required|exists:tariffs,id',
+        //     'service_id' => 'required|exists:services,id',
+        // ]);
 
         $user = User::create([
             'name' => $request->name,
@@ -61,8 +74,37 @@ class MenageController extends Controller
             'password' => Hash::make($request->password),  // hash du mot de passe
         ]);
 
+        $secteur = Secteur::findOrFail($request->secteur_id);
+        $service = Service::findOrFail($request->service_id);
 
-        return redirect()->route('menages.index')->with('success', 'Personnel ajouté avec succès');
+        $lastMenage = Menage::where('secteur_id', $secteur->id)
+            ->where('service_id', $service->id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        $lastNumber = $lastMenage ? intval($lastMenage->code) : 0;
+        if ($service->code_service) {
+            $code = $service->code_service . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+            $type_menage = $service->type_service;
+        } else {
+            $code = $secteur->nomSecteur . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+            $type_menage = $service->type_service;
+            dd($type_menage);
+        }
+
+        Menage::create([
+            'type_menage' => $type_menage,
+            'politique' => $request->politique,
+            'code' => $code,
+            'date_abonnement' => now(),
+            'date_prise_effet' => now(),
+            'secteur_id' => $request->secteur_id,
+            'user_id' => $user->id,
+            'tariff_id' => $request->tariff_id,
+            'service_id' => $request->service_id,
+        ]);
+
+        return redirect()->route('menages.index')->with('success', 'Ménage créé avec succès');
     }
 
     /**
@@ -79,8 +121,12 @@ class MenageController extends Controller
      */
     public function edit(Menage $menage)
     {
-        $menage = Menage::findOrFail($menage->id);
-        return view('menages.create_or_update', compact('menage'));
+        $secteurs = Secteur::all();
+        $services = Service::all();
+        $users = User::all();
+        $tariffs = Tariff::all();
+
+        return view('menages.create_or_update', compact('menage', 'secteurs', 'services', 'users', 'tariffs'));
     }
 
     /**
@@ -91,8 +137,14 @@ class MenageController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $menage->user_id,
+            'email' => 'required|string|email|max:255|unique:users',
             'contact' => 'required|string|max:15',
+            'password' => 'required|string|min:8|confirmed',
+            'politique' => 'required|boolean',
+            'secteur_id' => 'required|exists:secteurs,id',
+            'user_id' => 'required|exists:users,id',
+            'tariff_id' => 'required|exists:tariffs,id',
+            'service_id' => 'required|exists:services,id',
         ]);
 
         $menage->user->update([
@@ -102,7 +154,38 @@ class MenageController extends Controller
             'contact' => $request->contact,
         ]);
 
-        return redirect()->route('menages.index')->with('success', 'Personnel mis à jour avec succès');
+        $secteur = Secteur::findOrFail($request->secteur_id);
+        $service = Service::findOrFail($request->service_id);
+
+        if ($menage->secteur_id != $request->secteur_id || $menage->service_id != $request->service_id) {
+            $lastMenage = Menage::where('secteur_id', $request->secteur_id)
+                ->where('service_id', $request->service_id)
+                ->orderBy('id', 'desc')
+                ->first();
+
+            $lastNumber = $lastMenage ? intval($lastMenage->code) : 0;
+            if ($service->code_service) {
+                $code = $service->code_service . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+                $type_menage = $service->type_service;
+            } else {
+                $code = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+                $type_menage = $service->type_service;
+            }
+        } else {
+            $code = $menage->code;
+        }
+
+        $menage->update([
+            'type_menage' => $type_menage,
+            'politique' => $request->politique,
+            'code' => $code,
+            'secteur_id' => $request->secteur_id,
+            'user_id' => $menage->user_id,
+            'tariff_id' => $request->tariff_id,
+            'service_id' => $request->service_id,
+        ]);
+
+        return redirect()->route('menages.index')->with('success', 'Ménage mis à jour avec succès');
     }
 
     /**

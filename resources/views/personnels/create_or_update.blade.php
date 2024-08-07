@@ -77,32 +77,28 @@
                                     value="{{ old('lieu_de_provenance', $personnel->lieu_de_provenance ?? '') }}"
                                     class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                             </div>
-                            
+
                             <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                    for="etat">Etat</label>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="etat">Etat</label>
                                 <select id="etat" name="etat" class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                                    <option value="actif"
-                                        {{ old('etat', $personnel->etat ?? '') == 'actif' ? 'selected' : '' }}>Actif
-                                    </option>
-                                    <option value="inactif"
-                                        {{ old('etat', $personnel->etat ?? '') == 'inactif' ? 'selected' : '' }}>Inactif
-                                    </option>
+                                    <option disabled {{ old('etat', $personnel->etat ?? '') == '' ? 'selected' : '' }}>Sélectionnez un état pour se personnel</option>
+                                    <option value="actif" {{ old('etat', $personnel->etat ?? '') == 'actif' ? 'selected' : '' }}>Actif</option>
+                                    <option value="inactif" {{ old('etat', $personnel->etat ?? '') == 'inactif' ? 'selected' : '' }}>Inactif</option>
                                 </select>
                             </div>
 
                             <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                    for="role">Role</label>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="role">Role</label>
                                 <select id="role" name="role" class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                    <option disabled {{ old('role', $personnel->role ?? '') == '' ? 'selected' : '' }}>Sélectionnez un rôle pour se personnel</option>
                                     @foreach ($roles as $role)
-                                        <option value="{{ $role->name }}"
-                                            {{ old('role', $personnel->role ?? '') == $role->id ? 'selected' : '' }}>
+                                        <option value="{{ $role->name }}" {{ old('role', $personnel->role ?? '') == $role->id ? 'selected' : '' }}>
                                             {{ $role->name }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
+
                         </fieldset>
 
                         <div class="flex justify-end">

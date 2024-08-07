@@ -34,16 +34,14 @@
                             </button>
                         </form>
                     </div>
-                    <table class="w-full text-left">
+                    <table class="w-full text-left ">
                         <thead class="text-lg font-semibold bg-gray-300">
                             <th class="py-3 px-6">Nom</th>
                             <th class="py-3 px-6">Contact</th>
                             <th class="py-3 px-6">code</th>
                             <th class="py-3 px-6">Secteur</th>
                             <th class="py-3 px-6">Service</th>
-                            <th class="py-3 px-6">Numéro à Contacter</th>
                             <th class="py-3 px-6">Date d'abonnement</th>
-                            <th class="py-3 px-6">Date de prise d'effet</th>
                             <th class="py-3 px-6">Action</th>
                         </thead>
                         <tbody>
@@ -63,16 +61,10 @@
                                             {{ $user->menage->secteur->nomSecteur }}
                                         </td>
                                         <td class="py-3 px-6">
-                                            {{ $user->menage->service }}
-                                        </td>
-                                        <td class="py-3 px-6">
-                                            {{ $user->menage->personne_a_contacter }}
+                                            {{ $user->menage->service->type_service }}
                                         </td>
                                         <td class="py-3 px-6">
                                             {{ $user->menage->date_abonnement }}
-                                        </td>
-                                        <td class="py-3 px-6">
-                                            {{ $user->menage->date_prise_effet }}
                                         </td>
                                     @endif
                                     <td class="py-3 px-6">
