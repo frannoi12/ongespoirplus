@@ -7,25 +7,28 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            @if(session('success'))
+            @if (session('success'))
                 <div class="bg-green-500 text-white p-4 rounded-md">
                     {{ session('success') }}
                 </div>
             @endif
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div
+                class="bg-white flex items-center justify-between mx-6 px-6 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __('Liste des Services') }}
                 </div>
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div>
                     <a href="{{ route('services.create') }}">
-                        <button style="background: green" class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">
+                        <button style="background: green"
+                            class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">
                             Ajouter
                         </button>
                     </a>
                 </div>
             </div>
 
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div
+                class="bg-white flex items-center justify-between mx-6 px-6 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 w-full space-y-6">
                     <table class="w-full text-left">
                         <thead class="text-lg font-semibold bg-gray-300">
@@ -44,17 +47,20 @@
                                     </td>
                                     <td class="py-3 px-6">
                                         <a href="{{ route('services.edit', $service->id) }}">
-                                            <button class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">Editer</button>
+                                            <button
+                                                class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">Editer</button>
                                         </a>
                                         <a href="{{ route('services.show', $service->id) }}">
                                             @csrf
-                                            <button class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Consulter</button>
+                                            <button
+                                                class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Consulter</button>
                                         </a>
                                         <form action="{{ route('services.destroy', $service->id) }}" method="POST"
-                                              onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce service ?');">
+                                            onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce service ?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="bg-red-600 hover:bg-red-500 text-white text-sm px-3 py-2 rounded-md">Supprimer</button>
+                                            <button
+                                                class="bg-red-600 hover:bg-red-500 text-white text-sm px-3 py-2 rounded-md">Supprimer</button>
                                         </form>
                                     </td>
                                 </tr>

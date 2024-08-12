@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePersonnelRequest;
-use App\Http\Requests\UpdatePersonnelRequest;
 use App\Models\Personnel;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -28,7 +26,7 @@ class PersonnelController extends Controller
 
         $users = $query->paginate(10);
 
-        return view('personnels.index', compact('users','search'));
+        return view('personnels.index', compact('users','search'))->with('succes','Listes des personnls');
     }
 
     /**
@@ -37,7 +35,7 @@ class PersonnelController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view("personnels.create_or_update",compact('roles'));
+        return view("personnels.create_or_update",compact('roles'))->with('succes','Lancement de création d\'un personnel');
     }
 
     /**
@@ -77,7 +75,7 @@ class PersonnelController extends Controller
     public function show(Personnel $personnel)
     {
         $personnel = Personnel::findOrFail($personnel->id);
-        return view('personnels.show',compact('personnel'));
+        return view('personnels.show',compact('personnel'))->with('succes','Détail sur un personnle effectuée');
     }
 
     /**
@@ -87,7 +85,7 @@ class PersonnelController extends Controller
     {
         $personnel = Personnel::findOrFail($personnel->id);
         $roles = Role::all();
-        return view('personnels.create_or_update', compact('personnel','roles'));
+        return view('personnels.create_or_update', compact('personnel','roles'))->with('succes','Edition d\' un personnel');
     }
 
     /**

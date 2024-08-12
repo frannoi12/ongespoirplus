@@ -7,6 +7,11 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            @if (session('success'))
+                <div class="bg-green-500 text-white p-4 rounded-md">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <form
@@ -18,7 +23,8 @@
                         @endif
 
                         <fieldset class="mb-6 border border-gray-300 p-4 rounded-md">
-                            <legend class="text-lg font-medium text-gray-700 dark:text-gray-300">Information Générale</legend>
+                            <legend class="text-lg font-medium text-gray-700 dark:text-gray-300">Information Générale
+                            </legend>
 
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
@@ -68,7 +74,8 @@
                         </fieldset>
 
                         <fieldset class="mb-6 border border-gray-300 p-4 rounded-md">
-                            <legend class="text-lg font-medium text-gray-700 dark:text-gray-300">Information dans l'Entreprise</legend>
+                            <legend class="text-lg font-medium text-gray-700 dark:text-gray-300">Information dans
+                                l'Entreprise</legend>
 
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
@@ -79,20 +86,31 @@
                             </div>
 
                             <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="etat">Etat</label>
-                                <select id="etat" name="etat" class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                                    <option disabled {{ old('etat', $personnel->etat ?? '') == '' ? 'selected' : '' }}>Sélectionnez un état pour se personnel</option>
-                                    <option value="actif" {{ old('etat', $personnel->etat ?? '') == 'actif' ? 'selected' : '' }}>Actif</option>
-                                    <option value="inactif" {{ old('etat', $personnel->etat ?? '') == 'inactif' ? 'selected' : '' }}>Inactif</option>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="etat">Etat</label>
+                                <select id="etat" name="etat"
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                    <option disabled {{ old('etat', $personnel->etat ?? '') == '' ? 'selected' : '' }}>
+                                        Sélectionnez un état pour se personnel</option>
+                                    <option value="actif"
+                                        {{ old('etat', $personnel->etat ?? '') == 'actif' ? 'selected' : '' }}>Actif
+                                    </option>
+                                    <option value="inactif"
+                                        {{ old('etat', $personnel->etat ?? '') == 'inactif' ? 'selected' : '' }}>
+                                        Inactif</option>
                                 </select>
                             </div>
 
                             <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="role">Role</label>
-                                <select id="role" name="role" class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                                    <option disabled {{ old('role', $personnel->role ?? '') == '' ? 'selected' : '' }}>Sélectionnez un rôle pour se personnel</option>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="role">Role</label>
+                                <select id="role" name="role"
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                    <option disabled {{ old('role', $personnel->role ?? '') == '' ? 'selected' : '' }}>
+                                        Sélectionnez un rôle pour se personnel</option>
                                     @foreach ($roles as $role)
-                                        <option value="{{ $role->name }}" {{ old('role', $personnel->role ?? '') == $role->id ? 'selected' : '' }}>
+                                        <option value="{{ $role->name }}"
+                                            {{ old('role', $personnel->role ?? '') == $role->id ? 'selected' : '' }}>
                                             {{ $role->name }}
                                         </option>
                                     @endforeach

@@ -18,7 +18,7 @@ class ServiceSeeder extends Seeder
             ['code_service' => 'R', 'type_service' => 'Restaurant'],
             ['code_service' => 'R', 'type_service' => 'Bar-Restaurant'],
             ['code_service' => 'R', 'type_service' => 'Bar'],
-            ['code_service' => ' ', 'type_service' => 'menage'],
+            ['code_service' => ' ', 'type_service' => 'Menage'],
             ['code_service' => 'CMS', 'type_service' => 'Centre Médicale'],
             ['code_service' => 'B', 'type_service' => 'Boutique'],
             ['code_service' => 'P', 'type_service' => 'Primaire'],
