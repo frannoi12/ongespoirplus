@@ -7,6 +7,8 @@ use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\PolitiqueController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SecteurController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\TariffController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,6 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('politiques',PolitiqueController::class);
     Route::resource('liquides',LiquideController::class);
     Route::resource('secteurs',SecteurController::class);
+    Route::resource('tariffs',TariffController::class);
+    Route::resource('services',ServiceController::class);
+
 
 
 

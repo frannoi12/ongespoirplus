@@ -18589,6 +18589,15 @@ namespace Barryvdh\Debugbar\Facades {
             }
     }
 
+namespace Larswiegers\LaravelMaps {
+            /**
+     * 
+     *
+     * @see \Larswiegers\LaravelMaps\Skeleton\SkeletonClass
+     */        class LaravelMapsFacade {
+            }
+    }
+
 namespace Illuminate\Support {
             /**
      * 
@@ -22359,6 +22368,7 @@ namespace  {
             class View extends \Illuminate\Support\Facades\View {}
             class Vite extends \Illuminate\Support\Facades\Vite {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
+            class LaravelMaps extends \Larswiegers\LaravelMaps\LaravelMapsFacade {}
     }
 
 
