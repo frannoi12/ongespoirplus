@@ -132,6 +132,6 @@ class PersonnelController extends Controller
 
         $personnel->delete();
 
-        return redirect()->route('personnels.index')->with('success', 'Produit supprimé avec succès');
+        return redirect()->route('personnels.index')->with('success', 'Personnel supprimé avec succès');
     }
 }

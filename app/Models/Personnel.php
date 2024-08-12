@@ -15,6 +15,7 @@ class Personnel extends Model
     protected $fillable = [
         "etat",
         "role",
+        'lieu_de_provenance',
         "user_id"
     ];
 

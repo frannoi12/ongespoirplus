@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('lieu_de_provenance');
             $table->string('etat'); // actif ou inactif
             $table->string('role'); // ce que la personne fait dans l'entreprise
+            $table->string('lieu_de_provenance');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Définir la clé étrangère avec suppression en cascade
             $table->timestamps();
         });

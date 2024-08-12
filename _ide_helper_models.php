@@ -73,12 +73,12 @@ namespace App\Models{
  * @property string $type_menage
  * @property bool $politique
  * @property string $code
- * @property string $personne_a_contacter
  * @property string $date_abonnement
  * @property string $date_prise_effet
  * @property int $secteur_id
  * @property int $user_id
  * @property int $tariff_id
+ * @property int $service_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Paiement> $paiements
@@ -86,7 +86,7 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProposerVente> $proposerVentes
  * @property-read int|null $proposer_ventes_count
  * @property-read \App\Models\Secteur $secteur
- * @property-read \App\Models\Service|null $service
+ * @property-read \App\Models\Service $service
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\MenageFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Menage newModelQuery()
@@ -97,9 +97,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereDateAbonnement($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereDatePriseEffet($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Menage wherePersonneAContacter($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage wherePolitique($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereSecteurId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menage whereServiceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereTariffId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereTypeMenage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereUpdatedAt($value)
@@ -271,11 +271,21 @@ namespace App\Models{
 /**
  * 
  *
+ * @property int $id
+ * @property string $code_service
+ * @property string $type_service
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Menage> $menages
  * @property-read int|null $menages_count
  * @method static \Illuminate\Database\Eloquent\Builder|Service newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Service newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Service query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Service whereCodeService($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Service whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Service whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Service whereTypeService($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Service whereUpdatedAt($value)
  */
 	class Service extends \Eloquent {}
 }
