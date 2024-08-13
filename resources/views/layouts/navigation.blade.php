@@ -41,6 +41,11 @@
                         {{ __('Service') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('secteurs.index')" :active="request()->routeIs('secteurs.index')">
+                        {{ __('Secteur') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

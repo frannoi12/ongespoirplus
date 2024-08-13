@@ -31,7 +31,7 @@ class MenageController extends Controller
 
         $users = $query->paginate(10);
 
-        return view('menages.index', compact('users','search'));
+        return view('menages.index', compact('users', 'search'));
     }
 
     /**
@@ -45,7 +45,7 @@ class MenageController extends Controller
         $tariffs = Tariff::all();
         $politiques = Politique::all();
 
-        return view('menages.create_or_update', compact('secteurs', 'services', 'users', 'tariffs','politiques'));
+        return view('menages.create_or_update', compact('secteurs', 'services', 'users', 'tariffs', 'politiques'));
     }
 
     /**
@@ -55,18 +55,18 @@ class MenageController extends Controller
     {
 
         dd($request);
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'contact' => 'required|string|max:15',
-            'password' => 'required|string|min:8|confirmed',
-            'politique' => 'required|boolean',
-            'secteur_id' => 'required|exists:secteurs,id',
-            'user_id' => 'required|exists:users,id',
-            'tariff_id' => 'required|exists:tariffs,id',
-            'service_id' => 'required|exists:services,id',
-        ]);
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'prenom' => 'required|string|max:255',
+        //     'email' => 'required|string|email|max:255|unique:users',
+        //     'contact' => 'required|string|max:15',
+        //     'password' => 'required|string|min:8|confirmed',
+        //     'politique' => 'required|boolean',
+        //     'secteur_id' => 'required|exists:secteurs,id',
+        //     'user_id' => 'required|exists:users,id',
+        //     'tariff_id' => 'required|exists:tariffs,id',
+        //     'service_id' => 'required|exists:services,id',
+        // ]);
 
         $user = User::create([
             'name' => $request->name,
@@ -115,7 +115,8 @@ class MenageController extends Controller
     public function show(Menage $menage)
     {
         $menage = Menage::findOrFail($menage->id);
-        return view('menages.show',compact('menage'));
+        $user = $menage->user;
+        return view('menages.show', compact('menage','user'));
     }
 
     /**
@@ -195,12 +196,19 @@ class MenageController extends Controller
      */
     public function destroy(Menage $menage)
     {
-        if($menage->user){
-            $menage->user->delete();
+        $user = $menage->user;
+
+        // Vérifier si l'utilisateur est lié uniquement à un ménage
+        if ($user && $user->personnel()->exists()) {
+            // Si l'utilisateur est également un personnel, ne pas supprimer le user
+            $menage->delete();
+        } else {
+            // Sinon, supprimer le user et le ménage
+            $user->delete();
+            $menage->delete();
         }
 
-        $menage->delete();
-
-        return redirect()->route('menages.index')->with('success', 'Menage supprimé avec succès');
+        return redirect()->route('menages.index')->with('success', 'Ménage supprimé avec succès');
     }
+
 }

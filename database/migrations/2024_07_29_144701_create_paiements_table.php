@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('paiements', function (Blueprint $table) {
             $table->id();
             $table->string('type_paiement');
-            $table->foreignId('tariff_id')->constrained('tariffs')->onDelete('cascade');
-            $table->foreignId('personnel_id')->constrained('personnels')->onDelete('cascade');
+            $table->foreignId('tariff_id')->constrained('tariffs')->onDelete('set null');
+            $table->foreignId('personnel_id')->constrained('personnels')->onDelete('set null');
             $table->timestamps();
         });
     }

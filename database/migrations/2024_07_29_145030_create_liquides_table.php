@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('statut'); //Un indicateur du statut du paiement (par exemple, "en attente", "confirmé", "annulé", etc.).
             $table->string('date_paiement')->default(now()); //Date du paiement.
             //ici sa concerne un comptable (toute personne qui en caisse de l'argent d'un abonnement)
-            $table->foreignId('personnel_id')->constrained('personnels')->onDelete('cascade');
-            $table->foreignId('paiement_id')->constrained('paiements')->onDelete('cascade');
+            $table->foreignId('personnel_id')->constrained('personnels')->onDelete('set null');
+            $table->foreignId('paiement_id')->constrained('paiements')->onDelete('set null');
             $table->timestamps();
         });
     }

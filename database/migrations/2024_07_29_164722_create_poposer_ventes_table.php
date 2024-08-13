@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('statut');
             $table->timestamps();
 
-            $table->foreignId('ordure_id')->constrained('ordures')->onDelete('cascade');
-            $table->foreignId('menage_vandeur_id')->constrained('menages')->onDelete('cascade');
+            $table->foreignId('ordure_id')->constrained('ordures')->onDelete('set null');
+            $table->foreignId('menage_vandeur_id')->constrained('menages')->onDelete('set null');
         });
     }
 

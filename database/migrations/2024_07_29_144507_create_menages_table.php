@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('code');
             $table->string('date_abonnement')->default(now());
             $table->string('date_prise_effet')->default(now());
-            $table->foreignId('secteur_id')->constrained('secteurs')->onDelete('cascade');// A un secteur on associe 1 où plusieurs menage
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Définir la clé étrangère avec suppression en cascade
-            $table->foreignId('tariff_id')->constrained('tariffs')->onDelete('cascade'); // Définir la clé étrangère avec suppression en cascade
-            $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
+            $table->foreignId('secteur_id')->constrained('secteurs')->onDelete('set null');// A un secteur on associe 1 où plusieurs menage
+            $table->foreignId('user_id')->constrained('users')->onDelete('set null'); // Définir la clé étrangère avec suppression en set null
+            $table->foreignId('tariff_id')->constrained('tariffs')->onDelete('set null'); // Définir la clé étrangère avec suppression en set null
+            $table->foreignId('service_id')->constrained('services')->onDelete('set null');
             $table->timestamps();
         });
     }

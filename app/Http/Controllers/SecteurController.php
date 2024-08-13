@@ -5,15 +5,26 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSecteurRequest;
 use App\Http\Requests\UpdateSecteurRequest;
 use App\Models\Secteur;
+use Illuminate\Http\Request;
 
 class SecteurController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->input('search');
+
+        // Requête pour récupérer les secteurs avec ou sans filtre de recherche
+        $secteurs = Secteur::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('nomSecteur', 'like', '%' . $search . '%');
+            })
+            ->paginate(10); // Pagination des résultats
+
+        // Retourne la vue avec les données des secteurs
+        return view('secteurs.index', compact('secteurs', 'search'));
     }
 
     /**
@@ -22,6 +33,7 @@ class SecteurController extends Controller
     public function create()
     {
         //
+        return view('secteurs.create_or_update')->with('succes','');
     }
 
     /**
@@ -29,7 +41,15 @@ class SecteurController extends Controller
      */
     public function store(StoreSecteurRequest $request)
     {
-        //
+        $request->validate([
+            'nomSecteur' => 'required|string|max:255',
+        ]);
+
+        $secteur = new Secteur();
+        $secteur->fill($request->all());
+        $secteur->save();
+
+        return redirect()->route('secteurs.index')->with('success', 'Secteur créé avec succès.');
     }
 
     /**
@@ -37,7 +57,7 @@ class SecteurController extends Controller
      */
     public function show(Secteur $secteur)
     {
-        //
+        return view('secteurs.show', compact('secteur'));
     }
 
     /**
@@ -45,7 +65,7 @@ class SecteurController extends Controller
      */
     public function edit(Secteur $secteur)
     {
-        //
+        return view('secteurs.create_or_update', compact('secteur'));
     }
 
     /**
@@ -53,7 +73,14 @@ class SecteurController extends Controller
      */
     public function update(UpdateSecteurRequest $request, Secteur $secteur)
     {
-        //
+        $request->validate([
+            'nomSecteur' => 'required|string|max:255',
+        ]);
+
+        $secteur->fill($request->all());
+        $secteur->save();
+
+        return redirect()->route('secteurs.index')->with('success', 'Secteur mis à jour avec succès.');
     }
 
     /**
@@ -61,6 +88,8 @@ class SecteurController extends Controller
      */
     public function destroy(Secteur $secteur)
     {
-        //
+        $secteur->delete();
+
+        return redirect()->route('secteurs.index')->with('success', 'Secteur supprimé avec succès.');
     }
 }

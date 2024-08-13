@@ -179,25 +179,31 @@
                                             <ul>{{ $politique->description }}</ul>
                                         </li>
                                     @endforeach
-                                </div>
-
-                                <div class="mt-2">
-                                    <x-input-label for="politique_acceptance" :value="__('Acceptez-vous les politiques de confidentialité?')" />
-                                    <select id="politique_acceptance" name="politique_acceptance" required
-                                        class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                                        <option value="" disabled
-                                            {{ !isset($menage) || !isset($menage->politique) ? 'selected' : '' }}>
-                                            Sélectionnez une option</option>
-                                        <option value="1"
-                                            {{ isset($menage) && $menage->politique ? 'selected' : '' }}>Oui</option>
-                                        <option value="0"
-                                            {{ isset($menage) && !$menage->politique ? 'selected' : '' }}>Non</option>
-                                    </select>
+                                    <div class="flex items-center space-x-4">
+                                        <x-input-label for="politique_acceptance" :value="__('Acceptez-vous les politiques de confidentialité ?')" class="text-lg"/>
+                                        <div class="flex items-center">
+                                            <input type="radio" id="politique_acceptance_yes"
+                                                name="politique_acceptance" value="1"
+                                                {{ old('politique_acceptance', isset($menage) && $menage->politique ? 'checked' : '') }}
+                                                class="mr-2">
+                                            <label for="politique_acceptance_yes"
+                                                class="text-gray-700 dark:text-gray-300">{{ __('Oui') }}</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="radio" id="politique_acceptance_no"
+                                                name="politique_acceptance" value="0"
+                                                {{ old('politique_acceptance', isset($menage) && !$menage->politique ? 'checked' : '') }}
+                                                class="mr-2">
+                                            <label for="politique_acceptance_no"
+                                                class="text-gray-700 dark:text-gray-300">{{ __('Non') }}</label>
+                                        </div>
+                                    </div>
                                     @error('politique_acceptance')
                                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
+
 
 
 

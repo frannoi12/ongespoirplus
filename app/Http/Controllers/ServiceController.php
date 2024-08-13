@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ class ServiceController extends Controller
      */
     public function index(Request $request)
     {
+        // Recherche par 'code_service' ou 'type_service'
         $search = $request->input('search');
 
         // Requête pour récupérer les services avec ou sans filtre de recherche
@@ -31,8 +33,8 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        // $service = new Service(); // Crée un nouvel objet vide pour la création
-        return view('services.create_or_update', compact('success'));
+        // Retourne la vue de création avec un message de succès optionnel
+        return view('services.create_or_update')->with('success', 'Création d\'un service');
     }
 
     /**
@@ -40,21 +42,25 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        // Validation des champs requis
+        $validatedData = $request->validate([
             'code_service' => 'required|string|max:255',
             'type_service' => 'required|string|max:255',
         ]);
 
-        Service::create($request->all());
+        // Création du nouveau service
+        Service::create($validatedData);
 
+        // Redirection vers l'index avec un message de succès
         return redirect()->route('services.index')->with('success', 'Service ajouté avec succès.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Service $service)
     {
+        // Retourne la vue détaillée du service
         return view('services.show', compact('service'));
     }
 
@@ -63,6 +69,7 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
+        // Pas besoin de faire un find() ici car le service est déjà injecté
         return view('services.create_or_update', compact('service'));
     }
 
@@ -71,13 +78,16 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        $request->validate([
+        // Validation des champs requis
+        $validatedData = $request->validate([
             'code_service' => 'required|string|max:255',
             'type_service' => 'required|string|max:255',
         ]);
 
-        $service->update($request->all());
+        // Mise à jour du service existant
+        $service->update($validatedData);
 
+        // Redirection vers l'index avec un message de succès
         return redirect()->route('services.index')->with('success', 'Service mis à jour avec succès.');
     }
 
@@ -86,8 +96,10 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
+        // Suppression du service
         $service->delete();
 
+        // Redirection vers l'index avec un message de succès
         return redirect()->route('services.index')->with('success', 'Service supprimé avec succès.');
     }
 }
