@@ -60,12 +60,12 @@
                                                 {{ Auth::user()->menage->code }}
                                             </td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td class="border px-4 py-2">Personne à contacter</td>
                                             <td class="border px-4 py-2">
                                                 {{ Auth::user()->menage->personne_a_contacter }}
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <td class="border px-4 py-2">Date d'abonnement</td>
                                             <td class="border px-4 py-2">

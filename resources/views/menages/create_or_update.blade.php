@@ -149,14 +149,14 @@
 
                             <div class="mt-4">
                                 <x-maps-leaflet :center="[
-                                    'lat' => old('latitude', $menage->latitude ?? 8.98732401440619),
-                                    'lng' => old('longitude', $menage->longitude ?? 1.103867358597653),
+                                    'lat' => old('latitude', 8.978000145592532),
+                                    'lng' => old('longitude', 1.1454960246640997),
                                 ]" :zoom="19" style="width: 100%; height: 400px;">
                                 </x-maps-leaflet>
                                 <input type="hidden" id="longitude" name="longitude"
-                                    value="{{ old('longitude', $menage->longitude ?? 1.103867358597653) }}">
+                                    value="{{ old('longitude', 1.1454960246640997) }}">
                                 <input type="hidden" id="latitude" name="latitude"
-                                    value="{{ old('latitude', $menage->latitude ?? 8.98732401440619) }}">
+                                    value="{{ old('latitude', 8.978000145592532) }}">
                                 @error('longitude')
                                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                 @enderror
@@ -164,6 +164,7 @@
                                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
+
 
 
 
@@ -180,7 +181,7 @@
                                         </li>
                                     @endforeach
                                     <div class="flex items-center space-x-4">
-                                        <x-input-label for="politique_acceptance" :value="__('Acceptez-vous les politiques de confidentialité ?')" class="text-lg"/>
+                                        <x-input-label for="politique_acceptance" :value="__('Acceptez-vous les politiques de confidentialité ?')" class="text-lg" />
                                         <div class="flex items-center">
                                             <input type="radio" id="politique_acceptance_yes"
                                                 name="politique_acceptance" value="1"
@@ -234,17 +235,13 @@
 
 
         document.addEventListener('DOMContentLoaded', function() {
-            var map = L.map('map').setView([{{ old('latitude', $menage->latitude ?? 8.98732401440619) }},
-                {{ old('longitude', $menage->longitude ?? 1.103867358597653) }}
-            ], 19);
+            var map = L.map('map').setView([8.978000145592532, 1.1454960246640997], 19);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            var marker = L.marker([{{ old('latitude', $menage->latitude ?? 8.98732401440619) }},
-                {{ old('longitude', $menage->longitude ?? 1.103867358597653) }}
-            ], {
+            var marker = L.marker([8.978000145592532, 1.1454960246640997], {
                 draggable: true
             }).addTo(map);
 
@@ -261,6 +258,8 @@
                 document.getElementById('longitude').value = latlng.lng;
             });
         });
+
+
 
         document.addEventListener('DOMContentLoaded', function() {
             const politiqueAcceptance = document.getElementById('politique_acceptance');

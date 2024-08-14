@@ -6,7 +6,6 @@ use App\Models\Menage;
 use App\Models\Secteur;
 use App\Models\Service;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class MenageSeeder extends Seeder
@@ -54,4 +53,5 @@ class MenageSeeder extends Seeder
             }
         }
     }
+
 }

@@ -196,10 +196,12 @@ class MenageController extends Controller
      */
     public function destroy(Menage $menage)
     {
+        // dd($menage->user->personnel);
         $user = $menage->user;
 
+        // dd($user->personnel);
         // Vérifier si l'utilisateur est lié uniquement à un ménage
-        if ($user && $user->personnel()->exists()) {
+        if ($user->personnel) {
             // Si l'utilisateur est également un personnel, ne pas supprimer le user
             $menage->delete();
         } else {
