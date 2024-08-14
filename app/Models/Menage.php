@@ -20,7 +20,13 @@ class Menage extends Model
         "user_id",
         "tariff_id",
         'service_id',
+        'localisation',
     ];
+
+    protected $casts = [
+        'localisation' => 'array',  // Convertit automatiquement JSON en tableau PHP
+    ];
+
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
@@ -41,5 +47,9 @@ class Menage extends Model
     public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class); // Ajouter cette ligne
+    }
+
+    public function tariff(): BelongsTo {
+        return $this->belongsTo(Tariff::class);
     }
 }

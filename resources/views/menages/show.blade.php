@@ -18,7 +18,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Prenom</label>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Prénom</label>
                             <p>{{ $menage->user->prenom }}</p>
                         </div>
 
@@ -34,16 +34,46 @@
                     </fieldset>
 
                     <fieldset class="mb-6 border border-gray-300 p-4 rounded-md">
-                        <legend class="text-lg font-medium text-gray-700 dark:text-gray-300">Information dans l'Entreprise</legend>
+                        <legend class="text-lg font-medium text-gray-700 dark:text-gray-300">Information sur le Ménage</legend>
 
                         <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Etat</label>
-                            <p>{{ $menage->etat }}</p>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Politique</label>
+                            <p>{{ $menage->politique ? 'Acceptée' : 'Non acceptée' }}</p>
                         </div>
 
                         <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Role</label>
-                            <p>{{ $menage->role }}</p>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Secteur</label>
+                            <p>{{ $menage->secteur->nomSecteur }}</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Service</label>
+                            <p>{{ $menage->service->type_service }}</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tarif</label>
+                            <p>{{ $menage->tariff->name }}</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Code</label>
+                            <p>{{ $menage->code }}</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Date d'Abonnement</label>
+                            <p>{{ $menage->date_abonnement }}</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Date de Prise d'Effet</label>
+                            <p>{{ $menage->date_prise_effet }}</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Localisation</label>
+                            <div id="map" style="height: 400px;"></div>
                         </div>
                     </fieldset>
 
@@ -57,3 +87,17 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var latitude = @json(json_decode($menage->localisation)->latitude);
+        var longitude = @json(json_decode($menage->localisation)->longitude);
+
+        var map = L.map('map').setView([latitude, longitude], 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([latitude, longitude]).addTo(map);
+    });
+</script>

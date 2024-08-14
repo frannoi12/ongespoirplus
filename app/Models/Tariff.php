@@ -18,4 +18,8 @@ class Tariff extends Model
     public function paiements(): HasMany {
         return $this->hasMany(Paiement::class);
     }
+
+    public function menages(): HasMany {
+        return $this->hasMany(Menage::class);
+    }
 }

@@ -73,6 +73,7 @@ namespace App\Models{
  * @property string $type_menage
  * @property bool $politique
  * @property string $code
+ * @property array|null $localisation
  * @property string $date_abonnement
  * @property string $date_prise_effet
  * @property int $secteur_id
@@ -87,6 +88,7 @@ namespace App\Models{
  * @property-read int|null $proposer_ventes_count
  * @property-read \App\Models\Secteur $secteur
  * @property-read \App\Models\Service $service
+ * @property-read \App\Models\Tariff $tariff
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\MenageFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Menage newModelQuery()
@@ -97,6 +99,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereDateAbonnement($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereDatePriseEffet($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menage whereLocalisation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage wherePolitique($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereSecteurId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menage whereServiceId($value)
@@ -328,6 +331,8 @@ namespace App\Models{
  * @property int $montant
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Menage> $menages
+ * @property-read int|null $menages_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Paiement> $paiements
  * @property-read int|null $paiements_count
  * @method static \Database\Factories\TariffFactory factory($count = null, $state = [])

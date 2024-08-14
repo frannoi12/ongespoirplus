@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMenageRequest;
+// use App\Http\Requests\StoreMenageRequest;
 use App\Http\Requests\UpdateMenageRequest;
 use App\Models\Menage;
 use App\Models\Politique;
@@ -55,18 +55,23 @@ class MenageController extends Controller
     {
 
         dd($request);
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'prenom' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users',
-        //     'contact' => 'required|string|max:15',
-        //     'password' => 'required|string|min:8|confirmed',
-        //     'politique' => 'required|boolean',
-        //     'secteur_id' => 'required|exists:secteurs,id',
-        //     'user_id' => 'required|exists:users,id',
-        //     'tariff_id' => 'required|exists:tariffs,id',
-        //     'service_id' => 'required|exists:services,id',
-        // ]);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'contact' => 'required|string|max:15',
+            'password' => 'required|string|min:8|confirmed',
+            'politique_acceptance' => 'required|boolean', // Assurez-vous que 'politique' est bien un boolean
+            'secteur_id' => 'required|exists:secteurs,id',
+            'user_id' => 'required|exists:users,id',
+            'tariff_id' => 'required|exists:tariffs,id',
+            'service_id' => 'required|exists:services,id',
+            'latitude' => 'required|numeric|between:-90,90', // Valider la latitude
+            'longitude' => 'required|numeric|between:-180,180', // Valider la longitude
+        ]);
+
+
 
         $user = User::create([
             'name' => $request->name,
@@ -84,19 +89,19 @@ class MenageController extends Controller
             ->orderBy('id', 'desc')
             ->first();
 
-        $lastNumber = $lastMenage ? intval($lastMenage->code) : 0;
-        if ($service->code_service) {
-            $code = $service->code_service . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
-            $type_menage = $service->type_service;
-        } else {
-            $code = $secteur->nomSecteur . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
-            $type_menage = $service->type_service;
-            dd($type_menage);
-        }
+            $lastNumber = $lastMenage ? intval($lastMenage->code) : 0;
+            if ($service->code_service !== " ") {
+                $code = $service->code_service . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+                $type_menage = $service->type_service;
+            } else {
+                $code = $secteur->nomSecteur . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+                $type_menage = $service->type_service;
+                // dd($type_menage);
+            }
 
         Menage::create([
             'type_menage' => $type_menage,
-            'politique' => $request->politique,
+            'politique' => $request->politique == 1 ? true : false,
             'code' => $code,
             'date_abonnement' => now(),
             'date_prise_effet' => now(),
@@ -104,6 +109,10 @@ class MenageController extends Controller
             'user_id' => $user->id,
             'tariff_id' => $request->tariff_id,
             'service_id' => $request->service_id,
+            'localisation' => json_encode([
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude
+            ]), // Enregistre la localisation en JSON
         ]);
 
         return redirect()->route('menages.index')->with('success', 'Ménage créé avec succès');

@@ -1,6 +1,255 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ isset($menage) ? __('Modifier ménage') : __('Inscription d\'un ménage') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <form action="{{ isset($menage) ? route('menages.update', $menage->id) : route('menages.store') }}"
+                        method="POST" id="menage-form">
+                        @csrf
+                        @if (isset($menage))
+                            @method('PUT')
+                        @endif
+
+                        <fieldset class="mb-6 border border-gray-300 p-4 rounded-md">
+                            <legend class="text-lg font-medium text-gray-700 dark:text-gray-300">Information Générale
+                            </legend>
+
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="name">Nom</label>
+                                <input type="text" id="name" name="name"
+                                    value="{{ old('name', $menage->user->name ?? '') }}"
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                @error('name')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="prenom">Prenom</label>
+                                <input type="text" id="prenom" name="prenom"
+                                    value="{{ old('prenom', $menage->user->prenom ?? '') }}"
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                @error('prenom')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="email">Email</label>
+                                <input type="email" id="email" name="email"
+                                    value="{{ old('email', $menage->user->email ?? '') }}"
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                @error('email')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="contact">Contact</label>
+                                <input type="text" id="contact" name="contact"
+                                    value="{{ old('contact', $menage->user->contact ?? '') }}"
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                @error('contact')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="password">Mot de passe</label>
+                                <input type="password" id="password" name="password"
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                @error('password')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="password_confirmation">Confirmer mot de passe</label>
+                                <input type="password" id="password_confirmation" name="password_confirmation"
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                @error('password_confirmation')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="mb-6 border border-gray-300 p-4 rounded-md">
+                            <legend class="text-lg font-medium text-gray-700 dark:text-gray-300">Information d'un ménage
+                            </legend>
+
+                            <div class="mt-4">
+                                <x-input-label for="service_id" :value="__('Service')" />
+                                <select id="service_id" name="service_id"
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                    <option disabled
+                                        {{ !isset($menage) || !isset($menage->service_id) ? 'selected' : '' }}>
+                                        Sélectionnez un service</option>
+                                    @foreach ($services as $service)
+                                        <option value="{{ $service->id }}"
+                                            {{ isset($menage) && $menage->service_id == $service->id ? 'selected' : '' }}>
+                                            {{ $service->type_service }}</option>
+                                    @endforeach
+                                </select>
+                                @error('service_id')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="mt-4">
+                                <x-input-label for="secteur_id" :value="__('Secteur')" />
+                                <select id="secteur_id" name="secteur_id"
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                    <option disabled
+                                        {{ !isset($menage) || !isset($menage->secteur_id) ? 'selected' : '' }}>
+                                        Sélectionnez votre secteur</option>
+                                    @foreach ($secteurs as $secteur)
+                                        <option value="{{ $secteur->id }}"
+                                            {{ isset($menage) && $menage->secteur_id == $secteur->id ? 'selected' : '' }}>
+                                            {{ $secteur->nomSecteur }}</option>
+                                    @endforeach
+                                </select>
+                                @error('secteur_id')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="mt-4">
+                                <x-input-label for="tariff_id" :value="__('Tarif')" />
+                                <select id="tariff_id" name="tariff_id"
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                    <option disabled
+                                        {{ !isset($menage) || !isset($menage->tariff_id) ? 'selected' : '' }}>
+                                        Sélectionnez votre tarif</option>
+                                    @foreach ($tariffs as $tariff)
+                                        <option value="{{ $tariff->id }}"
+                                            {{ isset($menage) && $menage->tariff_id == $tariff->id ? 'selected' : '' }}>
+                                            {{ $tariff->montant . '  ' . $tariff->designation }}</option>
+                                    @endforeach
+                                </select>
+                                @error('tariff_id')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="mt-4">
+                                <x-maps-leaflet :center="[
+                                    'lat' => old('latitude', 8.978000145592532),
+                                    'lng' => old('longitude', 1.1454960246640997),
+                                ]" :zoom="19" style="width: 100%; height: 400px;">
+                                </x-maps-leaflet>
+                                <input type="hidden" id="longitude" name="longitude"
+                                    value="{{ old('longitude', 1.1454960246640997) }}">
+                                <input type="hidden" id="latitude" name="latitude"
+                                    value="{{ old('latitude', 8.978000145592532) }}">
+                                @error('longitude')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                                @error('latitude')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <!-- Politique de confidentialité -->
+                            <div class="mt-4">
+                                <x-input-label for="politique" :value="__('Politique de Confidentialité')" />
+                                <div
+                                    class="max-h-96 overflow-y-auto p-4 border rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                    <!-- Contenu des politiques de confidentialité -->
+                                    @foreach ($politiques as $politique)
+                                        <div class="mb-4">
+                                            <p class="font-medium">{{ $politique->titre }}</p>
+                                            <p>{{ $politique->description }}</p>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <x-input-label for="politique_acceptance" :value="__('Acceptez-vous les politiques de confidentialité ?')" />
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="politique_acceptance" name="politique_acceptance"
+                                        value="1"
+                                        {{ old('politique_acceptance', isset($menage) && $menage->politique ? 'checked' : '') }}
+                                        class="mr-2">
+                                    <label for="politique_acceptance"
+                                        class="text-gray-700 dark:text-gray-300">{{ __('Oui, j\'ai lu et j\'accepte les politiques de confidentialité') }}</label>
+                                </div>
+                                @error('politique_acceptance')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </fieldset>
+
+                        <x-primary-button id="submit-button" :disabled="!old('politique')" class="mt-4">
+                            {{ isset($menage) ? __('Mettre à jour') : __('Ajouter') }}
+                        </x-primary-button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('menage-form').addEventListener('submit', function(event) {
+            var password = document.getElementById('password').value;
+            var passwordConfirmation = document.getElementById('password_confirmation').value;
+            if (password !== passwordConfirmation) {
+                event.preventDefault();
+                alert('Les mots de passe ne correspondent pas.');
+            }
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const politiqueAcceptance = document.getElementById('politique_acceptance');
+            const submitBtn = document.getElementById('submit-button');
+            const form = document.getElementById('menage-form');
+            const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
+
+            // Désactiver le bouton de soumission par défaut
+            submitBtn.disabled = true;
+
+            function checkFormValidity() {
+                let allFilled = true;
+
+                requiredFields.forEach(field => {
+                    if (!field.value) {
+                        allFilled = false;
+                    }
+                });
+
+                if (allFilled && politiqueAcceptance.checked) {
+                    submitBtn.disabled = false;
+                } else {
+                    submitBtn.disabled = true;
+                }
+            }
+
+            requiredFields.forEach(field => {
+                field.addEventListener('input', checkFormValidity);
+            });
+
+            politiqueAcceptance.addEventListener('change', checkFormValidity);
+        });
+    </script>
+</x-app-layout>
+
+
+{{-- <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ isset($menage) ? __('Modifier menage') : __('Inscription d\' une menage') }}
         </h2>
     </x-slot>
@@ -293,7 +542,7 @@
             politiqueAcceptance.addEventListener('change', checkFormValidity);
         });
     </script>
-</x-app-layout>
+</x-app-layout> --}}
 
 
 {{-- <div class="form-group">
