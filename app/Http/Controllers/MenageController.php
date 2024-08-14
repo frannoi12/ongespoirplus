@@ -21,7 +21,7 @@ class MenageController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $query = User::whereHas('menage');
+        $query  = User::whereHas('menage');
 
         if ($search) {
             $query->where('name', 'like', "%{$search}%")
@@ -39,10 +39,10 @@ class MenageController extends Controller
      */
     public function create()
     {
-        $secteurs = Secteur::all();
-        $services = Service::all();
-        $users = User::all();
-        $tariffs = Tariff::all();
+        $secteurs   = Secteur::all();
+        $services   = Service::all();
+        $users      = User::all();
+        $tariffs    = Tariff::all();
         $politiques = Politique::all();
 
         return view('menages.create_or_update', compact('secteurs', 'services', 'users', 'tariffs', 'politiques'));
@@ -54,31 +54,25 @@ class MenageController extends Controller
     public function store(Request $request)
     {
 
-        dd($request);
+        // dd($request);
 
         $request->validate([
-            'name' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'contact' => 'required|string|max:15',
-            'password' => 'required|string|min:8|confirmed',
-            'politique_acceptance' => 'required|boolean', // Assurez-vous que 'politique' est bien un boolean
-            'secteur_id' => 'required|exists:secteurs,id',
-            'user_id' => 'required|exists:users,id',
-            'tariff_id' => 'required|exists:tariffs,id',
-            'service_id' => 'required|exists:services,id',
+            'name'                 => 'required|string|max:255',
+            'prenom'               => 'required|string|max:255',
+            'email'                => 'required|string|email|max:255|unique:users',
+            'contact'              => 'required|string|max:15',
+            'password'             => 'required|string|min:8|confirmed',
+            'politique_acceptance' => 'required|boolean', // Accepter 1 ou true comme valeurs valides
             'latitude' => 'required|numeric|between:-90,90', // Valider la latitude
             'longitude' => 'required|numeric|between:-180,180', // Valider la longitude
         ]);
 
-
-
         $user = User::create([
-            'name' => $request->name,
-            'prenom' => $request->prenom,
-            'email' => $request->email,
-            'contact' => $request->contact,
-            'password' => Hash::make($request->password),  // hash du mot de passe
+            'name'     => $request->name,
+            'prenom'   => $request->prenom,
+            'email'    => $request->email,
+            'contact'  => $request->contact,
+            'password' => Hash::make($request->password), // hash du mot de passe
         ]);
 
         $secteur = Secteur::findOrFail($request->secteur_id);
@@ -89,30 +83,30 @@ class MenageController extends Controller
             ->orderBy('id', 'desc')
             ->first();
 
-            $lastNumber = $lastMenage ? intval($lastMenage->code) : 0;
-            if ($service->code_service !== " ") {
-                $code = $service->code_service . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
-                $type_menage = $service->type_service;
-            } else {
-                $code = $secteur->nomSecteur . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
-                $type_menage = $service->type_service;
-                // dd($type_menage);
-            }
+        $lastNumber = $lastMenage ? intval($lastMenage->code) : 0;
+        if ($service->code_service !== " ") {
+            $code        = $service->code_service . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+            $type_menage = $service->type_service;
+        } else {
+            $code        = $secteur->nomSecteur . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+            $type_menage = $service->type_service;
+            // dd($type_menage);
+        }
 
         Menage::create([
-            'type_menage' => $type_menage,
-            'politique' => $request->politique == 1 ? true : false,
+            'type_menage'      => $type_menage,
+            'politique'        => $request->politique_acceptance == 1 ? true : false, // Utiliser 'politique_acceptance'
             'code' => $code,
-            'date_abonnement' => now(),
+            'date_abonnement'  => now(),
             'date_prise_effet' => now(),
-            'secteur_id' => $request->secteur_id,
-            'user_id' => $user->id,
-            'tariff_id' => $request->tariff_id,
-            'service_id' => $request->service_id,
-            'localisation' => json_encode([
-                'latitude' => $request->latitude,
-                'longitude' => $request->longitude
-            ]), // Enregistre la localisation en JSON
+            'secteur_id'       => $request->secteur_id,
+            'user_id'          => $user->id,
+            'tariff_id'        => $request->tariff_id,
+            'service_id'       => $request->service_id,
+            'localisation'     => json_encode([
+                'latitude'  => $request->latitude,
+                'longitude' => $request->longitude,
+            ]),
         ]);
 
         return redirect()->route('menages.index')->with('success', 'Ménage créé avec succès');
@@ -124,8 +118,8 @@ class MenageController extends Controller
     public function show(Menage $menage)
     {
         $menage = Menage::findOrFail($menage->id);
-        $user = $menage->user;
-        return view('menages.show', compact('menage','user'));
+        $user   = $menage->user;
+        return view('menages.show', compact('menage', 'user'));
     }
 
     /**
@@ -135,10 +129,11 @@ class MenageController extends Controller
     {
         $secteurs = Secteur::all();
         $services = Service::all();
-        $users = User::all();
-        $tariffs = Tariff::all();
+        $users    = User::all();
+        $tariffs  = Tariff::all();
+        $politiques = Politique::all();
 
-        return view('menages.create_or_update', compact('menage', 'secteurs', 'services', 'users', 'tariffs'));
+        return view('menages.create_or_update', compact('menage', 'secteurs', 'services', 'users', 'tariffs','politiques'));
     }
 
     /**
@@ -146,55 +141,62 @@ class MenageController extends Controller
      */
     public function update(UpdateMenageRequest $request, Menage $menage)
     {
+        // Validation des données
         $request->validate([
-            'name' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'contact' => 'required|string|max:15',
-            'password' => 'required|string|min:8|confirmed',
-            'politique' => 'required|boolean',
-            'secteur_id' => 'required|exists:secteurs,id',
-            'user_id' => 'required|exists:users,id',
-            'tariff_id' => 'required|exists:tariffs,id',
-            'service_id' => 'required|exists:services,id',
+            'name'                 => 'required|string|max:255',
+            'prenom'               => 'required|string|max:255',
+            'email'                => 'required|string|email|max:255|unique:users,email,' . $menage->user->id,
+            'contact'              => 'required|string|max:15',
+            'password'             => 'nullable|string|min:8|confirmed',
+            'politique_acceptance' => 'required|boolean',
+            'latitude'             => 'required|numeric|between:-90,90',
+            'longitude'            => 'required|numeric|between:-180,180',
         ]);
 
-        $menage->user->update([
-            'name' => $request->name,
-            'prenom' => $request->prenom,
-            'email' => $request->email,
-            'contact' => $request->contact,
+        // Trouver l'utilisateur à mettre à jour
+        $user = User::findOrFail($menage->user->id);
+        $user->update([
+            'name'     => $request->name,
+            'prenom'   => $request->prenom,
+            'email'    => $request->email,
+            'contact'  => $request->contact,
+            'password' => $request->filled('password') ? Hash::make($request->password) : $user->password, // Met à jour le mot de passe uniquement s'il est fourni
         ]);
 
+        // Trouver les entités liées
         $secteur = Secteur::findOrFail($request->secteur_id);
         $service = Service::findOrFail($request->service_id);
 
-        if ($menage->secteur_id != $request->secteur_id || $menage->service_id != $request->service_id) {
-            $lastMenage = Menage::where('secteur_id', $request->secteur_id)
-                ->where('service_id', $request->service_id)
-                ->orderBy('id', 'desc')
-                ->first();
+        // Générer le code pour le ménage
+        $lastMenage = Menage::where('secteur_id', $secteur->id)
+            ->where('service_id', $service->id)
+            ->orderBy('id', 'desc')
+            ->first();
 
-            $lastNumber = $lastMenage ? intval($lastMenage->code) : 0;
-            if ($service->code_service) {
-                $code = $service->code_service . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
-                $type_menage = $service->type_service;
-            } else {
-                $code = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
-                $type_menage = $service->type_service;
-            }
+        $lastNumber = $lastMenage ? intval($lastMenage->code) : 0;
+        if ($service->code_service !== " ") {
+            $code        = $service->code_service . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+            $type_menage = $service->type_service;
         } else {
-            $code = $menage->code;
+            $code        = $secteur->nomSecteur . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+            $type_menage = $service->type_service;
         }
 
+        // Trouver le ménage à mettre à jour
+        $menage = Menage::findOrFail($menage->id);
         $menage->update([
-            'type_menage' => $type_menage,
-            'politique' => $request->politique,
-            'code' => $code,
-            'secteur_id' => $request->secteur_id,
-            'user_id' => $menage->user_id,
-            'tariff_id' => $request->tariff_id,
-            'service_id' => $request->service_id,
+            'type_menage'      => $type_menage,
+            'politique'        => $request->politique_acceptance == 1 ? true : false,
+            'code'             => $code,
+            'date_abonnement'  => now(),
+            'date_prise_effet' => now(),
+            'secteur_id'       => $request->secteur_id,
+            'tariff_id'        => $request->tariff_id,
+            'service_id'       => $request->service_id,
+            'localisation'     => json_encode([
+                'latitude'  => $request->latitude,
+                'longitude' => $request->longitude,
+            ]),
         ]);
 
         return redirect()->route('menages.index')->with('success', 'Ménage mis à jour avec succès');
