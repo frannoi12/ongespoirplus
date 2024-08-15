@@ -144,9 +144,9 @@
                             </div>
 
                             <div class="mt-4">
-                                <x-maps-leaflet :center="[
-                                    'lat' => old('latitude', 8.978000145592532),
-                                    'lng' => old('longitude', 1.1454960246640997),
+                                <x-maps-leaflet :centerPoint="[
+                                    'lat' => old('latitude', 8.990347),
+                                    'lng' => old('longitude', 1.130433),
                                 ]" :zoom="19" style="width: 100%; height: 400px;">
                                 </x-maps-leaflet>
                                 <input type="hidden" id="longitude" name="longitude"

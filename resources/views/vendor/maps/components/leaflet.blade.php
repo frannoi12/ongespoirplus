@@ -22,7 +22,7 @@
         crossorigin=""></script>
 <script>
 
-    var mymap = L.map('{{$mapId}}').setView([{{$centerPoint['lat'] ?? $centerPoint[0]}}, {{$centerPoint['long'] ?? $centerPoint[1]}}], {{$zoomLevel}});
+    var mymap = L.map('{{$mapId}}').setView([{{$centerPoint['lat'] ?? $centerPoint[0]}}, {{$centerPoint['lng'] ?? $centerPoint[1]}}], {{$zoomLevel}});
     @foreach($markers as $marker)
      @if(isset($marker['icon']))
        var icon = L.icon({
