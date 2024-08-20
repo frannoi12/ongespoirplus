@@ -143,23 +143,36 @@
                                 @enderror
                             </div>
 
-                            <div class="mt-4">
+                            @php
+                                // Décoder la localisation si elle est disponible
+                                $localisation = isset($menage->localisation)
+                                    ? json_decode($menage->localisation, true)
+                                    : null;
+                                $latitude = old('latitude', $localisation['latitude'] ?? 8.990347);
+                                $longitude = old('longitude', $localisation['longitude'] ?? 1.130433);
+                            @endphp
+
+                            <div class="mt-4" id="map">
                                 <x-maps-leaflet :centerPoint="[
-                                    'lat' => old('latitude', 8.990347),
-                                    'lng' => old('longitude', 1.130433),
-                                ]" :zoom="19" style="width: 100%; height: 400px;">
+                                    'lat' => $latitude,
+                                    'lng' => $longitude,
+                                ]" :zoom="14"
+                                    style="width: 100%; height: 400px;">
                                 </x-maps-leaflet>
-                                <input type="hidden" id="longitude" name="longitude"
-                                    value="{{ old('longitude', 1.1454960246640997) }}">
-                                <input type="hidden" id="latitude" name="latitude"
-                                    value="{{ old('latitude', 8.978000145592532) }}">
+
+                                <input type="hidden" id="longitude" name="longitude" value="{{ $longitude }}">
+                                <input type="hidden" id="latitude" name="latitude" value="{{ $latitude }}">
+
                                 @error('longitude')
                                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                 @enderror
+
                                 @error('latitude')
                                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
+
+
 
                             <!-- Politique de confidentialité -->
                             <div class="mt-4">
@@ -210,6 +223,112 @@
                 alert('Les mots de passe ne correspondent pas.');
             }
         });
+
+
+        // Initialisation des coordonnées par défaut avec les valeurs récupérées ou anciennes
+        var defaultLat = {{ $latitude }};
+        var defaultLng = {{ $longitude }};
+
+        // Initialisation de la carte
+        var map = L.map('map').setView([defaultLat, defaultLng], 19);
+
+        // Définition de l'icône personnalisée pour le marqueur
+        var blueIcon = L.icon({
+            iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        // Ajout d'un marker initial avec l'icône personnalisée
+        var marker = L.marker([defaultLat, defaultLng], {
+            icon: blueIcon,
+            draggable: true
+        }).addTo(map);
+        marker.bindPopup("Latitude: " + defaultLat + "<br>Longitude: " + defaultLng).openPopup();
+
+        // Ajout des tuiles OpenStreetMap
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Fonction appelée lors du clic sur la carte
+        map.on('click', function(e) {
+            var lat = e.latlng.lat;
+            var lng = e.latlng.lng;
+
+            // Mise à jour de la position du marqueur
+            marker.setLatLng([lat, lng]).bindPopup("Latitude: " + lat + "<br>Longitude: " + lng).openPopup();
+
+            // Mise à jour des champs cachés avec les nouvelles coordonnées
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lng;
+        });
+
+        // Permettre à l'utilisateur de déplacer le marqueur
+        marker.on('dragend', function(e) {
+            var latLng = marker.getLatLng();
+            document.getElementById('latitude').value = latLng.lat;
+            document.getElementById('longitude').value = latLng.lng;
+
+            marker.bindPopup("Latitude: " + latLng.lat + "<br>Longitude: " + latLng.lng).openPopup();
+        });
+
+
+
+
+        // Initialisation des coordonnées par défaut
+        // var defaultLat = {{ old('latitude', 8.990347) }};
+        // var defaultLng = {{ old('longitude', 1.130433) }};
+
+        // // Initialisation de la carte
+        // var map = L.map('map').setView([defaultLat, defaultLng], 10);
+
+        // // Définition de l'icône personnalisée pour le marqueur
+        // var blueIcon = L.icon({
+        //     iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+        //     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+        //     iconSize: [25, 41],
+        //     iconAnchor: [12, 41],
+        //     popupAnchor: [1, -34],
+        //     shadowSize: [41, 41]
+        // });
+
+        // // Ajout d'un marker initial avec l'icône personnalisée
+        // var marker = L.marker([defaultLat, defaultLng], {
+        //     icon: blueIcon
+        // }).addTo(map);
+        // marker.bindPopup("Latitude: " + defaultLat + "<br>Longitude: " + defaultLng).openPopup();
+
+        // // Ajout des tuiles OpenStreetMap
+        // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        // }).addTo(map);
+
+        // // Ajout d'un popup initial à la position par défaut
+        // var popup = L.popup()
+        //     .setLatLng([defaultLat, defaultLng])
+        //     .setContent("Latitude: " + defaultLat + "<br>Longitude: " + defaultLng)
+        //     .openOn(map);
+
+        // // Fonction appelée lors du clic sur la carte
+        // function onMapClick(e) {
+        //     var lat = e.latlng.lat;
+        //     var lng = e.latlng.lng;
+
+        //     // Mise à jour de la position du marqueur
+        //     marker.setLatLng([lat, lng]).bindPopup("Latitude: " + lat + "<br>Longitude: " + lng).openPopup();
+
+        //     // Mise à jour des champs cachés avec les nouvelles coordonnées
+        //     document.getElementById('latitude').value = lat;
+        //     document.getElementById('longitude').value = lng;
+        // }
+
+        // // Attacher la fonction de clic à la carte
+        // map.on('click', onMapClick);
+
 
 
         document.addEventListener('DOMContentLoaded', function() {
