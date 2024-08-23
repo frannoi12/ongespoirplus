@@ -31,8 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('tariffs',TariffController::class);
     Route::resource('services',ServiceController::class);
 
-    Route::get('/menages/export', [MenageExportController::class, 'export'])->name('menages.export');
-    Route::get('/menages/export', [MenageExportController::class, 'exportPdf'])->name('menages.export.pdf');
+    // Route::get('/menages/export', [MenageExportController::class, 'export'])->name('menages.export');
+    Route::get('/menage', [MenageExportController::class, 'exportPdf'])->name('menages.pdf');
 
 
 

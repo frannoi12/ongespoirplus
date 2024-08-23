@@ -66,7 +66,7 @@ class MenageController extends Controller
             'name'                 => 'required|string|max:255',
             'prenom'               => 'required|string|max:255',
             'email'                => 'required|string|email|max:255|unique:users',
-            'contact'              => 'required|string|max:15',
+            'contact'              => 'required|string|regex:/^(9[0-36-9]|7[0-36-9])\d{6}$/',
             'password'             => 'required|string|min:8|confirmed',
             'politique_acceptance' => 'required|boolean', // Accepter 1 ou true comme valeurs valides
             'latitude' => 'required|numeric|between:-90,90', // Valider la latitude
@@ -152,7 +152,7 @@ class MenageController extends Controller
             'name'                 => 'required|string|max:255',
             'prenom'               => 'required|string|max:255',
             'email'                => 'required|string|email|max:255|unique:users,email,' . $menage->user->id,
-            'contact'              => 'required|string|max:15',
+            'contact'              => 'required|string|regex:/^(9[0-36-9]|7[0-36-9])\d{6}$/',
             'password'             => 'nullable|string|min:8|confirmed',
             'politique_acceptance' => 'required|boolean',
             'latitude'             => 'required|numeric|between:-90,90',

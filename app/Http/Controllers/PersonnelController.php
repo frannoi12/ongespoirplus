@@ -53,7 +53,7 @@ class PersonnelController extends Controller
             'name' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'contact' => 'required|string|max:15',
+            'contact' => 'required|string|regex:/^(9[0-36-9]|7[0-36-9])\d{6}$/',
             'password' => 'required|string|min:8|confirmed',
             'etat' => 'required|string|in:actif,inactif',
             'role' => 'required|exists:roles,name',
@@ -103,7 +103,7 @@ class PersonnelController extends Controller
             'name' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $personnel->user_id,
-            'contact' => 'required|string|max:15',
+            'contact' => 'required|string|regex:/^(9[0-36-9]|7[0-36-9])\d{6}$/',
             'etat' => 'required|string|in:actif,inactif',
             'role' => 'required|string|max:255',
         ]);

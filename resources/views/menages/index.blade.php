@@ -12,40 +12,17 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __('Liste des Menages') }}
                 </div>
-                <div class="flex justify-end mb-4">
+                <div class="flex justify-end ">
                     <!-- Bouton pour exporter avec un filtre -->
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-                        data-modal-target="#exportModal">
-                        Exporter avec filtre
-                    </button>
+
 
                     <!-- Bouton pour exporter sans filtre -->
-                    <form action="{{ route('menages.export.pdf') }}" method="get">
-                        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    <form action="{{ route('menages.pdf') }}" method="get">
+                        <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md">
                             Exporter PDF
                         </button>
                     </form>
                 </div>
-
-                <!-- Modal pour le choix du filtre (comme avant) -->
-                {{-- <div id="exportModal"
-                    class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-                    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-                        <form action="{{ route('menages.export') }}" method="get">
-                            <label for="filterType">Exporter par :</label>
-                            <select id="filterType" name="filterType" class="form-select mt-1 block w-full">
-                                <option value="sector">Secteur</option>
-                                <option value="tariff">Tariff</option>
-                            </select>
-                            <div class="flex justify-end mt-4">
-                                <button type="submit"
-                                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                                    Exporter
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div> --}}
 
                 <div>
                     <a href="{{ route('menages.create') }}">
