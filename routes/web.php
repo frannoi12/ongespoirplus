@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SecteurController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TariffController;
+use App\Http\Controllers\MenageExportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -29,6 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('secteurs',SecteurController::class);
     Route::resource('tariffs',TariffController::class);
     Route::resource('services',ServiceController::class);
+
+    Route::get('/menages/export', [MenageExportController::class, 'export'])->name('menages.export');
+    Route::get('/menages/export', [MenageExportController::class, 'exportPdf'])->name('menages.export.pdf');
+
 
 
 

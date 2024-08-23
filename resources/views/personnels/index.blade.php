@@ -51,49 +51,47 @@
                             <th class="py-3 px-6">Action</th>
                         </thead>
                         <tbody>
-                            @forelse ($users as $user)
+                            @forelse ($personnels as $personnel)
                                 <tr class="bg-gray-100">
                                     <td class="py-3 px-6">
-                                        {{ $user->name }}
+                                        {{ $personnel->user->name }}
                                     </td>
                                     <td class="py-3 px-6">
-                                        {{ $user->prenom }}
+                                        {{ $personnel->user->prenom }}
                                     </td>
                                     {{-- <td class="py-3 px-6">
-                                        {{ $user->email }}
+                                        {{ $personnel->email }}
                                     </td> --}}
                                     <td class="py-3 px-6">
-                                        {{ $user->contact }}
+                                        {{ $personnel->user->contact }}
                                     </td>
                                     <td class="py-3 px-6">
-                                        {{ $user->personnel->lieu_de_provenance ?? '' }}
+                                        {{ $personnel->lieu_de_provenance ?? '' }}
                                     </td>
                                     <td class="py-3 px-6">
-                                        {{ $user->personnel->etat ?? ' ' }}
+                                        {{ $personnel->etat ?? ' ' }}
                                     </td>
                                     <td class="py-3 px-6">
-                                        {{ $user->personnel->role ?? ' ' }}
+                                        {{ $personnel->role ?? ' ' }}
                                     </td>
                                     <td class="py-3 px-6">
-                                        @if ($user->personnel)
-                                            <a href="{{ route('personnels.edit', $user->personnel->id) }}">
-                                                <button
-                                                    class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">Editer</button>
-                                            </a>
-                                            <a href="{{ route('personnels.show', $user->personnel->id) }}">
-                                                @csrf
-                                                <button
-                                                    class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Consulter</button>
-                                            </a>
-                                            <form action="{{ route('personnels.destroy', $user->personnel->id) }}"
-                                                method="POST"
-                                                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel ?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button
-                                                    class="bg-red-600 hover:bg-red-500 text-white text-sm px-3 py-2 rounded-md">Supprimer</button>
-                                            </form>
-                                        @endif
+                                        <a href="{{ route('personnels.edit', $personnel->id) }}">
+                                            <button
+                                                class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">Editer</button>
+                                        </a>
+                                        <a href="{{ route('personnels.show', $personnel->id) }}">
+                                            @csrf
+                                            <button
+                                                class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Consulter</button>
+                                        </a>
+                                        <form action="{{ route('personnels.destroy', $personnel->id) }}"
+                                            method="POST"
+                                            onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel ?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button
+                                                class="bg-red-600 hover:bg-red-500 text-white text-sm px-3 py-2 rounded-md">Supprimer</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty
@@ -102,7 +100,7 @@
                         </tbody>
                     </table>
                     <div>
-                        {{ $users->links() }}
+                        {{ $personnels->links() }}
                     </div>
                 </div>
             </div>

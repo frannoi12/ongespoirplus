@@ -21,18 +21,24 @@ class MenageController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $query  = User::whereHas('menage');
+
+        $query = Menage::query()
+            ->join('users', 'menages.user_id', '=', 'users.id')
+            ->select('menages.*', 'users.name', 'users.prenom', 'users.email');
 
         if ($search) {
-            $query->where('name', 'like', "%{$search}%")
-                ->orWhere('prenom', 'like', "%{$search}%")
-                ->orWhere('email', 'like', "%{$search}%");
+            $query->where(function ($q) use ($search) {
+                $q->where('users.name', 'like', "%{$search}%")
+                  ->orWhere('users.prenom', 'like', "%{$search}%")
+                  ->orWhere('users.email', 'like', "%{$search}%");
+            });
         }
 
-        $users = $query->paginate(10);
+        $menages = $query->orderBy('name','asc')->paginate(10);
 
-        return view('menages.index', compact('users', 'search'));
+        return view('menages.index', compact('menages', 'search'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -133,7 +139,7 @@ class MenageController extends Controller
         $tariffs  = Tariff::all();
         $politiques = Politique::all();
 
-        return view('menages.create_or_update', compact('menage', 'secteurs', 'services', 'users', 'tariffs','politiques'));
+        return view('menages.create_or_update', compact('menage', 'secteurs', 'services', 'users', 'tariffs', 'politiques'));
     }
 
     /**
