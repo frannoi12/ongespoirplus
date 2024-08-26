@@ -16,18 +16,24 @@ class PersonnelController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $query = User::whereHas('personnel');
+
+        $query = Personnel::query()
+            ->join('users', 'personnels.user_id', '=', 'users.id')
+            ->select('personnels.*', 'users.name', 'users.prenom', 'users.email');
 
         if ($search) {
-            $query->where('name', 'like', "%{$search}%")
-                ->orWhere('prenom', 'like', "%{$search}%")
-                ->orWhere('email', 'like', "%{$search}%");
+            $query->where(function ($q) use ($search) {
+                $q->where('users.name', 'like', "%{$search}%")
+                  ->orWhere('users.prenom', 'like', "%{$search}%")
+                  ->orWhere('users.email', 'like', "%{$search}%");
+            });
         }
 
-        $users = $query->paginate(10);
+        $personnels = $query->orderBy('name','asc')->paginate(10);
 
-        return view('personnels.index', compact('users','search'))->with('succes','Listes des personnls');
+        return view('personnels.index', compact('personnels', 'search'))->with('succes','Listes des personnls');
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -35,7 +41,7 @@ class PersonnelController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view("personnels.create_or_update",compact('roles'))->with('succes','Lancement de création d\'un personnel');
+        return view("personnels.create_or_update", compact('roles'))->with('succes', 'Lancement de création d\'un personnel');
     }
 
     /**
@@ -47,7 +53,7 @@ class PersonnelController extends Controller
             'name' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'contact' => 'required|string|max:15',
+            'contact' => 'required|string|regex:/^(9[0-36-9]|7[0-36-9])\d{6}$/',
             'password' => 'required|string|min:8|confirmed',
             'etat' => 'required|string|in:actif,inactif',
             'role' => 'required|exists:roles,name',
@@ -75,7 +81,7 @@ class PersonnelController extends Controller
     public function show(Personnel $personnel)
     {
         $personnel = Personnel::findOrFail($personnel->id);
-        return view('personnels.show',compact('personnel'))->with('succes','Détail sur un personnle effectuée');
+        return view('personnels.show', compact('personnel'))->with('succes', 'Détail sur un personnle effectuée');
     }
 
     /**
@@ -85,7 +91,7 @@ class PersonnelController extends Controller
     {
         $personnel = Personnel::findOrFail($personnel->id);
         $roles = Role::all();
-        return view('personnels.create_or_update', compact('personnel','roles'))->with('succes','Edition d\' un personnel');
+        return view('personnels.create_or_update', compact('personnel', 'roles'))->with('succes', 'Edition d\' un personnel');
     }
 
     /**
@@ -97,7 +103,7 @@ class PersonnelController extends Controller
             'name' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $personnel->user_id,
-            'contact' => 'required|string|max:15',
+            'contact' => 'required|string|regex:/^(9[0-36-9]|7[0-36-9])\d{6}$/',
             'etat' => 'required|string|in:actif,inactif',
             'role' => 'required|string|max:255',
         ]);
@@ -124,7 +130,7 @@ class PersonnelController extends Controller
     {
         // dd($personnel->user);
 
-        if($personnel->user){
+        if($personnel->user) {
             $personnel->user->delete();
         }
 
