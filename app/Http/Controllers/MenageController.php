@@ -20,6 +20,9 @@ class MenageController extends Controller
      */
     public function index(Request $request)
     {
+
+        $secteurs   = Secteur::all();
+        $services   = Service::all();
         $search = $request->input('search');
 
         $query = Menage::query()
@@ -36,7 +39,7 @@ class MenageController extends Controller
 
         $menages = $query->orderBy('name','asc')->paginate(10);
 
-        return view('menages.index', compact('menages', 'search'));
+        return view('menages.index', compact('menages', 'search','secteurs','services'));
     }
 
 

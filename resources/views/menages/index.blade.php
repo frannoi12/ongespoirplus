@@ -12,19 +12,14 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __('Liste des Menages') }}
                 </div>
-                <div class="flex justify-end ">
+
+                <div class="flex justify-end items-center space-x-4">
                     <!-- Bouton pour exporter avec un filtre -->
+                    <button type="button" class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md" data-bs-toggle="modal" data-bs-target="#exportModal">
+                        Exporter en PDF
+                    </button>
 
-
-                    <!-- Bouton pour exporter sans filtre -->
-                    <form action="{{ route('menages.pdf') }}" method="get">
-                        <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md">
-                            Exporter PDF
-                        </button>
-                    </form>
-                </div>
-
-                <div>
+                    <!-- Bouton pour ajouter -->
                     <a href="{{ route('menages.create') }}">
                         <button style="background: green"
                             class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">
@@ -33,6 +28,7 @@
                     </a>
                 </div>
             </div>
+
             <div
                 class="bg-white flex items-center justify-between mx-6 px-6 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 w-full space-y-6">
@@ -109,4 +105,57 @@
         </div>
     </div>
 
+    <!-- Fenêtre modale -->
+    <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exportModalLabel">Exporter les ménages</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Voulez-vous ajouter des filtres avant d'exporter le PDF ?</p>
+                </div>
+                <div class="modal-footer">
+                    <!-- Lien vers export sans filtre -->
+                    <a href="{{ route('menages.export') }}" class="btn btn-secondary">Exporter sans
+                        filtre</a>
+
+                    <!-- Bouton pour ouvrir le formulaire avec filtres -->
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        onclick="document.getElementById('filterForm').style.display='block';">Ajouter
+                        des filtres</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulaire de filtre (caché au départ) -->
+    <div id="filterForm" style="display:none;">
+        <form action="{{ route('menages.export') }}" method="GET">
+            <div>
+                <label for="secteur">Secteur :</label>
+                <select name="secteur_id" id="secteur">
+                    <option disabled value="">Tous les secteurs</option>
+                    @foreach ($secteurs as $secteur)
+                        <option value="{{ $secteur->id }}">{{ $secteur->nomSecteur }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div>
+                <label for="service">Service :</label>
+                <select name="service_id" id="service">
+                    <option value="">Tous les services</option>
+                    @foreach ($services as $service)
+                        <option value="{{ $service->id }}">{{ $service->type_service }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <button type="submit">Exporter avec filtres</button>
+        </form>
+    </div>
 </x-app-layout>
