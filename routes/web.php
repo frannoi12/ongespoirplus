@@ -40,4 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/cinetpay', [\App\Http\Controllers\CinetPayController::class, 'index']);
+Route::post('/cinetpay', [\App\Http\Controllers\CinetPayController::class, 'Payment']);
+Route::match(['get','post'],'/notify_url', [\App\Http\Controllers\CinetPayController::class, 'notify_url'])->name('notify_url');
+Route::match(['get','post'],'/return_url', [\App\Http\Controllers\CinetPayController::class, 'return_url'])->name('return_url');
+
 require __DIR__.'/auth.php';
