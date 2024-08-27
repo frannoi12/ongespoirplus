@@ -55,7 +55,12 @@
                                     for="contact">Contact</label>
                                 <input type="contact" id="contact" name="contact"
                                     value="{{ old('contact', $personnel->user->contact ?? '') }}"
-                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                                    oninput="validateContact()">
+                                <p id="contactError" class="text-red-500 text-xs mt-1"></p>
+                                @error('contact')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="mb-4">
@@ -140,5 +145,18 @@
                 alert('Les mots de passe ne correspondent pas.');
             }
         });
+
+        function validateContact() {
+            const contactInput = document.getElementById('contact').value;
+            const errorElement = document.getElementById('contactError');
+            const regex = /^(9[0-36-9]|7[0-36-9])\d{6}$/;
+
+            if (regex.test(contactInput)) {
+                errorElement.textContent = ''; // Efface le message d'erreur si le contact est valide
+            } else {
+                errorElement.textContent =
+                    'Le numéro de téléphone n\'est pas valide.'; // Affiche un message d'erreur si le contact n'est pas valide
+            }
+        }
     </script>
 </x-app-layout>

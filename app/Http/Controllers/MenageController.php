@@ -69,7 +69,7 @@ class MenageController extends Controller
             'name'                 => 'required|string|max:255',
             'prenom'               => 'required|string|max:255',
             'email'                => 'required|string|email|max:255|unique:users',
-            'contact'              => 'required|string|regex:/^(9[0-36-9]|7[0-36-9])\d{6}$/',
+            'contact'              => 'required|string|min:8',
             'password'             => 'required|string|min:8|confirmed',
             'politique_acceptance' => 'required|boolean', // Accepter 1 ou true comme valeurs valides
             'latitude' => 'required|numeric|between:-90,90', // Valider la latitude
@@ -95,10 +95,10 @@ class MenageController extends Controller
         $lastNumber = $lastMenage ? intval($lastMenage->code) : 0;
         if ($service->code_service !== " ") {
             $code        = $service->code_service . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
-            $type_menage = $service->type_service;
+            $type_menage = $service->id;
         } else {
             $code        = $secteur->nomSecteur . '-' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
-            $type_menage = $service->type_service;
+            $type_menage = $service->id;
             // dd($type_menage);
         }
 
@@ -155,12 +155,13 @@ class MenageController extends Controller
             'name'                 => 'required|string|max:255',
             'prenom'               => 'required|string|max:255',
             'email'                => 'required|string|email|max:255|unique:users,email,' . $menage->user->id,
-            'contact'              => 'required|string|regex:/^(9[0-36-9]|7[0-36-9])\d{6}$/',
+            'contact'              => 'required|string|min:8',
             'password'             => 'nullable|string|min:8|confirmed',
             'politique_acceptance' => 'required|boolean',
             'latitude'             => 'required|numeric|between:-90,90',
             'longitude'            => 'required|numeric|between:-180,180',
         ]);
+
 
         // Trouver l'utilisateur à mettre à jour
         $user = User::findOrFail($menage->user->id);
