@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CinetPayController;
 use App\Http\Controllers\LiquideController;
 use App\Http\Controllers\MenageController;
 use App\Http\Controllers\OrdureController;
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/menage', [MenageExportController::class, 'export'])->name('menages.export');
     // Route::get('/menage', [MenageExportController::class, 'exportPdf'])->name('menages.pdf');
 
+    Route::get('/cinetpay/callback', [CinetPayController::class, 'callback'])->name('cinetpay.callback');
+    Route::post('/cinetpay/notify', [CinetPayController::class, 'notify'])->name('cinetpay.notify');
 
 
 
