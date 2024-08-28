@@ -11,6 +11,7 @@ use App\Http\Controllers\SecteurController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TariffController;
 use App\Http\Controllers\MenageExportController;
+use App\Http\Controllers\PaiementController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('secteurs', SecteurController::class);
     Route::resource('tariffs', TariffController::class);
     Route::resource('services', ServiceController::class);
+    Route::resource('paiements', PaiementController::class);
+    // Route::resource('liquides',);
 
     Route::get('/menage', [MenageExportController::class, 'export'])->name('menages.export');
     // Route::get('/menage', [MenageExportController::class, 'exportPdf'])->name('menages.pdf');

@@ -104,7 +104,7 @@ class MenageController extends Controller
             // dd($type_menage);
         }
 
-        Menage::create([
+        $menage =  Menage::create([
             'type_menage'      => $type_menage,
             'politique'        => $request->politique_acceptance == 1 ? true : false, // Utiliser 'politique_acceptance'
             'code' => $code,
@@ -120,7 +120,8 @@ class MenageController extends Controller
             ]),
         ]);
 
-        return redirect()->route('menages.index')->with('success', 'Ménage créé avec succès');
+        return view('paiements.create',compact('menage'))->with('succes','Menage en cours de création');
+        // return redirect()->route('menages.index')->with('success', 'Ménage créé avec succès');
     }
 
     /**
@@ -211,7 +212,9 @@ class MenageController extends Controller
             ]),
         ]);
 
-        return redirect()->route('menages.index')->with('success', 'Ménage mis à jour avec succès');
+        return view('paiements.create')->with('succes','Menage en cours de mise à jour');
+
+        // return redirect()->route('menages.index')->with('success', 'Ménage mis à jour avec succès');
     }
 
     /**
@@ -229,8 +232,8 @@ class MenageController extends Controller
             $menage->delete();
         } else {
             // Sinon, supprimer le user et le ménage
-            $user->delete();
             $menage->delete();
+            $user->delete();
         }
 
         return redirect()->route('menages.index')->with('success', 'Ménage supprimé avec succès');
