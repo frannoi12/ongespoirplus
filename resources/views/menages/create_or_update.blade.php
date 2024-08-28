@@ -292,9 +292,52 @@
         });
 
 
+        document.addEventListener('DOMContentLoaded', function() {
+            const politiqueAcceptance = document.getElementById('politique_acceptance');
+            const submitBtn = document.getElementById('submit-button');
+            const form = document.getElementById('menage-form');
+            const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
+
+            // Désactiver le bouton de soumission par défaut
+            submitBtn.disabled = true;
+
+            function checkFormValidity() {
+                let allFilled = true;
+
+                requiredFields.forEach(field => {
+                    if (!field.value) {
+                        allFilled = false;
+                    }
+                });
+
+                if (allFilled && politiqueAcceptance.checked) {
+                    submitBtn.disabled = false;
+                } else {
+                    submitBtn.disabled = true;
+                }
+            }
+
+            requiredFields.forEach(field => {
+                field.addEventListener('input', checkFormValidity);
+            });
+
+            politiqueAcceptance.addEventListener('change', checkFormValidity);
+        });
+    </script>
+</x-app-layout>
 
 
-        // Initialisation des coordonnées par défaut
+{{-- <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ isset($menage) ? __('Modifier menage') : __('Inscription d\' une menage') }}
+        </h2>
+    </x-slot>
+
+
+
+
+    // Initialisation des coordonnées par défaut
         // var defaultLat = {{ old('latitude', 8.990347) }};
         // var defaultLng = {{ old('longitude', 1.130433) }};
 
@@ -343,53 +386,6 @@
 
         // // Attacher la fonction de clic à la carte
         // map.on('click', onMapClick);
-
-
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const politiqueAcceptance = document.getElementById('politique_acceptance');
-            const submitBtn = document.getElementById('submit-button');
-            const form = document.getElementById('menage-form');
-            const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
-
-            // Désactiver le bouton de soumission par défaut
-            submitBtn.disabled = true;
-
-            function checkFormValidity() {
-                let allFilled = true;
-
-                requiredFields.forEach(field => {
-                    if (!field.value) {
-                        allFilled = false;
-                    }
-                });
-
-                if (allFilled && politiqueAcceptance.checked) {
-                    submitBtn.disabled = false;
-                } else {
-                    submitBtn.disabled = true;
-                }
-            }
-
-            requiredFields.forEach(field => {
-                field.addEventListener('input', checkFormValidity);
-            });
-
-            politiqueAcceptance.addEventListener('change', checkFormValidity);
-        });
-    </script>
-</x-app-layout>
-
-
-{{-- <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ isset($menage) ? __('Modifier menage') : __('Inscription d\' une menage') }}
-        </h2>
-    </x-slot>
-
-
-
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">

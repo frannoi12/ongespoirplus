@@ -29,9 +29,9 @@ class PersonnelController extends Controller
             });
         }
 
-        $personnels = $query->orderBy('name','asc')->paginate(10);
+        $personnels = $query->orderBy('name', 'asc')->paginate(10);
 
-        return view('personnels.index', compact('personnels', 'search'))->with('succes','Listes des personnls');
+        return view('personnels.index', compact('personnels', 'search'))->with('succes', 'Listes des personnls');
     }
 
 
@@ -128,14 +128,25 @@ class PersonnelController extends Controller
      */
     public function destroy(Personnel $personnel)
     {
-        // dd($personnel->user);
+        // Vérifier si l'utilisateur est associé à un ménage
+        $user = $personnel->user;
 
-        if($personnel->user) {
-            $personnel->user->delete();
+        // Vérifier si l'utilisateur est également associé à un ménage
+        $hasMenage = $user->menage()->exists();
+
+        if ($hasMenage) {
+            // Si l'utilisateur est associé à un ménage, on supprime uniquement le personnel
+            $personnel->delete();
+        } else {
+            // Si l'utilisateur n'a pas de ménage, on supprime l'utilisateur et le personnel
+            $personnel->delete();
+            $user->delete();
         }
-
-        $personnel->delete();
 
         return redirect()->route('personnels.index')->with('success', 'Personnel supprimé avec succès');
     }
+
+
+
+
 }
