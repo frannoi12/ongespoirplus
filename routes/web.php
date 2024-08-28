@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
 =======
 >>>>>>> 0690e4f (fin de liquide et reçu en cours)
 
-    
+
     Route::get('/menage', [MenageExportController::class, 'export'])->name('menages.export');
     // Route::get('/menage', [MenageExportController::class, 'exportPdf'])->name('menages.pdf');
 
