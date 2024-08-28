@@ -23,20 +23,25 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::resource('personnels',PersonnelController::class);
-    Route::resource('menages',MenageController::class);
-    Route::resource('ordures',OrdureController::class);
-    Route::resource('politiques',PolitiqueController::class);
-    Route::resource('liquides',LiquideController::class);
-    Route::resource('secteurs',SecteurController::class);
-    Route::resource('tariffs',TariffController::class);
-    Route::resource('services',ServiceController::class);
+    Route::resource('personnels', PersonnelController::class);
+    Route::resource('menages', MenageController::class);
+    Route::resource('ordures', OrdureController::class);
+    Route::resource('politiques', PolitiqueController::class);
+    Route::resource('liquides', LiquideController::class);
+    Route::resource('secteurs', SecteurController::class);
+    Route::resource('tariffs', TariffController::class);
+    Route::resource('services', ServiceController::class);
 
     Route::get('/menage', [MenageExportController::class, 'export'])->name('menages.export');
     // Route::get('/menage', [MenageExportController::class, 'exportPdf'])->name('menages.pdf');
 
-    Route::get('/cinetpay/callback', [CinetPayController::class, 'callback'])->name('cinetpay.callback');
-    Route::post('/cinetpay/notify', [CinetPayController::class, 'notify'])->name('cinetpay.notify');
+    Route::get('/payment', [CinetPayController::class, 'showPaymentForm'])->name('cinetpay.payment');
+
+    Route::post('/payment/process', [CinetPayController::class, 'processPayment'])->name('cinetpay.process');
+
+    Route::get('/payment/callback', [CinetPayController::class, 'callback'])->name('cinetpay.callback');
+
+    Route::post('/payment/notify', [CinetPayController::class, 'notify'])->name('cinetpay.notify');
 
 
 

@@ -24,7 +24,7 @@
                         <!-- Montant -->
                         <div class="mt-4">
                             <x-label for="amount" :value="__('Montant')" />
-                            <x-input id="amount" class="block mt-1 w-full" type="number" name="amount" value="100" required autofocus />
+                            <x-input id="amount" class="block mt-1 w-full" type="number" name="amount" value="1000" required autofocus />
                         </div>
 
                         <!-- Devise -->
