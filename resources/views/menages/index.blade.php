@@ -12,6 +12,9 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __('Liste des Menages') }}
                 </div>
+                @if (session('success'))
+                    <p class="text-green-500 text-xs mt-1">{{ session('success') }}</p>
+                @endif
 
                 <div class="flex justify-end items-center space-x-4" x-data="{ open: false }">
                     <!-- Bouton pour exporter avec un filtre -->
