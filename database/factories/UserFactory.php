@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'prenom'=> fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'contact' => $this->faker->regexify('(9[0-36-9]|7[0-36-9])\d{6}$'), // Génère un numéro de 10 chiffres.
+            'contact' => $this->faker->regexify('/^(9[0-36-9]|7[0-36-9])\d{6}$/'), // Génère un numéro de 10 chiffres.
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];

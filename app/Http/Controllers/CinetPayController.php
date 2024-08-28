@@ -27,7 +27,11 @@ class CinetPayController extends Controller
             'customer_surname' => "",
             'customer_name' => "",
             'customer_email' => "",
-            'customer_phone_number' => '',
+            //
+            // 'lock_phone_number' => true,
+            // 'customer_phone_number' => '+22890330819',
+            // 'phone_operator' => 'TOGOCEL',
+            //
             'customer_address' => '',
             'customer_city' => '',
             'customer_country' => '',
@@ -48,9 +52,10 @@ class CinetPayController extends Controller
             CURLOPT_POSTFIELDS => json_encode($cinetpay_data),
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_HTTPHEADER => array(
-                "content-type:application/json"
+                "Content-Type:application/json"
             ),
         ));
+        set_time_limit(60);
         $response = curl_exec($curl);
         $err = curl_error($curl);
         curl_close($curl);
@@ -63,6 +68,7 @@ class CinetPayController extends Controller
             $payment_link = $response_body["data"]["payment_url"]; // Recuperation de l'url de paiement
             //Enregistrement des informations dans la base de donnée
             //Ensuite redirection vers la page de paiement
+
             return redirect($payment_link);
         } else {
             return back()->with('info', 'Une erreur est survenue.  Description : ' . $response_body["description"]);
@@ -139,7 +145,7 @@ class CinetPayController extends Controller
                 return back()->with('info', 'Echec, votre paiement a échoué');
             }
         } else {
-            print("transaction non fourni");
+            print ("transaction non fourni");
         }
     }
 
