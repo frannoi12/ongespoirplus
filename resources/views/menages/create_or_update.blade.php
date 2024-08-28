@@ -128,7 +128,7 @@
                             </div>
 
                             <div class="mt-4">
-                                <x-input-label for="tariff_id" :value="__('Tarif')" />
+                                <x-input-label for="tariff_id" :value="__('Tariff')" />
                                 <select id="tariff_id" name="tariff_id"
                                     class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                                     <option disabled
