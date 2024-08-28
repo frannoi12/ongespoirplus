@@ -11,6 +11,9 @@ use App\Http\Controllers\SecteurController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TariffController;
 use App\Http\Controllers\MenageExportController;
+use App\Http\Controllers\Auth\GoogleAuthController;
+
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,6 +23,11 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
+Route::get('auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback']);
 
 Route::middleware('auth')->group(function () {
 
