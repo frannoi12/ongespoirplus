@@ -37,9 +37,9 @@ class MenageController extends Controller
             });
         }
 
-        $menages = $query->orderBy('name','asc')->paginate(10);
+        $menages = $query->orderBy('name', 'asc')->paginate(10);
 
-        return view('menages.index', compact('menages', 'search','secteurs','services'));
+        return view('menages.index', compact('menages', 'search', 'secteurs', 'services'));
     }
 
 
@@ -68,7 +68,7 @@ class MenageController extends Controller
         $request->validate([
             'name'                 => 'required|string|max:255',
             'prenom'               => 'required|string|max:255',
-            'email'                => 'required|string|email|max:255|unique:users',
+            'email'                => 'required|email',
             'contact'              => 'required|string|min:8',
             'password'             => 'required|string|min:8|confirmed',
             'politique_acceptance' => 'required|boolean', // Accepter 1 ou true comme valeurs valides
@@ -76,14 +76,16 @@ class MenageController extends Controller
             'longitude' => 'required|numeric|between:-180,180', // Valider la longitude
         ]);
 
-        $user = User::create([
-            'name'     => $request->name,
-            'prenom'   => $request->prenom,
-            'email'    => $request->email,
-            'contact'  => $request->contact,
-            'password' => Hash::make($request->password), // hash du mot de passe
-        ]);
-
+        // Recherche ou crée le user
+        $user = User::updateOrCreate(
+            ['email' => $request->input('email')], // Recherche par email
+            [
+                'name' => $request->input('name'),
+                'prenom' => $request->input('prenom'),
+                'contact' => $request->input('contact'),
+                'password' => $request->filled('password') ? Hash::make($request->input('password')) : null,
+            ]
+        );
         $secteur = Secteur::findOrFail($request->secteur_id);
         $service = Service::findOrFail($request->service_id);
 
@@ -102,7 +104,7 @@ class MenageController extends Controller
             // dd($type_menage);
         }
 
-        Menage::create([
+        $menage =  Menage::create([
             'type_menage'      => $type_menage,
             'politique'        => $request->politique_acceptance == 1 ? true : false, // Utiliser 'politique_acceptance'
             'code' => $code,
@@ -118,7 +120,8 @@ class MenageController extends Controller
             ]),
         ]);
 
-        return redirect()->route('menages.index')->with('success', 'Ménage créé avec succès');
+        return view('paiements.create',compact('menage'))->with('succes','Menage en cours de création');
+        // return redirect()->route('menages.index')->with('success', 'Ménage créé avec succès');
     }
 
     /**
@@ -209,7 +212,9 @@ class MenageController extends Controller
             ]),
         ]);
 
-        return redirect()->route('menages.index')->with('success', 'Ménage mis à jour avec succès');
+        return view('paiements.create')->with('succes','Menage en cours de mise à jour');
+
+        // return redirect()->route('menages.index')->with('success', 'Ménage mis à jour avec succès');
     }
 
     /**
@@ -227,8 +232,8 @@ class MenageController extends Controller
             $menage->delete();
         } else {
             // Sinon, supprimer le user et le ménage
-            $user->delete();
             $menage->delete();
+            $user->delete();
         }
 
         return redirect()->route('menages.index')->with('success', 'Ménage supprimé avec succès');

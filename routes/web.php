@@ -11,9 +11,13 @@ use App\Http\Controllers\SecteurController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TariffController;
 use App\Http\Controllers\MenageExportController;
+<<<<<<< HEAD
 use App\Http\Controllers\Auth\GoogleAuthController;
 
 
+=======
+use App\Http\Controllers\PaiementController;
+>>>>>>> 40abff8e4106040693d3353b9fc0fad8fb61b30a
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,20 +35,27 @@ Route::get('auth/google/callback', [GoogleAuthController::class, 'handleGoogleCa
 
 Route::middleware('auth')->group(function () {
 
-    Route::resource('personnels',PersonnelController::class);
-    Route::resource('menages',MenageController::class);
-    Route::resource('ordures',OrdureController::class);
-    Route::resource('politiques',PolitiqueController::class);
-    Route::resource('liquides',LiquideController::class);
-    Route::resource('secteurs',SecteurController::class);
-    Route::resource('tariffs',TariffController::class);
-    Route::resource('services',ServiceController::class);
+    Route::resource('personnels', PersonnelController::class);
+    Route::resource('menages', MenageController::class);
+    Route::resource('ordures', OrdureController::class);
+    Route::resource('politiques', PolitiqueController::class);
+    Route::resource('liquides', LiquideController::class);
+    Route::resource('secteurs', SecteurController::class);
+    Route::resource('tariffs', TariffController::class);
+    Route::resource('services', ServiceController::class);
+    Route::resource('paiements', PaiementController::class);
+    // Route::resource('liquides',);
 
     Route::get('/menage', [MenageExportController::class, 'export'])->name('menages.export');
     // Route::get('/menage', [MenageExportController::class, 'exportPdf'])->name('menages.pdf');
 
-    Route::get('/cinetpay/callback', [CinetPayController::class, 'callback'])->name('cinetpay.callback');
-    Route::post('/cinetpay/notify', [CinetPayController::class, 'notify'])->name('cinetpay.notify');
+    Route::get('/payment', [CinetPayController::class, 'showPaymentForm'])->name('cinetpay.payment');
+
+    Route::post('/payment/process', [CinetPayController::class, 'processPayment'])->name('cinetpay.process');
+
+    Route::get('/payment/callback', [CinetPayController::class, 'callback'])->name('cinetpay.callback');
+
+    Route::post('/payment/notify', [CinetPayController::class, 'notify'])->name('cinetpay.notify');
 
 
 

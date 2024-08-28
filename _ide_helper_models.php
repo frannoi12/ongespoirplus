@@ -115,11 +115,27 @@ namespace App\Models{
 /**
  * 
  *
- * @property-read \App\Models\Paiement|null $paiement
+ * @property int $id
+ * @property string $type_mobile_money
+ * @property int $paiement_id
+ * @property string $ref_transaction
+ * @property string $devise
+ * @property \Illuminate\Support\Carbon $date_transaction
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Paiement $paiement
  * @method static \Database\Factories\MobileMoneyFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney query()
+ * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereDateTransaction($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereDevise($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney wherePaiementId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereRefTransaction($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereTypeMobileMoney($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereUpdatedAt($value)
  */
 	class MobileMoney extends \Eloquent {}
 }
