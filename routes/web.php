@@ -39,11 +39,16 @@ Route::middleware('auth')->group(function () {
     Route::resource('menages', MenageController::class);
     Route::resource('ordures', OrdureController::class);
     Route::resource('politiques', PolitiqueController::class);
-    Route::resource('liquides', LiquideController::class);
+    // Route::resource('liquides', LiquideController::class);
     Route::resource('secteurs', SecteurController::class);
     Route::resource('tariffs', TariffController::class);
     Route::resource('services', ServiceController::class);
-    Route::resource('paiements', PaiementController::class);
+    // Route::resource('paiements', PaiementController::class);
+
+    Route::get('/liquides/create/{menageId}', [LiquideController::class, 'create'])->name('liquides.create');
+    Route::post('/paiements/store', [PaiementController::class, 'store'])->name('paiements.store');
+
+    Route::get('/paiements/create/{menageId}', [PaiementController::class, 'create'])->name('paiements.create');
     // Route::resource('liquides',);
 
     Route::get('/menage', [MenageExportController::class, 'export'])->name('menages.export');

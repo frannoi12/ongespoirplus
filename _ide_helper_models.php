@@ -172,10 +172,11 @@ namespace App\Models{
  * @property string $type_paiement
  * @property int $tariff_id
  * @property int $personnel_id
+ * @property int $menage_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Liquide|null $liquide
- * @property-read \App\Models\Menage|null $menage
+ * @property-read \App\Models\Menage $menage
  * @property-read \App\Models\MobileMoney|null $mobileMoney
  * @property-read \App\Models\Tariff|null $tarrif
  * @method static \Database\Factories\PaiementFactory factory($count = null, $state = [])
@@ -184,6 +185,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Paiement query()
  * @method static \Illuminate\Database\Eloquent\Builder|Paiement whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Paiement whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Paiement whereMenageId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Paiement wherePersonnelId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Paiement whereTariffId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Paiement whereTypePaiement($value)

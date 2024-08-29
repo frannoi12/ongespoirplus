@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('type_paiement');
             $table->foreignId('tariff_id')->constrained('tariffs')->onDelete('set null');
             $table->foreignId('personnel_id')->constrained('personnels')->onDelete('set null');
+            $table->foreignId('menage_id')->constrained('menages')->onDelete('set null');
             $table->timestamps();
         });
     }

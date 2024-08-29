@@ -12,8 +12,10 @@ class Paiement extends Model
     use HasFactory;
 
     protected $fillable = [
-        "tarrif_id",
-        "personnel_id"
+        "type_paiement",
+        "tariff_id",
+        "personnel_id",
+        "menage_id",
     ];
 
     public function menage(): BelongsTo{
