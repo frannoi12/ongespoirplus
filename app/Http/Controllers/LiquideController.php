@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLiquideRequest;
 use App\Http\Requests\UpdateLiquideRequest;
 use App\Models\Liquide;
+use App\Models\Menage;
 
 class LiquideController extends Controller
 {
@@ -19,9 +20,12 @@ class LiquideController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+        // dd($id);
+        $menage = Menage::findOrFail($id);
+        // dd($menage);
+        return view('liquides.create',compact('menage'))->with('sucess','Paiement en liquide en cours');
     }
 
     /**

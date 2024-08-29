@@ -157,6 +157,13 @@
                                             <button
                                                 class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Consulter</button>
                                         </a>
+                                        @if ($menage->paiements->isEmpty())
+                                            <a href="{{ route('paiements.create', $menage->id) }}">
+                                                <button
+                                                    class="bg-green-600 hover:bg-green-500 text-white text-sm px-3 py-2 rounded-md">payer
+                                                </button>
+                                            </a>
+                                        @endif
                                         <form action="{{ route('menages.destroy', $menage->id) }}" method="POST"
                                             onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce ménage ?');">
                                             @csrf

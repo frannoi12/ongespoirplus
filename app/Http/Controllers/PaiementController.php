@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePaiementRequest;
+// use App\Http\Requests\StorePaiementRequest;
 use App\Http\Requests\UpdatePaiementRequest;
 use App\Models\Menage;
 use App\Models\Paiement;
+use Illuminate\Http\Request;
 
 class PaiementController extends Controller
 {
@@ -20,35 +21,58 @@ class PaiementController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        // $menages = Menage::all();
-        return view('paiements.create'); // Assure-toi que cette vue existe et affiche un formulaire de paiement
+        // dd($id);
+        $menage = Menage::findOrFail($id);
+        return view('paiements.create', compact('menage'))->with('succes', 'Processus de paiement en cours'); // Assure-toi que cette vue existe et affiche un formulaire de paiement
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePaiementRequest $request)
+    public function store(Request $request)
     {
+        // dd($request);
+        // dd($request->input('menage_id'));
         // Valider les données de la requête
-        $validated = $request->validated();
+        // $request->validate([
+        //     'type_paiement' => 'required|string|in:liquide,mobileMoney',  // Type de paiement doit être 'liquide' ou 'mobileMoney'
+        // ]);
+
+        // Déterminer le type de paiement en fonction du bouton cliqué
+        $paymentMethod = $request->input('payment_method');
+
+        // Mapper le type de paiement selon le bouton cliqué
+        $typePaiement = $paymentMethod === 'liquide' ? 'liquide' : 'mobileMoney';
+
+        // dd($typePaiement);
+
+        $menage = Menage::findOrFail($request->input('menage_id'));
+
+        // dd($menage->tariff_id);
+
+        $tariff_id = $menage->tariff_id;
+
+        // dd($tariff_id);
 
         // Créer un nouvel enregistrement de paiement
         $paiement = Paiement::create([
-            'type_paiement' => $validated['type_paiement'],
-            'tariff_id' => $validated['tariff_id'] ?? null,
-            'personnel_id' => $validated['personnel_id'] ?? null,
+            'type_paiement' => $typePaiement,
+            'tariff_id' => $tariff_id,
+            'personnel_id' => $menage->user_id,
+            'menage_id' => $request->input('menage_id'),
         ]);
+        // dd($paiement->menage);
 
         // En fonction du type de paiement, rediriger vers la méthode appropriée
         if ($paiement->type_paiement === 'liquide') {
-            return $this->handleCashPayment($paiement);
+            return view('liquides.create',compact('paiement'));
         } elseif ($paiement->type_paiement === 'mobileMoney') {
-            return $this->handleMobileMoneyPayment($paiement);
+            return view('mobileMoneys.create',compact('paiement'));
         }
 
-        return redirect()->route('paiements.create')->with('status', 'Paiement enregistré avec succès');
+        // return redirect()->route('paiements.create')->with('status', 'Paiement enregistré avec succès');
     }
 
     /**

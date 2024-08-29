@@ -10,6 +10,13 @@ class Liquide extends Model
 {
     use HasFactory;
 
+
+    protected $fillable = [
+        'date_paiement',
+        'montant',
+        'paiement_id'
+    ];
+
     public function paiement(): BelongsTo{
         return $this->belongsTo(Paiement::class);
     }
