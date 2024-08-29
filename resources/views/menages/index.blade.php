@@ -7,20 +7,11 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-<<<<<<< HEAD
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                @if(session('success'))
-        <div class="alert alert-success bg-green-500 text-white p-4 rounded-md">
-            {{ session('success') }}
-        </div>
-        @endif
-=======
             @if (session('success'))
                 <div class="bg-green-500 text-white p-4 rounded-md">
                     {{ session('success') }}
                 </div>
             @endif
->>>>>>> main
             <div
                 class="bg-white flex items-center justify-between mx-6 px-6 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
