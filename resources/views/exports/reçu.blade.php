@@ -84,7 +84,7 @@
     <!-- Payment Method Section -->
     <div class="section">
         <label>Mode de Paiement:</label>
-        <span>Espèce [ ] T-Money [ ] Flooz [ ]</span>
+        <span>Espèce</span>
     </div>
 
     <!-- Subscriber Reference Section -->
