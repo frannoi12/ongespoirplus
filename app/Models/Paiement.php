@@ -22,7 +22,7 @@ class Paiement extends Model
         return $this->belongsTo(Menage::class);
     }
 
-    public function tarrif(): BelongsTo {
+    public function tariff(): BelongsTo {
         return $this->belongsTo(Tariff::class);
     }
 

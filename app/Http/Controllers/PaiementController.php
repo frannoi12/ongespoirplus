@@ -70,11 +70,11 @@ class PaiementController extends Controller
         ]);
         // dd($paiement->menage);
 
-        
+
 
         // En fonction du type de paiement, rediriger vers la méthode appropriée
         if ($paiement->type_paiement === 'liquide') {
-            return view('liquides.create', compact('paiement','menage'));
+            return view('liquides.create_or_update', compact('paiement','menage'));
         } elseif ($paiement->type_paiement === 'mobileMoney') {
             return view('mobileMoneys.create', compact('paiement','menage'));
         }
