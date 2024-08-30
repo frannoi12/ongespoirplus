@@ -49,12 +49,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/paiements/store', [PaiementController::class, 'store'])->name('paiements.store');
     Route::get('/paiements/create/{menageId}', [PaiementController::class, 'create'])->name('paiements.create');
-<<<<<<< HEAD
 
-=======
->>>>>>> 0690e4f (fin de liquide et reçu en cours)
-
-
+    
     Route::get('/menage', [MenageExportController::class, 'export'])->name('menages.export');
     // Route::get('/menage', [MenageExportController::class, 'exportPdf'])->name('menages.pdf');
 
