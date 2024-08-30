@@ -76,7 +76,7 @@ class PaiementController extends Controller
         if ($paiement->type_paiement === 'liquide') {
             return view('liquides.create_or_update', compact('paiement','menage'));
         } elseif ($paiement->type_paiement === 'mobileMoney') {
-            return view('mobileMoneys.create', compact('paiement','menage'));
+            return redirect()->route('cinetpay.payment', compact('paiement','menage'));
         }
 
         // return redirect()->route('paiements.create')->with('status', 'Paiement enregistré avec succès');

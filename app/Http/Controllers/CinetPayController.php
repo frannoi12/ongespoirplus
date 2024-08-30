@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Paiement;
 use Illuminate\Http\Request;
 use App\Services\CinetPayService;
 
@@ -15,9 +16,12 @@ class CinetPayController extends Controller
     }
 
     // Méthode pour afficher la page de paiement
-    public function showPaymentForm()
+    public function showPaymentForm(Request $request)
     {
-        return view('cinetpay.payment'); // Vue pour le formulaire de paiement
+        // dd($request);
+        $paiement = Paiement::findOrFail($request->paiement);
+        // dd($paiement);
+        return view('cinetpay.paiement',compact('paiement'))->with('succes', 'Paiement en ligne en cours'); // Vue pour le formulaire de paiement
     }
 
     // Méthode pour traiter le paiement
