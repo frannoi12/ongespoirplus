@@ -75,7 +75,7 @@ class MenageController extends Controller
             'name'                 => 'required|string|max:255',
             'prenom'               => 'required|string|max:255',
             'email'                => 'required|email',
-            'contact'              => 'required|string|min:8',
+            'contact' => 'required|string|min:8|unique:users,contact',
             'password'             => 'required|string|min:8|confirmed',
             'politique_acceptance' => 'required|boolean', // Accepter 1 ou true comme valeurs valides
             'latitude' => 'required|numeric|between:-90,90', // Valider la latitude
@@ -254,19 +254,25 @@ class MenageController extends Controller
      */
     public function destroy(Menage $menage)
     {
+
+        $menage->delete();
         // dd($menage->user->personnel);
-        $user = $menage->user;
+        // $user = $menage->user;
+
+        // dd($menage->paiements);
 
         // dd($user->personnel);
         // Vérifier si l'utilisateur est lié uniquement à un ménage
-        if ($user->personnel) {
+        // if ($user->personnel) {
             // Si l'utilisateur est également un personnel, ne pas supprimer le user
-            $menage->delete();
-        } else {
+            // $menage->paiements()->delete();
+            // $menage->delete();
+        // } else {
             // Sinon, supprimer le user et le ménage
-            $menage->delete();
-            $user->delete();
-        }
+            // $menage->paiements->delete();
+            // $menage->delete();
+            // $user->delete();
+        // }
 
         return redirect()->route('menages.index')->with('success', 'Ménage supprimé avec succès');
     }
