@@ -40,9 +40,13 @@ class TariffController extends Controller
     public function store(Request $request,Tariff $tariff)
     {
         $request->validate([
-            'designation' => 'required|string|max:1000',
-            'montant' => 'required',
+            'designation' => 'required|string|max:255|regex:/^[^0-9]*$/',
+            'montant'     => 'required|integer',
+        ], [
+            'designation.string' => 'La description doit être une chaîne de caractères.',
+            'montant.integer'    => 'Le montant doit être un nombre entier.',
         ]);
+        
 
         // Mise à jour des informations de la politique
         $tariff->create([
@@ -50,7 +54,7 @@ class TariffController extends Controller
             'montant' => $request->montant,
         ]);
          // Rediriger vers la liste des politiques avec un message de succès
-         return redirect()->route('politiques.index')->with('success', 'Politique créée avec succès.');
+         return redirect()->route('politiques.index')->with('success', 'Tariff créée avec succès.');
     }
 
     /**
@@ -77,7 +81,7 @@ class TariffController extends Controller
     {
         $request->validate([
             'designation' => 'required|string|max:1000',
-            'montant' => 'required',
+            'montant' => 'required|integer|max:20',
         ]);
 
         // Mise à jour des informations de la politique

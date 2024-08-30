@@ -50,13 +50,16 @@
 
                             @forelse ($tariffs as $tariff)
 
-                                <tr class="bg-gray-100">
-                                    <td class="py-3 px-6">
-                                        {{ $tariff->designation }}
-                                    </td>
-                                    <td class="py-3 px-6">
-                                        {{ $tariff->montant}}
-                                    </td>
+                            <tr class="bg-gray-100">
+                                <td class="py-1 px-3 w-1/2 text-sm max-h-[100px] overflow-hidden whitespace-normal break-words">
+                                    {{ Str::limit($tariff->designation, 50) }}
+                                </td>
+                                <td class="py-1 px-3 w-1/4 text-sm max-h-[100px] overflow-hidden whitespace-normal break-words">
+                                    {{ Str::limit($tariff->montant, 30) }}
+                                </td>
+                            </tr>
+                            
+                            
                                     <td class="py-3 px-6">
                                         <a href="{{ route('tariffs.edit', $tariff->id) }}">
                                             <button

@@ -11,13 +11,8 @@ use App\Http\Controllers\SecteurController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TariffController;
 use App\Http\Controllers\MenageExportController;
-<<<<<<< HEAD
 use App\Http\Controllers\Auth\GoogleAuthController;
-
-
-=======
 use App\Http\Controllers\PaiementController;
->>>>>>> 40abff8e4106040693d3353b9fc0fad8fb61b30a
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -34,7 +29,6 @@ Route::get('auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->na
 Route::get('auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback']);
 
 Route::middleware('auth')->group(function () {
-
     Route::resource('personnels', PersonnelController::class);
     Route::resource('menages', MenageController::class);
     Route::resource('ordures', OrdureController::class);

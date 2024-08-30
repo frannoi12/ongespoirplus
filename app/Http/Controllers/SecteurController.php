@@ -42,7 +42,7 @@ class SecteurController extends Controller
     public function store(StoreSecteurRequest $request)
     {
         $request->validate([
-            'nomSecteur' => 'required|string|max:255',
+            'nomSecteur' => 'required|string|max:255|regex:/^[^0-9]*$/',
         ]);
 
         $secteur = new Secteur();
