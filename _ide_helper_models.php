@@ -41,11 +41,14 @@ namespace App\Models{
  * 
  *
  * @property int $id
- * @property string $type_paiement
- * @property string $statut
  * @property string $date_paiement
- * @property int $personnel_id
+ * @property int $nbre_mois
+ * @property int $montant
+ * @property string $montant_lettre
+ * @property string $objet
  * @property int $paiement_id
+ * @property int $secteur_id
+ * @property int $tariff_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Paiement $paiement
@@ -56,10 +59,13 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Liquide whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Liquide whereDatePaiement($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Liquide whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Liquide whereMontant($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Liquide whereMontantLettre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Liquide whereNbreMois($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Liquide whereObjet($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Liquide wherePaiementId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Liquide wherePersonnelId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Liquide whereStatut($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Liquide whereTypePaiement($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Liquide whereSecteurId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Liquide whereTariffId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Liquide whereUpdatedAt($value)
  */
 	class Liquide extends \Eloquent {}
@@ -405,13 +411,18 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property string $prenom
- * @property string|null $email
- * @property string $contact
+ * @property int $contact
+ * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property mixed $password
  * @property string|null $remember_token
+ * @property int|null $current_team_id
+ * @property string|null $profile_photo_path
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $two_factor_secret
+ * @property string|null $two_factor_recovery_codes
+ * @property string|null $two_factor_confirmed_at
  * @property-read \App\Models\Menage|null $menage
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
@@ -428,13 +439,18 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null, $without = false)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereContact($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCurrentTeamId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePrenom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereProfilePhotoPath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorConfirmedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorRecoveryCodes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorSecret($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutRole($roles, $guard = null)

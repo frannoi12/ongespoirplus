@@ -22,7 +22,7 @@
                             @csrf
                             <input type="hidden" name="payment_method" value="liquide">
                             <input type="hidden" name="menage_id" value="{{ $menage->id }}">
-                            {{-- <input type="hidden" name="personnel_id" value="{{ $personnelId }}"> --}}
+                            <input type="hidden" name="personnel_id" value="{{ Auth::user()->id }}">
                             <x-primary-button>
                                 {{ __('Payer en liquide') }}
                             </x-primary-button>

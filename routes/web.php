@@ -35,11 +35,14 @@ Route::middleware('auth')->group(function () {
     // Route::resource('paiements', PaiementController::class);
 
     Route::get('/liquides/create/{menageId}', [LiquideController::class, 'create'])->name('liquides.create');
+    Route::post('/liquides/store', [LiquideController::class,'store'])->name('liquides.store');
+
+
+
     Route::post('/paiements/store', [PaiementController::class, 'store'])->name('paiements.store');
-
     Route::get('/paiements/create/{menageId}', [PaiementController::class, 'create'])->name('paiements.create');
-    // Route::resource('liquides',);
 
+    
     Route::get('/menage', [MenageExportController::class, 'export'])->name('menages.export');
     // Route::get('/menage', [MenageExportController::class, 'exportPdf'])->name('menages.pdf');
 

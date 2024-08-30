@@ -50,6 +50,11 @@ class PaiementController extends Controller
 
         $menage = Menage::findOrFail($request->input('menage_id'));
 
+        // $user = auth()->user();
+
+        // Affiche les informations de l'utilisateur
+        //dd($user);
+        // dd($menage);
         // dd($menage->tariff_id);
 
         $tariff_id = $menage->tariff_id;
@@ -57,19 +62,21 @@ class PaiementController extends Controller
         // dd($tariff_id);
 
         // Créer un nouvel enregistrement de paiement
-        $paiement = Paiement::create([
+        $paiement = Paiement::updateOrCreate([
             'type_paiement' => $typePaiement,
             'tariff_id' => $tariff_id,
-            'personnel_id' => $menage->user_id,
+            'personnel_id' => $request->input('personnel_id'),
             'menage_id' => $request->input('menage_id'),
         ]);
         // dd($paiement->menage);
 
+        
+
         // En fonction du type de paiement, rediriger vers la méthode appropriée
         if ($paiement->type_paiement === 'liquide') {
-            return view('liquides.create',compact('paiement'));
+            return view('liquides.create', compact('paiement','menage'));
         } elseif ($paiement->type_paiement === 'mobileMoney') {
-            return view('mobileMoneys.create',compact('paiement'));
+            return view('mobileMoneys.create', compact('paiement','menage'));
         }
 
         // return redirect()->route('paiements.create')->with('status', 'Paiement enregistré avec succès');
