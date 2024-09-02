@@ -8,6 +8,8 @@
         body {
             font-family: Arial, sans-serif;
             font-size: 14px;
+            margin: 0;
+            padding: 0;
         }
         .receipt-container {
             border: 1px dashed #000;
@@ -74,48 +76,59 @@
     <!-- Receipt Number and Date Section -->
     <div class="section">
         <label>Reçu N°:</label>
-        <span>{{ $receipt_number ?? '_ _ _ _' }}</span>
+        <span>{{ $liquide->id }}</span>
         <label style="margin-left: 100px;">Date de Versement:</label>
-        <span>{{ $payment_date ?? ' _ _ _ _ ' }}</span>
+        <span>{{ now()->format('d/m/Y') }}</span>
     </div>
 
     <!-- Payment Method Section -->
     <div class="section">
         <label>Mode de Paiement:</label>
-        <span>Espèce [ ] T-Money [ ] Flooz [ ]</span>
+        <span>Espèce</span>
     </div>
 
     <!-- Subscriber Reference Section -->
     <div class="section">
         <label>Réf Abonné:</label>
-        <span>{{ $subscriber_ref ?? '____' }}</span>
+        <span>{{ $liquide->paiement_id }}</span>
         <label style="margin-left: 100px;">Quartier:</label>
-        <span>{{ $subscriber_quarter ?? '____' }}</span>
+        <span>____</span>
     </div>
 
     <!-- Object Section -->
     <div class="object-section">
+        <h3>Détails du Paiement</h3>
         <table>
             <thead>
                 <tr>
-                    <th>Objet</th>
-                    <th>Montant Versé</th>
-                    <th>Mode de Paiement</th>
+                    <th>Description</th>
+                    <th>Quantité</th>
+                    <th>Montant Unitaire</th>
+                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>FCFA</td>
-                    <td>{{ $amount ?? '____' }}</td>
-                    <td>{{ $payment_mode ?? '____' }}</td>
+                    <td>Paiement en Liquidee</td>
+                    <td>1</td>
+                    <td>{{ $liquide->paiement->menage->tariff->montant }} FCFA</td>
+                    <td>{{ $liquide->montant }} FCFA</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
+    <!-- Amount in Words Section -->
+    <div class="section">
+        <label>Montant en Lettres:</label>
+        <span>{{ $liquide->montant_lettre }}</span>
+    </div>
+
     <!-- Footer Section -->
     <div class="footer">
-        <p>Nom et Signature de l'Agent: ________________________</p>
+        <p>Merci pour votre paiement!</p>
+        <p>Signature:</p>
+        <p>________________________</p>
     </div>
 </div>
 

@@ -31,8 +31,9 @@
                         <!-- Bouton pour paiement en ligne -->
                         <form action="{{ route('paiements.store', $menage->id) }}" method="POST">
                             @csrf
-                            <input type="hidden" name="payment_method" value="en_ligne">
+                            <input type="hidden" name="payment_method" value="mobileMoney">
                             <input type="hidden" name="menage_id" value="{{ $menage->id }}">
+                            <input type="hidden" name="personnel_id" value="{{ Auth::user()->id }}">
                             <x-primary-button>
                                 {{ __('Payer en ligne') }}
                             </x-primary-button>
