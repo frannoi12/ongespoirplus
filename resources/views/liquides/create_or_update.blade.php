@@ -15,6 +15,7 @@
                         @if (isset($liquid))
                             @method('PUT')
                         @endif
+                        {{-- {{dd($menage)}} --}}
 
                         <fieldset class="mb-6 border border-gray-300 p-4 rounded-md">
                             <legend class="text-lg font-medium text-gray-700 dark:text-gray-300">Détails du Paiement
@@ -27,8 +28,7 @@
                                 <input id="nbre_mois"
                                     class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                                     type="number" name="nbre_mois"
-                                    value="{{ old('nbre_mois', $liquid->nbre_mois ?? '') }}" required
-                                    min="0"
+                                    value="{{ old('nbre_mois', $liquid->nbre_mois ?? '') }}" required min="0"
                                     oninput="calculateAmount()" />
                             </div>
 
@@ -66,7 +66,7 @@
                                     for="secteur_id">{{ __('Secteur') }}</label>
                                 <p
                                     class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                                    {{ isset($liquid) ? $liquid->paiement->menage->secteur->nomSecteur : 'Secteur non défini' }}
+                                    {{ isset($liquid) ? $liquid->paiement->menage->secteur->nomSecteur : $paiement->menage->secteur->nomSecteur }}
                                 </p>
                             </div>
 
@@ -76,7 +76,7 @@
                                     for="tariff_id">{{ __('Tariff') }}</label>
                                 <p
                                     class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                                    {{ isset($liquid) ? $liquid->paiement->menage->tariff->montant : 'Tarif non défini' }}
+                                    {{ isset($liquid) ? $liquid->paiement->menage->tariff->montant : $paiement->menage->tariff->montant }}
                                 </p>
                             </div>
 
@@ -99,7 +99,7 @@
     <script>
         function calculateAmount() {
             let nbreMois = document.getElementById('nbre_mois').value;
-            let tarifMontant = {{ isset($liquid) ? $liquid->paiement->menage->tariff->montant : 0 }};
+            let tarifMontant = {{ isset($liquid) ? $liquid->paiement->menage->tariff->montant : $paiement->menage->tariff->montant }};
             let montant = nbreMois * tarifMontant;
 
             document.getElementById('montant').value = montant;
