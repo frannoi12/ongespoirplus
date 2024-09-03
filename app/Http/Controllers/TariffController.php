@@ -81,7 +81,7 @@ class TariffController extends Controller
     {
         $request->validate([
             'designation' => 'required|string|max:1000',
-            'montant' => 'required|integer|max:20',
+            'montant' => 'required|integer',
         ]);
 
         // Mise à jour des informations de la politique

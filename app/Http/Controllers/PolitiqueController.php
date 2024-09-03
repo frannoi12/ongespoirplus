@@ -85,7 +85,7 @@ class PolitiqueController extends Controller
             // Validation des données entrantes
     //dd($request);
     $request->validate([
-        'description' => 'required|string|max:1000',
+        'description' => 'required|string|max:1000|regex:/^[^0-9]*$/',
         'personnel_id' => 'required|exists:personnels,id',
     ]);
 
