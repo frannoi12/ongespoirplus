@@ -12,6 +12,11 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TariffController;
 use App\Http\Controllers\MenageExportController;
 use App\Http\Controllers\Auth\GoogleAuthController;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> cb8100421260b00db6a6c4460d22a9bb1353d3a9
 use App\Http\Controllers\PaiementController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,13 +38,21 @@ Route::middleware('auth')->group(function () {
     Route::resource('menages', MenageController::class);
     Route::resource('ordures', OrdureController::class);
     Route::resource('politiques', PolitiqueController::class);
-    Route::resource('liquides', LiquideController::class);
+    // Route::resource('liquides', LiquideController::class);
     Route::resource('secteurs', SecteurController::class);
     Route::resource('tariffs', TariffController::class);
     Route::resource('services', ServiceController::class);
-    Route::resource('paiements', PaiementController::class);
-    // Route::resource('liquides',);
+    // Route::resource('paiements', PaiementController::class);
 
+    Route::get('/liquides/create/{menageId}', [LiquideController::class, 'create'])->name('liquides.create');
+    Route::post('/liquides/store', [LiquideController::class,'store'])->name('liquides.store');
+
+
+
+    Route::post('/paiements/store', [PaiementController::class, 'store'])->name('paiements.store');
+    Route::get('/paiements/create/{menageId}', [PaiementController::class, 'create'])->name('paiements.create');
+
+    
     Route::get('/menage', [MenageExportController::class, 'export'])->name('menages.export');
     // Route::get('/menage', [MenageExportController::class, 'exportPdf'])->name('menages.pdf');
 

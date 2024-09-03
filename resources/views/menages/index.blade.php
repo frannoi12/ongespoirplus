@@ -7,6 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+<<<<<<< HEAD
 
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 @if(session('success'))
@@ -15,6 +16,8 @@
         </div>
         @endif
 
+=======
+>>>>>>> cb8100421260b00db6a6c4460d22a9bb1353d3a9
             @if (session('success'))
                 <div class="bg-green-500 text-white p-4 rounded-md">
                     {{ session('success') }}
@@ -156,6 +159,13 @@
                                             <button
                                                 class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Consulter</button>
                                         </a>
+                                        @if ($menage->paiements->isEmpty())
+                                            <a href="{{ route('paiements.create', $menage->id) }}">
+                                                <button
+                                                    class="bg-green-600 hover:bg-green-500 text-white text-sm px-3 py-2 rounded-md">payer
+                                                </button>
+                                            </a>
+                                        @endif
                                         <form action="{{ route('menages.destroy', $menage->id) }}" method="POST"
                                             onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce ménage ?');">
                                             @csrf

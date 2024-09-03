@@ -11,6 +11,7 @@ use App\Models\Service;
 use App\Models\Tariff;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class MenageController extends Controller
@@ -18,16 +19,19 @@ class MenageController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // App\Http\Controllers\MenageController.php
     public function index(Request $request)
     {
-
-        $secteurs   = Secteur::all();
-        $services   = Service::all();
+        $secteurs = Secteur::all();
+        $services = Service::all();
         $search = $request->input('search');
 
         $query = Menage::query()
             ->join('users', 'menages.user_id', '=', 'users.id')
-            ->select('menages.*', 'users.name', 'users.prenom', 'users.email');
+            ->leftJoin('paiements', 'menages.id', '=', 'paiements.menage_id')
+            ->select('menages.*', 'users.name', 'users.prenom', 'users.email')
+            ->selectRaw('COUNT(paiements.id) as paiement_count')
+            ->groupBy('menages.id', 'users.name', 'users.prenom', 'users.email');
 
         if ($search) {
             $query->where(function ($q) use ($search) {
@@ -41,6 +45,8 @@ class MenageController extends Controller
 
         return view('menages.index', compact('menages', 'search', 'secteurs', 'services'));
     }
+
+
 
 
     /**
@@ -69,7 +75,7 @@ class MenageController extends Controller
             'name'                 => 'required|string|max:255|regex:/^[^0-9]*$/',
             'prenom'               => 'required|string|max:255|regex:/^[^0-9]*$/',
             'email'                => 'required|email',
-            'contact'              => 'required|string|min:8',
+            'contact' => 'required|string|min:8|unique:users,contact',
             'password'             => 'required|string|min:8|confirmed',
             'politique_acceptance' => 'required|boolean', // Accepter 1 ou true comme valeurs valides
             'latitude' => 'required|numeric|between:-90,90', // Valider la latitude
@@ -104,25 +110,51 @@ class MenageController extends Controller
             // dd($type_menage);
         }
 
-        $menage =  Menage::create([
-            'type_menage'      => $type_menage,
-            'politique'        => $request->politique_acceptance == 1 ? true : false, // Utiliser 'politique_acceptance'
-            'code' => $code,
-            'date_abonnement'  => now(),
-            'date_prise_effet' => now(),
-            'secteur_id'       => $request->secteur_id,
-            'user_id'          => $user->id,
-            'tariff_id'        => $request->tariff_id,
-            'service_id'       => $request->service_id,
-            'localisation'     => json_encode([
-                'latitude'  => $request->latitude,
-                'longitude' => $request->longitude,
-            ]),
-        ]);
+        $menageExist = Menage::where('user_id', $user->id)
+            ->where('secteur_id', $request->secteur_id)
+            ->where('service_id', $request->service_id)
+            ->first();
 
-        return view('paiements.create',compact('menage'))->with('succes','Menage en cours de création');
-        // return redirect()->route('menages.index')->with('success', 'Ménage créé avec succès');
+        if ($menageExist) {
+            // Mettre à jour l'enregistrement existant
+            $menage = $menageExist->update([
+                'type_menage'      => $type_menage,
+                'politique'        => $request->politique_acceptance == 1 ? true : false,
+                'code'             => $code,
+                'date_abonnement'  => now(),
+                'date_prise_effet' => now(),
+                'tariff_id'        => $request->tariff_id,
+                'localisation'     => json_encode([
+                    'latitude'  => $request->latitude,
+                    'longitude' => $request->longitude,
+                ]),
+            ]);
+        } else {
+            // Créer un nouvel enregistrement
+            $menage = Menage::create([
+                'type_menage'      => $type_menage,
+                'politique'        => $request->politique_acceptance == 1 ? true : false,
+                'code'             => $code,
+                'date_abonnement'  => now(),
+                'date_prise_effet' => now(),
+                'secteur_id'       => $request->secteur_id,
+                'user_id'          => $user->id,
+                'tariff_id'        => $request->tariff_id,
+                'service_id'       => $request->service_id,
+                'localisation'     => json_encode([
+                    'latitude'  => $request->latitude,
+                    'longitude' => $request->longitude,
+                ]),
+            ]);
+        }
+
+
+
+        // return view('paiements.create',compact('menage'))->with('succes','Menage en cours de création');
+        return redirect()->route('menages.index')->with('success', 'Ménage créé avec succès');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -212,7 +244,7 @@ class MenageController extends Controller
             ]),
         ]);
 
-        return view('paiements.create')->with('succes','Menage en cours de mise à jour');
+        return view('paiements.create')->with('succes', 'Menage en cours de mise à jour');
 
         // return redirect()->route('menages.index')->with('success', 'Ménage mis à jour avec succès');
     }
@@ -222,19 +254,25 @@ class MenageController extends Controller
      */
     public function destroy(Menage $menage)
     {
+
+        $menage->delete();
         // dd($menage->user->personnel);
-        $user = $menage->user;
+        // $user = $menage->user;
+
+        // dd($menage->paiements);
 
         // dd($user->personnel);
         // Vérifier si l'utilisateur est lié uniquement à un ménage
-        if ($user->personnel) {
+        // if ($user->personnel) {
             // Si l'utilisateur est également un personnel, ne pas supprimer le user
-            $menage->delete();
-        } else {
+            // $menage->paiements()->delete();
+            // $menage->delete();
+        // } else {
             // Sinon, supprimer le user et le ménage
-            $menage->delete();
-            $user->delete();
-        }
+            // $menage->paiements->delete();
+            // $menage->delete();
+            // $user->delete();
+        // }
 
         return redirect()->route('menages.index')->with('success', 'Ménage supprimé avec succès');
     }
