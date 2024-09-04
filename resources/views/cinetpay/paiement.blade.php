@@ -24,7 +24,7 @@
                         <!-- Montant -->
                         <div class="mt-4">
                             <label for="amount" :value="__('Montant')" />
-                            <input id="amount" class="block mt-1 w-full" type="number" name="amount" value="{{$paiement->tariff->montant}}" required autofocus />
+                            <input id="amount" class="block mt-1 w-full" type="number" name="amount" value="{{$paiement->mobileMoney->montant}}" required autofocus />
                         </div>
 
                         <!-- Devise -->

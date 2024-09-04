@@ -34,12 +34,15 @@ class MobileMoneyController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id)
+    public function create(Request $request)
     {
         //
-        $menage = Menage::findOrFail($id);
+        // $menage = Menage::findOrFail($id);
 
-        return view('mobileMoneys.create_or_update',compact('menage'))->with('sucess','Paiement en ligne en cours');
+        $id = $request->query()['paiement'];
+        $paiement = Paiement::findOrFail($id);
+
+        return view('mobileMoneys.create_or_update',compact('paiement'))->with('sucess','Paiement en ligne en cours');
     }
 
     /**
@@ -47,20 +50,20 @@ class MobileMoneyController extends Controller
      */
     public function store(Request $request)
     {
+
+        // dd($request);
+
         // Validation des données
         $request->validate([
-            'type_mobile_money' => 'required|string|max:255',
             'nbre_mois' => 'required|integer|min:1',
             'montant' => 'required|integer|min:1000',
             'montant_lettre' => 'required|string',
             'objet' => 'required|string|max:255',
-            'secteur_id' => 'required|exists:secteurs,id',
-            'tariff_id' => 'required|exists:tariffs,id',
             'paiement_id' => 'nullable|exists:paiements,id',
         ],[
-            'type_mobile_money.required' => 'Le type de Mobile Money est obligatoire.',
-            'type_mobile_money.string' => 'Le type de Mobile Money doit être une chaîne de caractères.',
-            'type_mobile_money.max' => 'Le type de Mobile Money ne doit pas dépasser 255 caractères.',
+            // 'type_mobile_money.required' => 'Le type de Mobile Money est obligatoire.',
+            // 'type_mobile_money.string' => 'Le type de Mobile Money doit être une chaîne de caractères.',
+            // 'type_mobile_money.max' => 'Le type de Mobile Money ne doit pas dépasser 255 caractères.',
 
             'nbre_mois.required' => 'Le nombre de mois est obligatoire.',
             'nbre_mois.integer' => 'Le nombre de mois doit être un nombre entier.',
@@ -87,16 +90,20 @@ class MobileMoneyController extends Controller
             'paiement_id.exists' => 'Le paiement ID sélectionné n\'existe pas.',
         ]);
 
+        // dd($request);
+
+
         $mobilMoney_paie = $request->input('paiement_id');
 
         $payer = Paiement::findOrFail($mobilMoney_paie);
 
         $menag = Menage::findOrFail($payer->menage_id);
 
+        // dd($payer);
 
         // Création d'une nouvelle transaction Mobile Money
         $mobilMoney = MobileMoney::updateOrCreate([
-            'type_mobile_money' => $request->type_mobile_money,
+            'type_mobile_money' => $payer->type_paiement,
             'devise' => $request->devise ?? 'XOF',
             'nbre_mois' => $request->nbre_mois,
             'montant' => $request->montant,
@@ -121,10 +128,11 @@ class MobileMoneyController extends Controller
     {
         // Trouver le paiement en liquide avec l'ID donné
         $mobile = MobileMoney::findOrFail($id);
-
+        $paiement = $mobile->paiement;
+        $menage = $paiement->menage;
         // dd($mobile);
 
-        return view('mobiles.show', compact('mobile'));
+        return view('mobileMoneys.show', compact('mobile','paiement','menage'));
     }
 
     /**
@@ -146,16 +154,15 @@ class MobileMoneyController extends Controller
     {
         // Validation des données
         $request->validate([
-            'type_mobile_money' => 'required|string|max:255',
             'nbre_mois' => 'required|integer|min:1',
             'montant' => 'required|integer|min:1000',
             'montant_lettre' => 'required|string',
             'objet' => 'required|string|max:255',
             'paiement_id' => 'nullable|exists:paiements,id',
         ],[
-            'type_mobile_money.required' => 'Le type de Mobile Money est obligatoire.',
-            'type_mobile_money.string' => 'Le type de Mobile Money doit être une chaîne de caractères.',
-            'type_mobile_money.max' => 'Le type de Mobile Money ne doit pas dépasser 255 caractères.',
+            // 'type_mobile_money.required' => 'Le type de Mobile Money est obligatoire.',
+            // 'type_mobile_money.string' => 'Le type de Mobile Money doit être une chaîne de caractères.',
+            // 'type_mobile_money.max' => 'Le type de Mobile Money ne doit pas dépasser 255 caractères.',
 
             'nbre_mois.required' => 'Le nombre de mois est obligatoire.',
             'nbre_mois.integer' => 'Le nombre de mois doit être un nombre entier.',
@@ -172,22 +179,35 @@ class MobileMoneyController extends Controller
             'objet.string' => 'L\'objet doit être une chaîne de caractères.',
             'objet.max' => 'L\'objet ne doit pas dépasser 255 caractères.',
 
+            // 'secteur_id.required' => 'Le secteur est obligatoire.',
+            // 'secteur_id.exists' => 'Le secteur sélectionné n\'existe pas.',
+
+            // 'tariff_id.required' => 'Le tarif est obligatoire.',
+            // 'tariff_id.exists' => 'Le tarif sélectionné n\'existe pas.',
+
             'paiement_id.required' => 'Le paiement ID est requis.',
             'paiement_id.exists' => 'Le paiement ID sélectionné n\'existe pas.',
         ]);
 
 
         $mobileMoney = MobileMoney::findOrFail($id);
+
+        $mobilMoney_paie = $request->input('paiement_id');
+
+        $payer = Paiement::findOrFail($mobilMoney_paie);
+
+        $menag = Menage::findOrFail($payer->menage_id);
+
         // Mise à jour de la transaction Mobile Money
         $mobileMoney->update([
-            'type_mobile_money' => $request->type_mobile_money,
+            'type_mobile_money' => $payer->type_paiement,
             'devise' => $request->devise ?? 'XOF',
             'nbre_mois' => $request->nbre_mois,
             'montant' => $request->montant,
             'montant_lettre' => $request->montant_lettre,
             'objet' => $request->objet,
-            'secteur_id' => $request->secteur_id,
-            'tariff_id' => $request->tariff_id,
+            'tariff_id' => $payer->tariff_id,
+            'secteur_id' => $menag->secteur_id,
             'paiement_id' => $request->paiement_id,
         ]);
 

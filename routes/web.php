@@ -43,10 +43,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/liquides/{id}/edit', [LiquideController::class, 'edit'])->name('liquides.edit');
 
 
-    Route::get('/mobileMoneys/create/{menageId}', [MobileMoneyController::class, 'create'])->name('mobiles.create_or_update');
+    Route::get('/mobileMoneys/create', [MobileMoneyController::class, 'create'])->name('mobiles.create_or_update');
     Route::post('/mobileMoneys/store', [MobileMoneyController::class,'store'])->name('mobiles.store');
     Route::get('/mobileMoney/{id}', [MobileMoneyController::class, 'show'])->name('mobiles.show');
-    // Route::get('/mobilMoneys/pdf/{id}', [MobileMoneyController::class, 'generatePdf'])->name('pdf.generate');
+    Route::get('/mobilMoneys/pdf/{id}', [MobileMoneyController::class, 'generatePdf'])->name('pdf_ligne.generate');
     Route::put('/mobilMoneys/{id}', [MobileMoneyController::class, 'update'])->name('mobiles.update');
     Route::get('/mobilMoneys/{id}/edit', [MobileMoneyController::class, 'edit'])->name('mobiles.edit');
 
