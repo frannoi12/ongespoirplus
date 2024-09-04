@@ -84,7 +84,7 @@
     <!-- Payment Method Section -->
     <div class="section">
         <label>Mode de Paiement:</label>
-        <span>Espèce</span>
+        <span>{{ $liquide->paiement->type_paiement}}</span>
     </div>
 
     <!-- Subscriber Reference Section -->
@@ -92,7 +92,7 @@
         <label>Réf Abonné:</label>
         <span>{{ $liquide->paiement_id }}</span>
         <label style="margin-left: 100px;">Quartier:</label>
-        <span>____</span>
+        <span>{{ $liquide->paiement->menage->secteur->nomSecteur}}</span>
     </div>
 
     <!-- Object Section -->
@@ -102,15 +102,17 @@
             <thead>
                 <tr>
                     <th>Description</th>
-                    <th>Quantité</th>
-                    <th>Montant Unitaire</th>
+                    <th>Nbre Mois</th>
+                    <th>Objet</th>
+                    <th>Tariff</th>
                     <th>Total</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Paiement en Liquidee</td>
-                    <td>1</td>
+                    <td>Liquidee</td>
+                    <td>{{ $liquide->nbre_mois}}</td>
+                    <th>{{ $liquide->objet}}</th>
                     <td>{{ $liquide->paiement->menage->tariff->montant }} FCFA</td>
                     <td>{{ $liquide->montant }} FCFA</td>
                 </tr>
@@ -128,7 +130,7 @@
     <div class="footer">
         <p>Merci pour votre paiement!</p>
         <p>Signature:</p>
-        <p>________________________</p>
+        <p>{{ $liquide->paiement->personnel->user->name . '  ' . $liquide->paiement->personnel->user->prenom}}</p>
     </div>
 </div>
 

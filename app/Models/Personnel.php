@@ -35,4 +35,9 @@ class Personnel extends Model
         return $this->hasMany(Tournee::class);
     }
 
+    public function paiements(): HasMany
+    {
+        return $this->hasMany(Paiement::class);
+    }
+
 }

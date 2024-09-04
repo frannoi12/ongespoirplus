@@ -123,10 +123,15 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $type_mobile_money
- * @property int $paiement_id
- * @property string $ref_transaction
  * @property string $devise
+ * @property int $nbre_mois
+ * @property int $montant
+ * @property string $montant_lettre
+ * @property string $objet
  * @property \Illuminate\Support\Carbon $date_transaction
+ * @property int $paiement_id
+ * @property int $secteur_id
+ * @property int $tariff_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Paiement $paiement
@@ -138,8 +143,13 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereDateTransaction($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereDevise($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereMontant($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereMontantLettre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereNbreMois($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereObjet($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney wherePaiementId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereRefTransaction($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereSecteurId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereTariffId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereTypeMobileMoney($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MobileMoney whereUpdatedAt($value)
  */
@@ -184,6 +194,7 @@ namespace App\Models{
  * @property-read \App\Models\Liquide|null $liquide
  * @property-read \App\Models\Menage $menage
  * @property-read \App\Models\MobileMoney|null $mobileMoney
+ * @property-read \App\Models\Personnel $personnel
  * @property-read \App\Models\Tariff $tariff
  * @method static \Database\Factories\PaiementFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Paiement newModelQuery()
@@ -211,6 +222,8 @@ namespace App\Models{
  * @property int $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Paiement> $paiements
+ * @property-read int|null $paiements_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Politique> $politiques
  * @property-read int|null $politiques_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Signalement> $signalements
