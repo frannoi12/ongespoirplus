@@ -12,11 +12,11 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TariffController;
 use App\Http\Controllers\MenageExportController;
 use App\Http\Controllers\Auth\GoogleAuthController;
-<<<<<<< HEAD
-=======
 
 
->>>>>>> cb8100421260b00db6a6c4460d22a9bb1353d3a9
+
+
+
 use App\Http\Controllers\PaiementController;
 use Illuminate\Support\Facades\Route;
 
