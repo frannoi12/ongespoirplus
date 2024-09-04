@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ isset($liquid) ? __('Modifier Paiement en Liquide') : __('Ajouter Paiement en Liquide') }}
+            {{ isset($mobileMoney) ? __('Modifier Paiement en Ligne') : __('Ajouter Paiement en Ligne') }}
         </h2>
     </x-slot>
 
@@ -9,13 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form action="{{ isset($liquid) ? route('liquides.update', $liquid->id) : route('liquides.store') }}"
-                        method="post" id="liquid-form">
+                    <form action="{{ isset($mobileMoney) ? route('mobiles.update', $mobileMoney->id) : route('mobiles.store') }}"
+                        method="POST" id="liquid-form">
                         @csrf
-                        @if (isset($liquid))
+                        @if (isset($mobileMoney))
                             @method('PUT')
                         @endif
-                        {{-- {{dd($liquid)}} --}}
+                        {{-- {{dd($mobileMoney)}} --}}
 
                         <fieldset class="mb-6 border border-gray-300 p-4 rounded-md">
                             <legend class="text-lg font-medium text-gray-700 dark:text-gray-300">Détails du Paiement
@@ -28,7 +28,7 @@
                                 <input id="nbre_mois"
                                     class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                                     type="number" name="nbre_mois"
-                                    value="{{ old('nbre_mois', $liquid->nbre_mois ?? '') }}" required min="0"
+                                    value="{{ old('nbre_mois', $mobileMoney->nbre_mois ?? '') }}" required min="0"
                                     oninput="calculateAmount()" />
                             </div>
 
@@ -38,7 +38,7 @@
                                     for="montant">{{ __('Montant') }}</label>
                                 <input id="montant"
                                     class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
-                                    type="number" name="montant" value="{{ old('montant', $liquid->montant ?? '') }}"
+                                    type="number" name="montant" value="{{ old('montant', $mobileMoney->montant ?? '') }}"
                                     required />
                             </div>
 
@@ -48,7 +48,7 @@
                                     for="montant_lettre">{{ __('Montant en Lettres') }}</label>
                                 <textarea id="montant_lettre"
                                     class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
-                                    name="montant_lettre" required>{{ old('montant_lettre', $liquid->montant_lettre ?? '') }}</textarea>
+                                    name="montant_lettre" required>{{ old('montant_lettre', $mobileMoney->montant_lettre ?? '') }}</textarea>
                             </div>
 
                             <!-- Objet -->
@@ -57,7 +57,7 @@
                                     for="objet">{{ __('Objet') }}</label>
                                 <textarea id="objet"
                                     class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
-                                    name="objet" required>{{ old('objet', $liquid->objet ?? '') }}</textarea>
+                                    name="objet" required>{{ old('objet', $mobileMoney->objet ?? '') }}</textarea>
                             </div>
 
                             <!-- Secteur -->
@@ -66,7 +66,7 @@
                                     for="secteur_id">{{ __('Secteur') }}</label>
                                 <p
                                     class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                                    {{ isset($liquid) ? $liquid->paiement->menage->secteur->nomSecteur : $paiement->menage->secteur->nomSecteur }}
+                                    {{ isset($mobileMoney) ? $mobileMoney->paiement->menage->secteur->nomSecteur : $paiement->menage->secteur->nomSecteur }}
                                 </p>
                             </div>
 
@@ -76,18 +76,18 @@
                                     for="tariff_id">{{ __('Tariff') }}</label>
                                 <p
                                     class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                                    {{ isset($liquid) ? $liquid->paiement->menage->tariff->montant : $paiement->menage->tariff->montant }}
+                                    {{ isset($mobileMoney) ? $mobileMoney->paiement->menage->tariff->montant : $paiement->menage->tariff->montant }}
                                 </p>
                             </div>
 
                             <!-- Paiement ID caché -->
                             <input type="hidden" name="paiement_id"
-                                value="{{ isset($liquid) ? $liquid->paiement_id : $paiement->id }}">
+                                value="{{ isset($mobileMoney) ? $mobileMoney->paiement_id : $paiement->id }}">
                         </fieldset>
 
                         <div class="flex items-center justify-end mt-4">
                             <x-primary-button class="ml-4">
-                                {{ isset($liquid) ? __('Modifier le Paiement en Liquide') : __('Ajouter le Paiement en Liquide') }}
+                                {{ isset($mobileMoney) ? __('Modifier le Paiement en ligne') : __('Ajouter le Paiement en Ligne') }}
                             </x-primary-button>
                         </div>
                     </form>
@@ -99,7 +99,7 @@
     <script>
         function calculateAmount() {
             let nbreMois = document.getElementById('nbre_mois').value;
-            let tarifMontant = {{ isset($liquid) ? $liquid->paiement->menage->tariff->montant : $paiement->menage->tariff->montant }};
+            let tarifMontant = {{ isset($mobileMoney) ? $mobileMoney->paiement->menage->tariff->montant : $paiement->menage->tariff->montant }};
             let montant = nbreMois * tarifMontant;
 
             document.getElementById('montant').value = montant;

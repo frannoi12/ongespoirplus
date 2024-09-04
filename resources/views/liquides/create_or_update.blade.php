@@ -15,7 +15,7 @@
                         @if (isset($liquid))
                             @method('PUT')
                         @endif
-                        {{-- {{dd($liquid)}} --}}
+                        {{-- {{dd($paiement)}} --}}
 
                         <fieldset class="mb-6 border border-gray-300 p-4 rounded-md">
                             <legend class="text-lg font-medium text-gray-700 dark:text-gray-300">Détails du Paiement

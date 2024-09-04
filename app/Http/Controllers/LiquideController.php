@@ -17,7 +17,7 @@ class LiquideController extends Controller
         $liquide = Liquide::findOrFail($id);
         // dd($liquide);
 
-        $pdf = Pdf::loadView('exports.reçu', ['liquide' => $liquide]);
+        $pdf = Pdf::loadView('exports.reçu_liquide', ['liquide' => $liquide]);
 
         return $pdf->download('recu_paiement.pdf');
     }
@@ -32,12 +32,21 @@ class LiquideController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id)
+    public function create(Request $request)
     {
+        // dd($request->query()['paiement']);
         // dd($id);
-        $menage = Menage::findOrFail($id);
+        // $menage = Menage::findOrFail($id);
+        // $paiement = $menage->paiements;
         // dd($menage);
-        return view('liquides.create_or_update', compact('menage'))->with('sucess', 'Paiement en liquide en cours');
+
+        $id = $request->query()['paiement'];
+
+        $paiement = Paiement::findOrFail($id);
+
+        // dd($paiement);
+
+        return view('liquides.create_or_update',compact('paiement'))->with('sucess', 'Paiement en liquide en cours');
     }
 
     /**

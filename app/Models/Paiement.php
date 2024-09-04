@@ -22,6 +22,11 @@ class Paiement extends Model
         return $this->belongsTo(Menage::class);
     }
 
+    public function personnel(): BelongsTo
+    {
+        return $this->belongsTo(Personnel::class);
+    }
+
     public function tariff(): BelongsTo {
         return $this->belongsTo(Tariff::class);
     }
