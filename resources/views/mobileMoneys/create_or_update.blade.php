@@ -60,6 +60,23 @@
                                     name="objet" required>{{ old('objet', $mobile->objet ?? '') }}</textarea>
                             </div>
 
+                            <!-- Type Mobile Money -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    for="type_mobile_money">{{ __('Type Mobile Money') }}</label>
+                                <select id="type_mobile_money"
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                                    name="type_mobile_money" required>
+                                    <option value="flooz"
+                                        {{ old('type_mobile_money', $mobile->type_mobile_money ?? '') == 'flooz' ? 'selected' : '' }}>
+                                        Flooz</option>
+                                    <option value="tmoney"
+                                        {{ old('type_mobile_money', $mobile->type_mobile_money ?? '') == 'tmoney' ? 'selected' : '' }}>
+                                        Tmoney</option>
+                                </select>
+                            </div>
+
+
                             <!-- Secteur -->
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
@@ -99,7 +116,8 @@
     <script>
         function calculateAmount() {
             let nbreMois = document.getElementById('nbre_mois').value;
-            let tarifMontant = {{ isset($mobile) ? $mobile->paiement->menage->tariff->montant : $paiement->menage->tariff->montant }};
+            let tarifMontant =
+                {{ isset($mobile) ? $mobile->paiement->menage->tariff->montant : $paiement->menage->tariff->montant }};
             let montant = nbreMois * tarifMontant;
 
             document.getElementById('montant').value = montant;

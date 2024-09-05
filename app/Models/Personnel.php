@@ -27,6 +27,10 @@ class Personnel extends Model
         return $this->hasMany(Politique::class);
     }
 
+    public function tariffs(): HasMany{
+        return $this->hasMany(Tariff::class);
+    }
+
     public function signalements(): HasMany{
         return $this->hasMany(Signalement::class);
     }
@@ -38,6 +42,16 @@ class Personnel extends Model
     public function paiements(): HasMany
     {
         return $this->hasMany(Paiement::class);
+    }
+
+    public function secteurs(): HasMany
+    {
+        return $this->hasMany(Secteur::class);
+    }
+
+    public function services(): HasMany
+    {
+        return $this->hasMany(Service::class);
     }
 
 }

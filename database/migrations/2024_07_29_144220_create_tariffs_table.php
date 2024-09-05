@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('designation');
             $table->integer('montant')->unsigned();
+            $table->foreignId('personnel_id')->constrained('personnels')->onDelete('set null');
             $table->timestamps();
         });
     }

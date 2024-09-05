@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('montant_lettre');
             $table->text('objet');
             $table->string('date_transaction')->default(now());
-            $table->foreignId('paiement_id')->constrained('paiements')->onDelete('set null');
+            $table->foreignId('paiement_id')->constrained('paiements')->onDelete('cascade');
             $table->foreignId('secteur_id')->constrained('secteurs')->onDelete('cascade');
             $table->foreignId('tariff_id')->constrained('tariffs')->onDelete('cascade');
             $table->timestamps();

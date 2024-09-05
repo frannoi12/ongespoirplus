@@ -46,7 +46,7 @@ class PolitiqueController extends Controller
     {
         // Créer une nouvelle politique à partir des données du formulaire
         $request->validate([
-            'description' => 'required|string|max:1000',
+            'description' => 'required|string|max:1000|regex:/^[\pL\s\-]+$/u',
             'personnel_id' => 'required|exists:personnels,id',
         ]);
 
@@ -85,7 +85,7 @@ class PolitiqueController extends Controller
             // Validation des données entrantes
     //dd($request);
     $request->validate([
-        'description' => 'required|string|max:1000',
+        'description' => 'required|string|max:1000|regex:/^[\pL\s\-]+$/u',
         'personnel_id' => 'required|exists:personnels,id',
     ]);
 

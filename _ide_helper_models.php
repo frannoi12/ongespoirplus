@@ -226,8 +226,14 @@ namespace App\Models{
  * @property-read int|null $paiements_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Politique> $politiques
  * @property-read int|null $politiques_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Secteur> $secteurs
+ * @property-read int|null $secteurs_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Service> $services
+ * @property-read int|null $services_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Signalement> $signalements
  * @property-read int|null $signalements_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tariff> $tariffs
+ * @property-read int|null $tariffs_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tournee> $tournees
  * @property-read int|null $tournees_count
  * @property-read \App\Models\User $user
@@ -293,6 +299,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Menage> $menages
  * @property-read int|null $menages_count
+ * @property-read \App\Models\Personnel|null $personnel
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tournee> $tournees
  * @property-read int|null $tournees_count
  * @method static \Database\Factories\SecteurFactory factory($count = null, $state = [])
@@ -318,6 +325,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Menage> $menages
  * @property-read int|null $menages_count
+ * @property-read \App\Models\Personnel|null $personnel
  * @method static \Illuminate\Database\Eloquent\Builder|Service newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Service newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Service query()
@@ -372,6 +380,7 @@ namespace App\Models{
  * @property-read int|null $menages_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Paiement> $paiements
  * @property-read int|null $paiements_count
+ * @property-read \App\Models\Personnel|null $personnel
  * @method static \Database\Factories\TariffFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Tariff newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Tariff newQuery()

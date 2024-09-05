@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('code_service');
             $table->string('type_service');
+            $table->foreignId('personnel_id')->constrained('personnels')->onDelete('set null');
             $table->timestamps();
         });
     }

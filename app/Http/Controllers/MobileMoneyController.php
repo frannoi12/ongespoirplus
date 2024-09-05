@@ -55,10 +55,11 @@ class MobileMoneyController extends Controller
 
         // Validation des données
         $request->validate([
+            'type_mobile_money' => 'required|in:flooz,tmoney',
             'nbre_mois' => 'required|integer|min:1',
             'montant' => 'required|integer|min:1000',
             'montant_lettre' => 'required|string',
-            'objet' => 'required|string|max:255',
+            'objet' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
             'paiement_id' => 'nullable|exists:paiements,id',
         ],[
             // 'type_mobile_money.required' => 'Le type de Mobile Money est obligatoire.',
@@ -103,7 +104,7 @@ class MobileMoneyController extends Controller
 
         // Création d'une nouvelle transaction Mobile Money
         $mobilMoney = MobileMoney::updateOrCreate([
-            'type_mobile_money' => $payer->type_paiement,
+            'type_mobile_money' => $request->type_mobile_money,
             'devise' => $request->devise ?? 'XOF',
             'nbre_mois' => $request->nbre_mois,
             'montant' => $request->montant,
