@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTariffRequest;
-use App\Http\Requests\UpdateTariffRequest;
+// use App\Http\Requests\StoreTariffRequest;
+// use App\Http\Requests\UpdateTariffRequest;
 use App\Models\Personnel;
 use App\Models\Tariff;
 use Illuminate\Http\Request;
@@ -49,7 +49,7 @@ class TariffController extends Controller
             'montant' => 'required|integer',
             'personnel_id' => 'required|exists:personnels,id',
         ]);
-        
+
 
         // Mise à jour des informations de la politique
         $tariff->updateOrCreate([
@@ -84,8 +84,6 @@ class TariffController extends Controller
     public function update(Request $request, Tariff $tariff)
     {
         $request->validate([
-            'designation' => 'required|string|max:1000',
-            'montant' => 'required|integer',
             'designation' => 'required|string|max:1000|regex:/^[\pL\s\-]+$/u',
             'montant' => 'required|integer',
             'personnel_id' => 'required|exists:personnels,id'
