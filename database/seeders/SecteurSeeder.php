@@ -17,27 +17,35 @@ class SecteurSeeder extends Seeder
         // Secteur::factory()->count(8)->create();
         Secteur::create([
             'nomSecteur'=>'BAMADOLO',
+            'personnel_id'=>1,
         ]);
         Secteur::create([
             'nomSecteur'=>'LOMNAVA',
+            'personnel_id'=>1,
         ]);
         Secteur::create([
             'nomSecteur'=>'TCHAKPALADE',
+            'personnel_id'=>1,
         ]);
         Secteur::create([
             'nomSecteur'=>'KOMAH',
+            'personnel_id'=>1,
         ]);
         Secteur::create([
             'nomSecteur'=>'KPANGALAM',
+            'personnel_id'=>1,
         ]);
         Secteur::create([
             'nomSecteur'=>'DIDAOURE',
+            'personnel_id'=>1,
         ]);
         Secteur::create([
             'nomSecteur'=>'AKAMADE',
+            'personnel_id'=>1,
         ]);
         Secteur::create([
             'nomSecteur'=>'KWAWOUWORO',
+            'personnel_id'=>1,
         ]);
     }
 }

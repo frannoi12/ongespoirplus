@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
-            SecteurSeeder::class,
             PersonnelSeeder::class,
+            SecteurSeeder::class,
             ServiceSeeder::class,
             PolitiqueSeeder::class,
             TariffSeeder::class,

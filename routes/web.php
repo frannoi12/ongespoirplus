@@ -11,6 +11,7 @@ use App\Http\Controllers\SecteurController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TariffController;
 use App\Http\Controllers\MenageExportController;
+use App\Http\Controllers\MobileMoneyController;
 use App\Http\Controllers\Auth\GoogleAuthController;
 
 
@@ -44,15 +45,28 @@ Route::middleware('auth')->group(function () {
     Route::resource('services', ServiceController::class);
     // Route::resource('paiements', PaiementController::class);
 
-    Route::get('/liquides/create/{menageId}', [LiquideController::class, 'create'])->name('liquides.create');
+    Route::get('/liquides/create', [LiquideController::class, 'create'])->name('liquides.create_or_update');
     Route::post('/liquides/store', [LiquideController::class,'store'])->name('liquides.store');
+    Route::get('/liquide/{id}', [LiquideController::class, 'show'])->name('liquides.show');
+    Route::get('/liquides/pdf/{id}', [LiquideController::class, 'generatePdf'])->name('pdf.generate');
+    Route::put('/liquides/{id}', [LiquideController::class, 'update'])->name('liquides.update');
+    Route::get('/liquides/{id}/edit', [LiquideController::class, 'edit'])->name('liquides.edit');
+
+
+    Route::get('/mobileMoneys/create', [MobileMoneyController::class, 'create'])->name('mobiles.create_or_update');
+    Route::post('/mobileMoneys/store', [MobileMoneyController::class,'store'])->name('mobiles.store');
+    Route::get('/mobileMoney/{id}', [MobileMoneyController::class, 'show'])->name('mobiles.show');
+    Route::get('/mobilMoneys/pdf/{id}', [MobileMoneyController::class, 'generatePdf'])->name('pdf_ligne.generate');
+    Route::put('/mobilMoneys/{id}', [MobileMoneyController::class, 'update'])->name('mobiles.update');
+    Route::get('/mobilMoneys/{id}/edit', [MobileMoneyController::class, 'edit'])->name('mobiles.edit');
+
 
 
 
     Route::post('/paiements/store', [PaiementController::class, 'store'])->name('paiements.store');
     Route::get('/paiements/create/{menageId}', [PaiementController::class, 'create'])->name('paiements.create');
 
-    
+
     Route::get('/menage', [MenageExportController::class, 'export'])->name('menages.export');
     // Route::get('/menage', [MenageExportController::class, 'exportPdf'])->name('menages.pdf');
 

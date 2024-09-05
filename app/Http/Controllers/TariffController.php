@@ -45,13 +45,17 @@ class TariffController extends Controller
         ], [
             'designation.string' => 'La description doit être une chaîne de caractères.',
             'montant.integer'    => 'Le montant doit être un nombre entier.',
+            'designation' => 'required|string|max:1000|regex:/^[\pL\s\-]+$/u',
+            'montant' => 'required|integer',
+            'personnel_id' => 'required|exists:personnels,id',
         ]);
         
 
         // Mise à jour des informations de la politique
-        $tariff->create([
+        $tariff->updateOrCreate([
             'designation' => $request->designation,
             'montant' => $request->montant,
+            'personnel_id' => $request->personnel_id,
         ]);
          // Rediriger vers la liste des politiques avec un message de succès
          return redirect()->route('politiques.index')->with('success', 'Tariff créée avec succès.');
@@ -82,12 +86,16 @@ class TariffController extends Controller
         $request->validate([
             'designation' => 'required|string|max:1000',
             'montant' => 'required|integer',
+            'designation' => 'required|string|max:1000|regex:/^[\pL\s\-]+$/u',
+            'montant' => 'required|integer',
+            'personnel_id' => 'required|exists:personnels,id'
         ]);
 
         // Mise à jour des informations de la politique
         $tariff->update([
             'description' => $request->designation,
             'montant' => $request->montant,
+            'personnel_id' => $request->personnel_id,
         ]);
 
         // Redirection vers la liste des politiques avec un message de succès

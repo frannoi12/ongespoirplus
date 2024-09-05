@@ -43,6 +43,8 @@ class SecteurController extends Controller
     {
         $request->validate([
             'nomSecteur' => 'required|string|max:255|regex:/^[^0-9]*$/',
+            'nomSecteur' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
+            'personnel_id' => 'required|exists:personnels,id',
         ]);
 
         $secteur = new Secteur();
@@ -74,7 +76,8 @@ class SecteurController extends Controller
     public function update(UpdateSecteurRequest $request, Secteur $secteur)
     {
         $request->validate([
-            'nomSecteur' => 'required|string|max:255',
+            'nomSecteur' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
+            'personnel_id' => 'required|exists:personnels,id',
         ]);
 
         $secteur->fill($request->all());

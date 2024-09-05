@@ -14,10 +14,15 @@ class MobileMoney extends Model
 
     protected $fillable = [
         'type_mobile_money',
-        'paiement_id',
-        'ref_transaction',
         'devise',
+        'nbre_mois',
+        'montant',
+        'montant_lettre',
+        'objet',
         'date_transaction',
+        'paiement_id',
+        'secteur_id',
+        'tariff_id',
     ];
 
     protected $casts = [

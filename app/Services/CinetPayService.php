@@ -27,7 +27,7 @@ class CinetPayService
         $payload = [
             'apikey' => $this->apiKey,
             'site_id' => $this->siteId,
-            'transaction_id' => $transactionId,
+            'transaction_id' => "sdkLaravel-" . $transactionId,
             'amount' => $amount,
             'currency' => $currency,
             'description' => $description,
@@ -40,11 +40,18 @@ class CinetPayService
 
         try {
             $response = $this->client->post($url, [
-                'json' => $payload
+                'json' => $payload,
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                ],
             ]);
             return json_decode($response->getBody()->getContents(), true);
-        } catch (\Exception $e) {
-            Log::error('CinetPay initPayment Error: ' . $e->getMessage());
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            if ($e->hasResponse()) {
+                Log::error('CinetPay initPayment Error: ' . $e->getResponse()->getBody()->getContents());
+            } else {
+                Log::error('CinetPay initPayment Error: ' . $e->getMessage());
+            }
             return null;
         }
     }
@@ -60,11 +67,18 @@ class CinetPayService
 
         try {
             $response = $this->client->post($url, [
-                'json' => $payload
+                'json' => $payload,
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                ],
             ]);
             return json_decode($response->getBody()->getContents(), true);
-        } catch (\Exception $e) {
-            Log::error('CinetPay verifyPayment Error: ' . $e->getMessage());
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            if ($e->hasResponse()) {
+                Log::error('CinetPay verifyPayment Error: ' . $e->getResponse()->getBody()->getContents());
+            } else {
+                Log::error('CinetPay verifyPayment Error: ' . $e->getMessage());
+            }
             return null;
         }
     }

@@ -74,8 +74,10 @@ class MenageController extends Controller
         $request->validate([
             'name'                 => 'required|string|max:255|regex:/^[^0-9]*$/',
             'prenom'               => 'required|string|max:255|regex:/^[^0-9]*$/',
+            'name'                 => 'required|string|regex:/^[\pL\s\-]+$/u|max:255',
+            'prenom'               => 'required|string|regex:/^[\pL\s\-]+$/u|max:255',
             'email'                => 'required|email',
-            'contact' => 'required|string|min:8|unique:users,contact',
+            'contact'              => 'required|string|min:8|unique:users,contact',
             'password'             => 'required|string|min:8|confirmed',
             'politique_acceptance' => 'required|boolean', // Accepter 1 ou true comme valeurs valides
             'latitude' => 'required|numeric|between:-90,90', // Valider la latitude
@@ -189,6 +191,8 @@ class MenageController extends Controller
         $request->validate([
             'name'                 => 'required|string|max:255|regex:/^[^0-9]*$/',
             'prenom'               => 'required|string|max:255|regex:/^[^0-9]*$/',
+            'name'                 => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
+            'prenom'               => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
             'email'                => 'required|string|email|max:255|unique:users,email,' . $menage->user->id,
             'contact'              => 'required|string|min:8',
             'password'             => 'nullable|string|min:8|confirmed',
@@ -264,14 +268,14 @@ class MenageController extends Controller
         // dd($user->personnel);
         // Vérifier si l'utilisateur est lié uniquement à un ménage
         // if ($user->personnel) {
-            // Si l'utilisateur est également un personnel, ne pas supprimer le user
-            // $menage->paiements()->delete();
-            // $menage->delete();
+        // Si l'utilisateur est également un personnel, ne pas supprimer le user
+        // $menage->paiements()->delete();
+        // $menage->delete();
         // } else {
-            // Sinon, supprimer le user et le ménage
-            // $menage->paiements->delete();
-            // $menage->delete();
-            // $user->delete();
+        // Sinon, supprimer le user et le ménage
+        // $menage->paiements->delete();
+        // $menage->delete();
+        // $user->delete();
         // }
 
         return redirect()->route('menages.index')->with('success', 'Ménage supprimé avec succès');
