@@ -15,8 +15,8 @@
                     <p>{{ __('Secteur :') }} {{ $menage->secteur->nomSecteur }}</p>
                     <p>{{ __('Tarif :') }} {{ $menage->tariff->montant . '  ' . $menage->tariff->designation }}</p>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
                     <!-- Intégrer le formulaire de paiement ici -->
                     <form action="{{ route('cinetpay.process', $menage->id) }}" method="POST">
                         @csrf
@@ -26,7 +26,7 @@
                         </x-primary-button>
                     </form>
 
-                    
+
                     @if ($errors->any())
                     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
                         <ul>
@@ -36,9 +36,8 @@
                         </ul>
                     </div>
                 @endif
-=======
-=======
->>>>>>> cb8100421260b00db6a6c4460d22a9bb1353d3a9
+
+
                     <!-- Conteneur des boutons de paiement -->
                     <div class="mt-6 flex space-x-4">
                         <!-- Bouton pour paiement en liquide -->
@@ -63,10 +62,8 @@
                             </x-primary-button>
                         </form>
                     </div>
-<<<<<<< HEAD
->>>>>>> cb8100421260b00db6a6c4460d22a9bb1353d3a9
-=======
->>>>>>> cb8100421260b00db6a6c4460d22a9bb1353d3a9
+
+
                 </div>
             </div>
         </div>
