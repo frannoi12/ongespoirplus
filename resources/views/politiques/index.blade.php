@@ -48,15 +48,15 @@
                         </thead>
                         <tbody>
                             @forelse ($politiques as $politique)
-                                <tr class="bg-gray-100">
-                                    <td class="py-3 px-6">
-                                        {{ $politique->description }}
-                                    </td>
-                                    <td class="py-3 px-6">
-                                        {{ $politique->personnel->user->name ?? ''}}
-                                    </td>
-                                    <td class="py-3 px-6">
-                                        <a href="{{ route('politiques.edit', $politique->id) }}">
+                            <tr class="bg-gray-100">
+                                <td class="py-1 px-3 w-1/3 text-sm truncate">
+                                    {{ Str::limit($politique->description, 100) }} 
+                                </td>
+                                <td class="py-1 px-3 w-1/4 text-sm truncate">
+                                    {{ $politique->personnel->user->name ?? '' }}
+                                </td>
+                                <td class="py-1 px-3 w-1/6 text-sm">
+                                    <a href="{{ route('politiques.edit', $politique->id) }}">
                                             <button
                                                 class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">Editer</button>
                                         </a>

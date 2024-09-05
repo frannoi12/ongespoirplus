@@ -72,6 +72,8 @@ class MenageController extends Controller
         // dd($request);
 
         $request->validate([
+            'name'                 => 'required|string|max:255|regex:/^[^0-9]*$/',
+            'prenom'               => 'required|string|max:255|regex:/^[^0-9]*$/',
             'name'                 => 'required|string|regex:/^[\pL\s\-]+$/u|max:255',
             'prenom'               => 'required|string|regex:/^[\pL\s\-]+$/u|max:255',
             'email'                => 'required|email',
@@ -187,6 +189,8 @@ class MenageController extends Controller
     {
         // Validation des données
         $request->validate([
+            'name'                 => 'required|string|max:255|regex:/^[^0-9]*$/',
+            'prenom'               => 'required|string|max:255|regex:/^[^0-9]*$/',
             'name'                 => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
             'prenom'               => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
             'email'                => 'required|string|email|max:255|unique:users,email,' . $menage->user->id,

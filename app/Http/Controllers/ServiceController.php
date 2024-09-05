@@ -81,6 +81,8 @@ class ServiceController extends Controller
     {
         // Validation des champs requis
         $validatedData = $request->validate([
+            'code_service' => 'required|string|max:255|regex:/^[^0-9]*$/',
+            'type_service' => 'required|string|max:255|regex:/^[^0-9]*$/',
             'code_service' => 'required|string|max:255',
             'type_service' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
             'personnel_id' => 'required|exists:personnels,id'

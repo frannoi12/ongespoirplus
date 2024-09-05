@@ -50,13 +50,13 @@ class PersonnelController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
+            'name' => 'required|string|max:255|regex:/^[^0-9]*$/',
+            'prenom' => 'required|string|max:255|regex:/^[^0-9]*$/',
             'email' => 'required|string|email|max:255|unique:users',
             'contact' => 'required|string|min:8',
             'password' => 'required|string|min:8|confirmed',
-            'etat' => 'required|string|in:actif,inactif',
-            'role' => 'required|exists:roles,name',
+            'etat' => 'required|string|in:actif,inactif|regex:/^[^0-9]*$/',
+            'role' => 'required|exists:roles,name|regex:/^[^0-9]*$/',
         ]);
 
         $user = User::create([

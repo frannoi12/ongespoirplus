@@ -12,6 +12,7 @@
                     {{ session('success') }}
                 </div>
             @endif
+            
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <form action="{{ isset($service) ? route('services.update', $service->id) : route('services.store') }}" method="POST">
                     @csrf
@@ -42,6 +43,15 @@
                         </button>
                     </div>
                 </form>
+                @if ($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             </div>
         </div>
     </div>
