@@ -15,6 +15,9 @@ use App\Http\Controllers\MobileMoneyController;
 use App\Http\Controllers\Auth\GoogleAuthController;
 
 
+
+
+
 use App\Http\Controllers\PaiementController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,7 +35,6 @@ Route::get('auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->na
 Route::get('auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback']);
 
 Route::middleware('auth')->group(function () {
-
     Route::resource('personnels', PersonnelController::class);
     Route::resource('menages', MenageController::class);
     Route::resource('ordures', OrdureController::class);

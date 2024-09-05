@@ -13,10 +13,17 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+
+//     'google' => [
+//     'client_id' => env('GOOGLE_CLIENT_ID'),
+//     'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+//     'redirect' => 'http://127.0.0.1:8000/auth/google/callback',
+// ],
+
    'google' => [
-    'client_id' => env('GOOGLE_CLIENT_ID'),
-    'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-    'redirect' => env('GOOGLE_REDIRECT_URI'),
+    'client_id' => '850709734568-u6028ln58srh8n36f113jvusejqidmc5.apps.googleusercontent.com',
+    'client_secret' =>'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',
+    'redirect' => 'http://127.0.0.1:8000/auth/google/callback',
 ],
 
 

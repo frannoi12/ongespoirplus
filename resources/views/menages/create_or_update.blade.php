@@ -66,25 +66,42 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-4">
+                            <div class="mb-4 relative">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                                     for="password">Mot de passe</label>
                                 <input type="password" id="password" name="password"
-                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 pr-10">
+                                <button type="button" id="togglePassword"
+                                    class="absolute inset-y-0 right-0 px-3 py-2 text-gray-500 dark:text-gray-300">
+                                    <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zM12 13a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                                    </svg>
+                                </button>
                                 @error('password')
                                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
 
-                            <div class="mb-4">
+                            <div class="mb-4 relative">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                                     for="password_confirmation">Confirmer mot de passe</label>
                                 <input type="password" id="password_confirmation" name="password_confirmation"
-                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                    class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 pr-10">
+                                <button type="button" id="togglePasswordConfirmation"
+                                    class="absolute inset-y-0 right-0 px-3 py-2 text-gray-500 dark:text-gray-300">
+                                    <svg id="eyeIconConfirmation" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zM12 13a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                                    </svg>
+                                </button>
                                 @error('password_confirmation')
                                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
+
                         </fieldset>
 
                         <fieldset class="mb-6 border border-gray-300 p-4 rounded-md">
@@ -158,7 +175,8 @@
                                 <x-maps-leaflet :centerPoint="[
                                     'lat' => $latitude,
                                     'lng' => $longitude,
-                                ]" :zoom="14" style="width: 100%; height: 400px;">
+                                ]" :zoom="14"
+                                    style="width: 100%; height: 400px;">
                                 </x-maps-leaflet>
 
                                 <input type="hidden" id="longitude" name="longitude" value="{{ $longitude }}">
@@ -210,10 +228,74 @@
                             {{ isset($menage) ? __('Mettre à jour') : __('Ajouter') }}
                         </x-primary-button>
                     </form>
+
+                    @if ($errors->any())
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
+                            role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById('password');
+            const eyeIcon = document.getElementById('eye-icon');
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.setAttribute('d',
+                    'M13.875 18.825a8.967 8.967 0 01-1.875.175c-4.478 0-8.268-2.944-9.542-7 1.274-4.057 5.064-7 9.542-7 1.18 0 2.313.198 3.374.57'
+                );
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.setAttribute('d',
+                    'M15 12A3 3 0 1112 9a3 3 0 013 3zM2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z'
+                );
+            }
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+
+            togglePassword.addEventListener('click', function() {
+                // Toggle the type attribute using getAttribute and setAttribute
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+
+                // Toggle the eye icon
+                eyeIcon.classList.toggle('text-gray-500'); // Change color when toggled
+                eyeIcon.classList.toggle('text-gray-700');
+            });
+
+            const togglePasswordConfirmation = document.getElementById('togglePasswordConfirmation');
+            const passwordConfirmationInput = document.getElementById('password_confirmation');
+            const eyeIconConfirmation = document.getElementById('eyeIconConfirmation');
+
+            togglePasswordConfirmation.addEventListener('click', function() {
+                // Toggle the type attribute using getAttribute and setAttribute
+                const type = passwordConfirmationInput.getAttribute('type') === 'password' ? 'text' :
+                    'password';
+                passwordConfirmationInput.setAttribute('type', type);
+
+                // Toggle the eye icon
+                eyeIconConfirmation.classList.toggle('text-gray-500'); // Change color when toggled
+                eyeIconConfirmation.classList.toggle('text-gray-700');
+            });
+        });
+    </script>
+
+
 
     <script>
         document.getElementById('menage-form').addEventListener('submit', function(event) {
@@ -235,7 +317,7 @@
                 errorElement.textContent = ''; // Efface le message d'erreur si le contact est valide
             } else {
                 errorElement.textContent =
-                'Le numéro de téléphone n\'est pas valide.'; // Affiche un message d'erreur si le contact n'est pas valide
+                    'Le numéro de téléphone n\'est pas valide.'; // Affiche un message d'erreur si le contact n'est pas valide
             }
         }
 

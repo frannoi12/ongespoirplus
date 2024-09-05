@@ -270,7 +270,7 @@
                             </div>
                             <div class="flex items-center justify-center">
                                 <a href="{{ route("register") }}">
-                                    <button
+                                    <button href="mailto:dermanefad1@gmail.com"
                                         class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                                         Commencer
                                     </button>
@@ -368,94 +368,57 @@
             <h3 class="my-4 text-3xl leading-tight">
                 Laissez nous un message !
             </h3>
-            <a href="#">
+            <a href="mailto:dermanefad1@gmail.com">
                 <button
                     class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                     C'est partie !
                 </button>
-            </a>
+            </a>            
 
         </section>
         <!--Footer-->
-        <footer class="bg-white">
-            <div class="container mx-auto px-8">
-                <div class="w-full flex flex-col md:flex-row py-6">
-                    <div class="flex-1 mb-6 text-black">
-                        <a class="text-pink-600 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-                            href="#">
-                            <!--Icon from: http://www.potlabicons.com/ -->
-                            <img src="images/espoirplus.png" alt="logo" class="h-12 fill-current inline">
-                        </a>
+        <footer class="bg-green-800 text-white py-8 mt-12">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap justify-between items-center">
+                    <div class="w-full md:w-1/3">
+                        <h3 class="text-xl font-semibold">Espoir Plus</h3>
+                        <p class="mt-4 text-gray-300">Espoir Plus est une entreprise spécialisée dans le ramassage et la gestion
+                            des déchets à Sokodé, Togo. Nous visons à améliorer l'hygiène et la qualité de vie dans chaque
+                            quartier.</p>
                     </div>
-                    <div class="flex-1">
-                        <p class="uppercase text-gray-500 md:mb-6">Lien</p>
-                        <ul class="list-reset mb-6">
-                            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                                <a href="#"
-                                    class="no-underline hover:underline text-gray-800 hover:text-pink-500">FAQ</a>
-                            </li>
-                            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                                <a href="#"
-                                    class="no-underline hover:underline text-gray-800 hover:text-pink-500">Help</a>
-                            </li>
-                            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                                <a href="#"
-                                    class="no-underline hover:underline text-gray-800 hover:text-pink-500">Support</a>
-                            </li>
-                        </ul>
+                    <div class="w-full md:w-1/3 mt-8 md:mt-0 text-center">
+                        <h4 class="text-lg font-semibold">Suivez-nous</h4>
+                        <div class="flex justify-center space-x-4 mt-4">
+                            <!-- Logos des applications avec liens -->
+                            <a href="https://www.facebook.com/profile.php?id=61552210329384" target="_blank">
+                                <img src="{{ asset('images/fesbook.png') }}" alt="Facebook" class="w-8 h-8">
+                            </a>
+                            
+                            <a href="https://www.twitter.com" target="_blank">
+                                <img src="{{ asset('images/tiwter.png') }}" alt="Twitter" class="w-8 h-8">
+                            </a>
+                            <a href="https://www.instagram.com" target="_blank">
+                                <img src="{{ asset('images/instagram.jpeg') }}" alt="Instagram" class="w-8 h-8">
+                            </a>
+                            <a href="https://www.linkedin.com" target="_blank">
+                                <img src="{{ asset('images/linkedin.png') }}" alt="LinkedIn" class="w-8 h-8">
+                            </a>
+                            <a href="https://www.youtube.com" target="_blank">
+                                <img src="{{ asset('images/youtube.jpg') }}" alt="YouTube" class="w-8 h-8">
+                            </a>
+                            <a href="https://wa.me/22892588651" target="_blank">
+                                <img src="{{ asset('images/whatsapp.jpeg') }}" alt="WhatsApp" class="w-8 h-8">
+                            </a>                            
+                        </div>
                     </div>
-                    <div class="flex-1">
-                        <p class="uppercase text-gray-500 md:mb-6">Legal</p>
-                        <ul class="list-reset mb-6">
-                            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                                <a href="#"
-                                    class="no-underline hover:underline text-gray-800 hover:text-pink-500">Terms</a>
-                            </li>
-                            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                                <a href="#"
-                                    class="no-underline hover:underline text-gray-800 hover:text-pink-500">Privacy</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="flex-1">
-                        <p class="uppercase text-gray-500 md:mb-6">Social</p>
-                        <ul class="list-reset mb-6">
-                            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                                <a href="#"
-                                    class="no-underline hover:underline text-gray-800 hover:text-pink-500">Facebook</a>
-                            </li>
-                            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                                <a href="#"
-                                    class="no-underline hover:underline text-gray-800 hover:text-pink-500">Linkedin</a>
-                            </li>
-                            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                                <a href="#"
-                                    class="no-underline hover:underline text-gray-800 hover:text-pink-500">Twitter</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="flex-1">
-                        <p class="uppercase text-gray-500 md:mb-6">Compagnie</p>
-                        <ul class="list-reset mb-6">
-                            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                                <a href="#"
-                                    class="no-underline hover:underline text-gray-800 hover:text-pink-500">Official
-                                    Blog</a>
-                            </li>
-                            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                                <a href="#"
-                                    class="no-underline hover:underline text-gray-800 hover:text-pink-500">About Us</a>
-                            </li>
-                            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                                <a href="#"
-                                    class="no-underline hover:underline text-gray-800 hover:text-pink-500">Contact</a>
-                            </li>
-                        </ul>
+                    <div class="w-full md:w-1/3 mt-8 md:mt-0 text-right">
+                        <h4 class="text-lg font-semibold">Contact</h4>
+                        <p class="mt-4">+228 90 00 00 00</p>
+                        <p class="mt-2">contact@espoirplus.tg</p>
+                        <p class="mt-2">Sokodé, Togo</p>
                     </div>
                 </div>
             </div>
-            <a href="https://www.freepik.com/free-photos-vectors/background" class="text-gray-500">Background vector
-                created by freepik - www.freepik.com</a>
         </footer>
         <!-- jQuery if you need it
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

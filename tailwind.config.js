@@ -3,6 +3,18 @@ import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 
 /** @type {import('tailwindcss').Config} */
+module.exports = {
+    content: [
+        './resources/**/*.blade.php',
+        './resources/**/*.js',
+        './resources/**/*.vue',
+      ],
+      
+    plugins: [
+      require('@tailwindcss/typography'),
+      // d'autres plugins
+    ],
+  };
 export default {
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
@@ -20,4 +32,7 @@ export default {
     },
 
     plugins: [forms, typography],
+
 };
+
+  

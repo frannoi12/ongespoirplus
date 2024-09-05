@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('date_jour')->default(now());
             $table->foreignId('secteur_id')->constrained('secteurs')->onDelete('set null');// A un secteur on associe 1 où plusieurs menage
             $table->foreignId('personnel_id')->constrained('personnels')->onDelete('set null');
-            $table->integer('agent');
             $table->timestamps();
         });
     }

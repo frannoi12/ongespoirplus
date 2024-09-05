@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePolitiqueRequest;
-use App\Http\Requests\UpdatePolitiqueRequest;
+// use App\Http\Requests\StorePolitiqueRequest;
+// use App\Http\Requests\UpdatePolitiqueRequest;
 use App\Models\Politique;
 use App\Models\Personnel;
 use Illuminate\Http\Request;
