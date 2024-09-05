@@ -12,8 +12,7 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <div
-                class="bg-white flex items-center justify-between mx-6 px-6 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white flex items-center justify-between mx-6 px-6 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __('Liste des personnels') }}
                 </div>
@@ -84,8 +83,7 @@
                                             <button
                                                 class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Consulter</button>
                                         </a>
-                                        <form action="{{ route('personnels.destroy', $personnel->id) }}"
-                                            method="POST"
+                                        <form action="{{ route('personnels.destroy', $personnel->id) }}" method="POST"
                                             onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel ?');">
                                             @csrf
                                             @method('DELETE')

@@ -295,11 +295,12 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $nomSecteur
+ * @property int $personnel_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Menage> $menages
  * @property-read int|null $menages_count
- * @property-read \App\Models\Personnel|null $personnel
+ * @property-read \App\Models\Personnel $personnel
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tournee> $tournees
  * @property-read int|null $tournees_count
  * @method static \Database\Factories\SecteurFactory factory($count = null, $state = [])
@@ -309,6 +310,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Secteur whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Secteur whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Secteur whereNomSecteur($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Secteur wherePersonnelId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Secteur whereUpdatedAt($value)
  */
 	class Secteur extends \Eloquent {}
@@ -321,17 +323,19 @@ namespace App\Models{
  * @property int $id
  * @property string $code_service
  * @property string $type_service
+ * @property int $personnel_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Menage> $menages
  * @property-read int|null $menages_count
- * @property-read \App\Models\Personnel|null $personnel
+ * @property-read \App\Models\Personnel $personnel
  * @method static \Illuminate\Database\Eloquent\Builder|Service newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Service newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Service query()
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereCodeService($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Service wherePersonnelId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereTypeService($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Service whereUpdatedAt($value)
  */
@@ -374,13 +378,14 @@ namespace App\Models{
  * @property int $id
  * @property string $designation
  * @property int $montant
+ * @property int $personnel_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Menage> $menages
  * @property-read int|null $menages_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Paiement> $paiements
  * @property-read int|null $paiements_count
- * @property-read \App\Models\Personnel|null $personnel
+ * @property-read \App\Models\Personnel $personnel
  * @method static \Database\Factories\TariffFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Tariff newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Tariff newQuery()
@@ -389,6 +394,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Tariff whereDesignation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tariff whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tariff whereMontant($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tariff wherePersonnelId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tariff whereUpdatedAt($value)
  */
 	class Tariff extends \Eloquent {}

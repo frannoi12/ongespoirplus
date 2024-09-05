@@ -18,13 +18,13 @@
 
 
                     <!-- Intégrer le formulaire de paiement ici -->
-                    <form action="{{ route('cinetpay.process', $menage->id) }}" method="POST">
+                    {{-- <form action="{{ route('cinetpay.process', $menage->id) }}" method="POST"> --}}
                         @csrf
                         <!-- Ajouter ici les détails spécifiques du paiement -->
-                        <x-primary-button>
+                        {{-- <x-primary-button>
                             {{ __('Payer') }}
                         </x-primary-button>
-                    </form>
+                    </form> --}}
 
 
                     @if ($errors->any())
