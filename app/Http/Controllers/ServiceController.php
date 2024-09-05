@@ -45,11 +45,12 @@ class ServiceController extends Controller
         // Validation des champs requis
         $validatedData = $request->validate([
             'code_service' => 'required|string|max:255',
-            'type_service' => 'required|string|max:255',
+            'type_service' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
+            'personnel_id' => 'required|exists:personnels,id'
         ]);
 
         // Création du nouveau service
-        Service::create($validatedData);
+        Service::updateOrCreate($validatedData);
 
         // Redirection vers l'index avec un message de succès
         return redirect()->route('services.index')->with('success', 'Service ajouté avec succès.');
@@ -81,7 +82,8 @@ class ServiceController extends Controller
         // Validation des champs requis
         $validatedData = $request->validate([
             'code_service' => 'required|string|max:255',
-            'type_service' => 'required|string|max:255',
+            'type_service' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
+            'personnel_id' => 'required|exists:personnels,id'
         ]);
 
         // Mise à jour du service existant
