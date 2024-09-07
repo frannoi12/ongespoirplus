@@ -73,8 +73,7 @@ class PersonnelController extends Controller
 
         Auth::login($user);
 
-        $user->personnel()->updateOrCreate([
-            'lieu_de_provenance' => $request->lieu_de_provenance,
+        $user->personnel()->create([
             'etat' => $request->etat,
             'role' => $request->role,
         ]);
