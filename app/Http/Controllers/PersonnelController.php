@@ -55,6 +55,7 @@ class PersonnelController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'contact' => 'required|string|min:8',
             'password' => 'required|string|min:8|confirmed',
+            'lieu_de_provenance' => 'required|string|max:255|regex:/^[^0-9]*$/',
             'etat' => 'required|string|in:actif,inactif|regex:/^[^0-9]*$/',
             'role' => 'required|exists:roles,name|regex:/^[^0-9]*$/',
         ]);
@@ -68,6 +69,7 @@ class PersonnelController extends Controller
         ]);
 
         $user->personnel()->create([
+            'lieu_de_provenance' => $request->lieu_de_provenance,
             'etat' => $request->etat,
             'role' => $request->role,
         ]);
