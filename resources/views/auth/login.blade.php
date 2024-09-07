@@ -6,6 +6,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 2f545d6 (font image de connexion et d'inscription)
 =======
@@ -36,11 +37,22 @@
         <x-auth-session-status class="mb-4" :status="session('status')" />
         <form method="POST" action="{{ route('login') }}" class="bg-white dark:bg-gray-800 bg-opacity-75 p-6 rounded-lg shadow-lg w-full max-w-md">
             @csrf
+=======
+    <div class="min-h-screen flex flex-col justify-center items-center bg-cover bg-center" style="background-image: url('{{ asset('images/cut-xl.jpg') }}');">
+    
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
+
+        <form method="POST" action="{{ route('login') }}" class="bg-white dark:bg-gray-800 bg-opacity-75 p-6 rounded-lg shadow-lg w-full max-w-md">
+            @csrf
+
+>>>>>>> 4552cd5 (login et register)
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
+<<<<<<< HEAD
             </div>
             <!-- Password -->
             <div class="mt-4">
@@ -90,6 +102,14 @@
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label for="password" :value="__('Password')" />
+=======
+            </div>
+
+            <!-- Password -->
+            <div class="mt-4">
+                <x-input-label for="password" :value="__('Password')" />
+
+>>>>>>> 4552cd5 (login et register)
                 <div class="relative">
                     <x-text-input id="password" class="block mt-1 w-full pr-10"
                                   type="password"
@@ -103,6 +123,9 @@
 
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
+<<<<<<< HEAD
+>>>>>>> 4552cd5 (login et register)
+=======
 >>>>>>> 4552cd5 (login et register)
 
             <!-- Remember Me -->
@@ -121,11 +144,15 @@
                 @endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4552cd5 (login et register)
                 <x-primary-button class="ms-3">
                     {{ __('Log in') }}
                 </x-primary-button>
             </div>
         </form>
+<<<<<<< HEAD
 =======
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
@@ -135,6 +162,8 @@
 >>>>>>> a1b138e (login et register)
 
     </div>
+=======
+>>>>>>> 4552cd5 (login et register)
 
     </div>
 
