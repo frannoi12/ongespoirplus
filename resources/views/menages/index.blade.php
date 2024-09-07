@@ -19,6 +19,7 @@
         @endif
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <<<<<<< HEAD
                 {{-- @if (session('success'))
@@ -44,6 +45,8 @@
 >>>>>>> 57ec7bd (login et register)
 =======
 >>>>>>> 7bea7f9 (login et register)
+=======
+>>>>>>> c620c38 (login et register)
             @if (session('success'))
                 <div class="bg-green-500 text-white p-4 rounded-md">
                     {{ session('success') }}
