@@ -74,11 +74,15 @@ class PersonnelController extends Controller
         // $user->personnel()->create([
         // Auth::login($user);
 
+<<<<<<< HEAD
         // $user->personnel()->create([
         // Auth::login($user);
 
         $user->personnel()->create([
             'lieu_de_provenance' => $request->lieu_de_provenance,
+=======
+        $user->personnel()->create([
+>>>>>>> a1b138e (login et register)
             'etat' => $request->etat,
             'role' => $request->role,
         ]);
