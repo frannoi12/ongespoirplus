@@ -42,9 +42,9 @@
 <body class="font-sans text-gray-900 antialiased">
 
     <!-- Container principal avec une grille à deux colonnes -->
-
     <div class="min-h-screen grid-cols-1 md:grid-cols-2 bg-cover bg-center" style="background-image: url('{{ asset('images/hollywood-md.jpg') }}');">
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -59,6 +59,8 @@
     <!--div class="min-h-screen grid grid-cols-1 "-->
 
 >>>>>>> 087c0a6 (font image de connexion et d'inscription)
+=======
+>>>>>>> 145103e (login et register)
         <!-- Section de l'image -->
         {{-- <div class="hidden md:block">
             <img src="{{ asset('images/images.jpeg') }}" alt="Description de l'image" class="object-cover w-full h-full">
