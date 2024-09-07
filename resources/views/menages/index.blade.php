@@ -33,9 +33,15 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 513744a (login et register)
+=======
+=======
+=======
+>>>>>>> 7d7fd24 (login et register)
+>>>>>>> 4d888ba (login et register)
 
 <<<<<<< HEAD
                 {{-- @if (session('success'))
@@ -68,8 +74,16 @@
 >>>>>>> cb8100421260b00db6a6c4460d22a9bb1353d3a9
 =======
 >>>>>>> cb8100421260b00db6a6c4460d22a9bb1353d3a9
+<<<<<<< HEAD
 >>>>>>> a1b138e (login et register)
+<<<<<<< HEAD
 >>>>>>> 513744a (login et register)
+=======
+=======
+=======
+>>>>>>> 57ec7bd (login et register)
+>>>>>>> 7d7fd24 (login et register)
+>>>>>>> 4d888ba (login et register)
             @if (session('success'))
                 <div class="bg-green-500 text-white p-4 rounded-md">
                     {{ session('success') }}
