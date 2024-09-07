@@ -71,46 +71,10 @@ class PersonnelController extends Controller
         ]);
         event(new Registered($user));
 
-<<<<<<< HEAD
-        // $user->personnel()->create([
-        // Auth::login($user);
-
-<<<<<<< HEAD
-        // $user->personnel()->create([
-        // Auth::login($user);
-=======
-<<<<<<< HEAD
         $user->personnel()->create([
         Auth::login($user);
-=======
-        // $user->personnel()->create([
-        // Auth::login($user);
->>>>>>> fd37ec8 (personnel)
->>>>>>> 2957510 (personnel)
-
-<<<<<<< HEAD
-        $user->personnel()->create([
-<<<<<<< HEAD
-            'lieu_de_provenance' => $request->lieu_de_provenance,
-<<<<<<< HEAD
-=======
-        $user->personnel()->create([
->>>>>>> a1b138e (login et register)
-=======
->>>>>>> 7d7fd24 (login et register)
-=======
-        Auth::login($user);
-=======
-        // $user->personnel()->create([
-        // Auth::login($user);
->>>>>>> fe1fa57 (personnel)
 
         $user->personnel()->create([
-<<<<<<< HEAD
->>>>>>> 145103e (login et register)
-=======
-            'lieu_de_provenance' => $request->lieu_de_provenance,
->>>>>>> 4552cd5 (login et register)
             'etat' => $request->etat,
             'role' => $request->role,
         ]);
