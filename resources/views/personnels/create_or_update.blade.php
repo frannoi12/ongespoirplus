@@ -94,6 +94,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                             {{-- <div class="mb-4">
 =======
 >>>>>>> 12a2817 (login et register)
@@ -106,6 +107,9 @@
 >>>>>>> 12a2817 (login et register)
                             {{-- <div class="mb-4">
 >>>>>>> a1b138e (login et register)
+=======
+                            {{-- <div class="mb-4">
+>>>>>>> 4552cd5 (login et register)
 =======
                             {{-- <div class="mb-4">
 >>>>>>> 4552cd5 (login et register)

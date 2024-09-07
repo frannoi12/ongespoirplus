@@ -98,6 +98,7 @@ class PersonnelController extends Controller
         $user->personnel()->create([
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             'lieu_de_provenance' => $request->lieu_de_provenance,
 <<<<<<< HEAD
 =======
@@ -110,6 +111,9 @@ class PersonnelController extends Controller
 
         $user->personnel()->create([
 >>>>>>> 145103e (login et register)
+=======
+            'lieu_de_provenance' => $request->lieu_de_provenance,
+>>>>>>> 4552cd5 (login et register)
 =======
             'lieu_de_provenance' => $request->lieu_de_provenance,
 >>>>>>> 4552cd5 (login et register)

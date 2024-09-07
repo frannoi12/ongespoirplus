@@ -13,6 +13,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 6c1649d (font image de connexion et d'inscription)
@@ -97,11 +98,22 @@
 >>>>>>> 4552cd5 (login et register)
 =======
 >>>>>>> 0aa5346 (font image de connexion et d'inscription)
+=======
+    <div class="min-h-screen flex flex-col justify-center items-center bg-cover bg-center" style="background-image: url('{{ asset('images/cut-xl.jpg') }}');">
+    
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
+
+        <form method="POST" action="{{ route('login') }}" class="bg-white dark:bg-gray-800 bg-opacity-75 p-6 rounded-lg shadow-lg w-full max-w-md">
+            @csrf
+
+>>>>>>> 4552cd5 (login et register)
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             </div>
@@ -252,6 +264,28 @@
             </div>
 
 >>>>>>> 4552cd5 (login et register)
+=======
+            </div>
+
+            <!-- Password -->
+            <div class="mt-4">
+                <x-input-label for="password" :value="__('Password')" />
+
+                <div class="relative">
+                    <x-text-input id="password" class="block mt-1 w-full pr-10"
+                                  type="password"
+                                  name="password"
+                                  required autocomplete="current-password" />
+                    <!-- Bouton pour afficher le mot de passe -->
+                    <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                        👁️
+                    </button>
+                </div>
+
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            </div>
+
+>>>>>>> 4552cd5 (login et register)
             <!-- Remember Me -->
             <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">
@@ -271,6 +305,7 @@
                     {{ __('Log in') }}
                 </x-primary-button>
             </div>
+<<<<<<< HEAD
             <!-- Bouton Continuer avec Google -->
             <div class="mt-6">
                 <a href="{{ route('auth.google') }}" class="w-full inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
@@ -284,6 +319,10 @@
 <<<<<<< HEAD
 >>>>>>> 12a2817 (login et register)
 =======
+>>>>>>> 4552cd5 (login et register)
+=======
+        </form>
+
 >>>>>>> 4552cd5 (login et register)
     </div>
 

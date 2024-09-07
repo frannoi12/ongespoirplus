@@ -36,6 +36,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 513744a (login et register)
@@ -109,6 +110,8 @@
 >>>>>>> 7bea7f9 (login et register)
 >>>>>>> 145103e (login et register)
 >>>>>>> 922d2e4 (login et register)
+=======
+>>>>>>> 4552cd5 (login et register)
 =======
 >>>>>>> 4552cd5 (login et register)
             @if (session('success'))
