@@ -11,6 +11,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 6c1649d (font image de connexion et d'inscription)
@@ -81,11 +82,22 @@
         <x-auth-session-status class="mb-4" :status="session('status')" />
         <form method="POST" action="{{ route('login') }}" class="bg-white dark:bg-gray-800 bg-opacity-75 p-6 rounded-lg shadow-lg w-full max-w-md">
             @csrf
+=======
+    <div class="min-h-screen flex flex-col justify-center items-center bg-cover bg-center" style="background-image: url('{{ asset('images/cut-xl.jpg') }}');">
+    
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
+
+        <form method="POST" action="{{ route('login') }}" class="bg-white dark:bg-gray-800 bg-opacity-75 p-6 rounded-lg shadow-lg w-full max-w-md">
+            @csrf
+
+>>>>>>> 4552cd5 (login et register)
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
+<<<<<<< HEAD
 <<<<<<< HEAD
             </div>
             <!-- Password -->
@@ -215,6 +227,28 @@
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
+=======
+            </div>
+
+            <!-- Password -->
+            <div class="mt-4">
+                <x-input-label for="password" :value="__('Password')" />
+
+                <div class="relative">
+                    <x-text-input id="password" class="block mt-1 w-full pr-10"
+                                  type="password"
+                                  name="password"
+                                  required autocomplete="current-password" />
+                    <!-- Bouton pour afficher le mot de passe -->
+                    <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                        👁️
+                    </button>
+                </div>
+
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            </div>
+
+>>>>>>> 4552cd5 (login et register)
             <!-- Remember Me -->
             <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">
@@ -236,7 +270,10 @@
             </div>
         </form>
 
+<<<<<<< HEAD
 >>>>>>> 12a2817 (login et register)
+=======
+>>>>>>> 4552cd5 (login et register)
     </div>
 
     <!-- Script JavaScript pour basculer la visibilité du mot de passe -->

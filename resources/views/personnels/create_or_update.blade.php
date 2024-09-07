@@ -93,6 +93,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                             {{-- <div class="mb-4">
 =======
 >>>>>>> 12a2817 (login et register)
@@ -105,6 +106,9 @@
 >>>>>>> 12a2817 (login et register)
                             {{-- <div class="mb-4">
 >>>>>>> a1b138e (login et register)
+=======
+                            {{-- <div class="mb-4">
+>>>>>>> 4552cd5 (login et register)
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                                     for="lieu_de_provenance">Provenance</label>
                                 <input type="lieu_de_provenance" id="lieu_de_provenance" name="lieu_de_provenance"
