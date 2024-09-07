@@ -1,18 +1,24 @@
 <x-guest-layout>
     <!-- Ajout de l'image de fond avec Tailwind CSS -->
+    <div class="min-h-screen flex flex-col justify-center items-center bg-cover bg-center" style="background-image: url('{{ asset('images/cut-xl.jpg') }}');">
+
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
+
         <form method="POST" action="{{ route('login') }}" class="bg-white dark:bg-gray-800 bg-opacity-75 p-6 rounded-lg shadow-lg w-full max-w-md">
             @csrf
+
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
+
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label for="password" :value="__('Password')" />
+
                 <div class="relative">
                     <x-text-input id="password" class="block mt-1 w-full pr-10"
                                   type="password"
@@ -42,19 +48,11 @@
                     </a>
                 @endif
 
-                <x-primary-button class="ms-3">
-                    {{ __('Log in') }}
-                </x-primary-button>
-            </div>
-            <!-- Bouton Continuer avec Google -->
-            <div class="mt-6">
-                <a href="{{ route('auth.google') }}" class="w-full inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                    <!-- Logo Google -->
-                    <img src="{{ asset('images/google.png') }}" alt="Google Logo" class="w-5 h-5 mr-2">
-                    Continuer avec Google
-                </a>
-            </div>
-        </form>
+            <x-primary-button class="ms-3">
+                {{ __('Log in') }}
+            </x-primary-button>
+        </div>
+    </form>
 
     </div>
 

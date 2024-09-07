@@ -14,11 +14,6 @@
             {{ session('success') }}
         </div>
         @endif
-
-=======
->>>>>>> cb8100421260b00db6a6c4460d22a9bb1353d3a9
-=======
->>>>>>> cb8100421260b00db6a6c4460d22a9bb1353d3a9
             @if (session('success'))
                 <div class="bg-green-500 text-white p-4 rounded-md">
                     {{ session('success') }}
