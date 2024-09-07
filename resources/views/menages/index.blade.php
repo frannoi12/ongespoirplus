@@ -7,10 +7,22 @@
 
     <div class="py-12">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
 >>>>>>> 12a2817 (login et register)
+=======
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+
+=======
+<<<<<<< HEAD
+=======
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+
+>>>>>>> 12a2817 (login et register)
+>>>>>>> a1b138e (login et register)
+>>>>>>> 513744a (login et register)
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 @if(session('success'))
         <div class="alert alert-success bg-green-500 text-white p-4 rounded-md">
@@ -20,6 +32,10 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 513744a (login et register)
 
 <<<<<<< HEAD
                 {{-- @if (session('success'))
@@ -34,6 +50,7 @@
                     </div>
 =======
 =======
+<<<<<<< HEAD
 
 >>>>>>> 7bea7f9 (login et register)
 =======
@@ -47,6 +64,12 @@
 >>>>>>> 7bea7f9 (login et register)
 =======
 >>>>>>> c620c38 (login et register)
+=======
+>>>>>>> cb8100421260b00db6a6c4460d22a9bb1353d3a9
+=======
+>>>>>>> cb8100421260b00db6a6c4460d22a9bb1353d3a9
+>>>>>>> a1b138e (login et register)
+>>>>>>> 513744a (login et register)
             @if (session('success'))
                 <div class="bg-green-500 text-white p-4 rounded-md">
                     {{ session('success') }}
@@ -57,7 +80,14 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __('Liste des Menages') }}
                 </div>
+<<<<<<< HEAD
 >>>>>>> 12a2817 (login et register)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 12a2817 (login et register)
+>>>>>>> a1b138e (login et register)
+>>>>>>> 513744a (login et register)
 
                     <div class="flex justify-end items-center space-x-4" x-data="{ open: false }">
                         <!-- Bouton pour exporter avec un filtre -->

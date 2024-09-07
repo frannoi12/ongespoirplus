@@ -6,6 +6,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     <form method="POST" action="{{ route('register') }}" id="menage-form">
         @csrf
@@ -36,6 +37,8 @@
 >>>>>>> c620c38 (login et register)
 =======
 >>>>>>> 6c1649d (font image de connexion et d'inscription)
+=======
+>>>>>>> 513744a (login et register)
 
 
 =======
@@ -43,6 +46,13 @@
 >>>>>>> 0aa5346 (font image de connexion et d'inscription)
     <form method="POST" action="{{ route('register') }}" id="menage-form">
         @csrf
+=======
+    <div class="min-h-screen flex flex-col justify-center items-center bg-cover bg-center" style="background-image: url('{{ asset('images/cut-xl.jpg') }}');">
+
+        <form method="POST" action="{{ route('register') }}" class="bg-white dark:bg-gray-800 bg-opacity-75 p-6 rounded-lg shadow-lg w-full max-w-md" id="menage-form">
+            @csrf
+
+>>>>>>> a1b138e (login et register)
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
@@ -53,8 +63,7 @@
         <!-- Prenom -->
         <div>
             <x-input-label for="Prenom" :value="__('Prenom')" />
-            <x-text-input id="prenom" class="block mt-1 w-full" type="text" name="prenom" :value="old('prenom')"
-                required autofocus autocomplete="prenom" />
+            <x-text-input id="prenom" class="block mt-1 w-full" type="text" name="prenom" :value="old('prenom')" required autofocus autocomplete="prenom" />
             <x-input-error :messages="$errors->get('prenom')" class="mt-2" />
         </div>
 =======
@@ -89,11 +98,11 @@
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
-                required autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+<<<<<<< HEAD
         <!-- Contact -->
         <div class="mt-4">
             <x-input-label for="contact" :value="__('Contact')" />
@@ -104,10 +113,13 @@
         </div>
 
 
+=======
+>>>>>>> a1b138e (login et register)
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
+<<<<<<< HEAD
             <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
                 autocomplete="new-password" />
 =======
@@ -120,6 +132,12 @@
                                 required autocomplete="new-password" />
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
+=======
+            <x-text-input id="password" class="block mt-1 w-full"
+                            type="password"
+                            name="password"
+                            required autocomplete="new-password" />
+>>>>>>> a1b138e (login et register)
 
             <!-- Confirm Password -->
             <div class="mt-4">
@@ -147,12 +165,14 @@
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password"
-                name="password_confirmation" required autocomplete="new-password" />
+            <x-text-input id="password_confirmation" class="block mt-1 w-full"
+                            type="password"
+                            name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
+<<<<<<< HEAD
         {{-- <fieldset class="mb-6 border border-gray-300 p-4 rounded-md">
             <legend class="text-lg font-medium text-gray-700 dark:text-gray-300">Information d'un ménage
             </legend> --}}
@@ -270,18 +290,22 @@
         {{-- </fieldset> --}}
 >>>>>>> 7bea7f9 (login et register)
 
+=======
+>>>>>>> 513744a (login et register)
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                href="{{ route('login') }}">
+            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
 
-            <x-primary-button id="submit-button" class="ms-4">
+            <x-primary-button class="ms-4">
                 {{ __('Register') }}
             </x-primary-button>
         </div>
     </form>
+<<<<<<< HEAD
 =======
     </div>
 >>>>>>> 4552cd5 (login et register)
+=======
+>>>>>>> a1b138e (login et register)
 </x-guest-layout>

@@ -16,12 +16,15 @@
 </head>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <body class="font-sans text-gray-10000 antialiased">
     <div class="min-h-screen grid-cols-1 md:grid-cols-2 bg-cover bg-center" style="background-image: url('{{ asset('images/IMG-20200529-WA0154-768x432.jpg') }}');">
         <div class="flex flex-col justify-center items-center dark:bg-gray-900 bg-opacity-50 p-6">
 =======
 =======
 >>>>>>> 6c1649d (font image de connexion et d'inscription)
+=======
+>>>>>>> 513744a (login et register)
 <body class="font-sans text-gray-900 antialiased">
 
     <!-- Container principal avec une grille à deux colonnes -->
@@ -35,6 +38,13 @@
     <div class="min-h-screen grid-cols-1 md:grid-cols-2 bg-cover bg-center" style="background-image: url('{{ asset('images/hollywood-md.jpg') }}');">
     
 >>>>>>> 4552cd5 (login et register)
+=======
+<body class="font-sans text-gray-900 antialiased">
+
+    <!-- Container principal avec une grille à deux colonnes -->
+    <div class="min-h-screen grid-cols-1 md:grid-cols-2 bg-cover bg-center" style="background-image: url('{{ asset('images/hollywood-md.jpg') }}');">
+
+>>>>>>> a1b138e (login et register)
         <!-- Section de l'image -->
         {{-- <div class="hidden md:block">
             <img src="{{ asset('images/images.jpeg') }}" alt="Description de l'image" class="object-cover w-full h-full">
@@ -42,6 +52,7 @@
 
         <!-- Section du formulaire de connexion -->
         <div class="flex flex-col justify-center items-center bg-gray-100 dark:bg-gray-900 bg-opacity-50 p-6">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -53,11 +64,18 @@
 >>>>>>> 320fdfb (font image de connexion et d'inscription)
 =======
 =======
+>>>>>>> 513744a (login et register)
+=======
 <body class="font-sans text-gray-10000 antialiased">
     <div class="min-h-screen grid-cols-1 md:grid-cols-2 bg-cover bg-center" style="background-image: url('{{ asset('images/IMG-20200529-WA0154-768x432.jpg') }}');">
         <div class="flex flex-col justify-center items-center dark:bg-gray-900 bg-opacity-50 p-6">
 >>>>>>> 0aa5346 (font image de connexion et d'inscription)
+<<<<<<< HEAD
 >>>>>>> 6c1649d (font image de connexion et d'inscription)
+=======
+=======
+>>>>>>> a1b138e (login et register)
+>>>>>>> 513744a (login et register)
             <div>
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />

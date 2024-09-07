@@ -6,11 +6,17 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 6c1649d (font image de connexion et d'inscription)
+=======
+>>>>>>> 513744a (login et register)
     <div class="min-h-screen flex flex-col justify-center items-center bg-cover bg-center" style="background-image: url('{{ asset('images/cut-xl.jpg') }}');">
 <<<<<<< HEAD
+=======
+    <div class="min-h-screen flex flex-col justify-center items-center bg-cover bg-center" style="background-image: url('{{ asset('images/cut-xl.jpg') }}');">
+>>>>>>> a1b138e (login et register)
 
 >>>>>>> 57ec7bd (login et register)
 =======
@@ -21,8 +27,10 @@
 >>>>>>> 7bea7f9 (login et register)
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
+
         <form method="POST" action="{{ route('login') }}" class="bg-white dark:bg-gray-800 bg-opacity-75 p-6 rounded-lg shadow-lg w-full max-w-md">
             @csrf
+
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />
@@ -30,9 +38,11 @@
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
 <<<<<<< HEAD
             </div>
+
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label for="password" :value="__('Password')" />
+
                 <div class="relative">
                     <x-text-input id="password" class="block mt-1 w-full pr-10"
                                   type="password"
@@ -109,11 +119,19 @@
                     </a>
                 @endif
 
+<<<<<<< HEAD
                 <x-primary-button class="ms-3">
                     {{ __('Log in') }}
                 </x-primary-button>
             </div>
         </form>
+=======
+            <x-primary-button class="ms-3">
+                {{ __('Log in') }}
+            </x-primary-button>
+        </div>
+    </form>
+>>>>>>> a1b138e (login et register)
 
     </div>
 
