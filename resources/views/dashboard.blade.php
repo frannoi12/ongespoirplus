@@ -17,6 +17,8 @@
                         @auth
                             <table class="table-auto w-full">
                                 <thead>
+
+                                    {{-- {{ dd(Auth::user())}} --}}
                                     {{-- <tr>
                                         <th class="px-4 py-2">Attribut</th>
                                         <th class="px-4 py-2">Valeur</th>
@@ -84,6 +86,42 @@
                                                 {{ Auth::user()->menage->secteur->nomSecteur }}
                                             </td>
                                         </tr>
+                                        @php
+                                            // Décoder la localisation si elle est disponible
+                                            $localisation = isset(Auth::user()->menage->localisation)
+                                                ? json_decode(Auth::user()->menage->localisation, true)
+                                                : null;
+                                            $latitude = old('latitude', $localisation['latitude'] ?? 8.990347);
+                                            $longitude = old('longitude', $localisation['longitude'] ?? 1.130433);
+                                        @endphp
+
+                                        <tr>
+                                            {{-- {{dd(Auth::user()->menage->localisation)}} --}}
+                                            <td class="border px-4 py-2">Localisation</td>
+                                            <td class="border px-4 py-2">
+                                                <div class="mt-4" id="map" style="height: 400px; width: 100%;">
+                                                    <!-- Carte initialisée avec les coordonnées -->
+                                                    <x-maps-leaflet :centerPoint="[
+                                                        'lat' => $latitude,
+                                                        'lng' => $longitude,
+                                                    ]" :zoom="14">
+                                                    </x-maps-leaflet>
+
+                                                    <input type="hidden" id="longitude" name="longitude"
+                                                        value="{{ $longitude }}">
+                                                    <input type="hidden" id="latitude" name="latitude"
+                                                        value="{{ $latitude }}">
+
+                                                    @error('longitude')
+                                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                                    @enderror
+
+                                                    @error('latitude')
+                                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                            </td>
+                                        </tr>
                                     @endif
                                 </tbody>
                             </table>
@@ -95,4 +133,33 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Coordonnées du ménage
+            var latitude = {{ $latitude }};
+            var longitude = {{ $longitude }};
+
+            // Initialisation de la carte
+            var map = L.map('map').setView([latitude, longitude], 18);
+
+            // Ajout des tuiles OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Ajout d'un marqueur
+            L.marker([latitude, longitude]).addTo(map)
+                .bindPopup('Latitude: ' + latitude + '<br>Longitude: ' + longitude)
+                .openPopup();
+
+            // Désactivation des interactions avec la carte
+            map.dragging.disable();
+            map.touchZoom.disable();
+            map.doubleClickZoom.disable();
+            map.scrollWheelZoom.disable();
+            map.boxZoom.disable();
+            map.keyboard.disable();
+        });
+    </script>
 </x-app-layout>

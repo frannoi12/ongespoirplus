@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Personnel;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -67,6 +69,9 @@ class PersonnelController extends Controller
             'contact' => $request->contact,
             'password' => Hash::make($request->password),  // hash du mot de passe
         ]);
+        event(new Registered($user));
+
+        Auth::login($user);
 
         $user->personnel()->updateOrCreate([
             'lieu_de_provenance' => $request->lieu_de_provenance,

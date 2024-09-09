@@ -17,6 +17,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'return_url',
             'notify_url',
         ]);
+        // $middleware->use([
+        //     \App\Http\Middleware\PersonnelMiddleware::class,
+        //     \App\Http\Middleware\ClientMiddleware::class,
+        // ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
