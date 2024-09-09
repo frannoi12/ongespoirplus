@@ -34,6 +34,19 @@ class MobileMoneyController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+
+     public function createEnligne(Request $request)
+    {
+        //
+        // $menage = Menage::findOrFail($id);
+
+        $id = $request->query()['paiement'];
+        $paiement = Paiement::findOrFail($id);
+
+        return view('mobileMoneys.create',compact('paiement'))->with('sucess','Paiement en ligne en cours');
+    }
+
     public function create(Request $request)
     {
         //

@@ -114,11 +114,15 @@ class RegisteredUserController extends Controller
             ]);
         }
 
+        $menageId = $menage->id; // Récupérer l'ID du nouveau ménage créé
+        // dd($id);
+
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->route('paiements.create', ['menageId' => $menageId]);
+        // return redirect(route('dashboard', absolute: false));
     }
 }

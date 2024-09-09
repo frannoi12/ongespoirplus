@@ -70,18 +70,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/menage', [MenageExportController::class, 'export'])->name('menages.export');
     // Route::get('/menage', [MenageExportController::class, 'exportPdf'])->name('menages.pdf');
 
-    Route::get('/payment', [CinetPayController::class, 'showPaymentForm'])->name('cinetpay.payment');
-
-    Route::post('/payment/process', [CinetPayController::class, 'processPayment'])->name('cinetpay.process');
-
-    Route::get('/payment/callback', [CinetPayController::class, 'callback'])->name('cinetpay.callback');
-
-    Route::post('/payment/notify', [CinetPayController::class, 'notify'])->name('cinetpay.notify');
-
-
-
-
-
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -89,3 +77,19 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::post('/paiements/store', [PaiementController::class, 'store'])->name('paiements.store');
+
+Route::get('/paiements/create/{menageId}', [PaiementController::class, 'createMenageLigne'])->name('paiements.create');
+
+Route::get('/payment', [CinetPayController::class, 'showPaymentForm'])->name('cinetpay.payment');
+
+Route::post('/payment/process', [CinetPayController::class, 'processPayment'])->name('cinetpay.process');
+
+Route::get('/payment/callback', [CinetPayController::class, 'callback'])->name('cinetpay.callback');
+
+Route::post('/payment/notify', [CinetPayController::class, 'notify'])->name('cinetpay.notify');
+
+
+Route::get('/mobileMoneys/create', [MobileMoneyController::class, 'createEnligne'])->name('mobiles.create_or_update');
