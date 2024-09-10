@@ -137,8 +137,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Coordonnées du ménage
-            var latitude = {{ $latitude }};
-            var longitude = {{ $longitude }};
+            var latitude = {{ $latitude ?? "" }};
+            var longitude = {{ $longitude  ?? ""}};
 
             // Initialisation de la carte
             var map = L.map('map').setView([latitude, longitude], 18);

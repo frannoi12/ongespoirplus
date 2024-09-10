@@ -82,7 +82,7 @@ class MenageController extends Controller
             'prenom' => 'required|string|max:255|regex:/^[^0-9]*$/',
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'contact' => ['required', 'regex:/^(9[0-36-9]|7[0-36-9])\d{6}$/'],
-            'password' => ['required', 'confirmed', Rules\password::defaults()],
+            'password' => 'required|string|min:8|confirmed',
             'politique_acceptance' => 'required|boolean', // Accepter 1 ou true comme valeurs valides
             'latitude' => 'required|numeric|between:-90,90', // Valider la latitude
             'longitude' => 'required|numeric|between:-180,180', // Valider la longitude
