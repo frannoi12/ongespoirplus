@@ -22,12 +22,12 @@ class RoleHasPermissionSeeder extends Seeder
         $admin = $roles[0];
         $admin->syncPermissions($permissions);
 
-        
-        $Agent_terrain=$roles[1];
+
+        // $Agent_terrain=$roles[1];
         // $menage = $roles[2];
         $comptable = $roles[2];
-        $secretaire=$roles[3];
-        $Volontaire=$roles[4];
+        // $secretaire=$roles[3];
+        // $Volontaire=$roles[4];
         // dd($menage);
 
         $rollbak_permissions_client = [

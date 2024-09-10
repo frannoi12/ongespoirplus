@@ -17,10 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'return_url',
             'notify_url',
         ]);
-        // $middleware->use([
-        //     \App\Http\Middleware\PersonnelMiddleware::class,
-        //     \App\Http\Middleware\ClientMiddleware::class,
-        // ]);
+        $middleware->alias([
+            'personnel' => \App\Http\Middleware\PersonnelMiddleware::class,
+            'client' => \App\Http\Middleware\ClientMiddleware::class,
+            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

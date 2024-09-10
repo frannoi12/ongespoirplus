@@ -16,18 +16,8 @@ class RoleSeeder extends Seeder
         //
         $roles = [
             'Admin',
-            'Secretaire & Comptable',
-            'Volontaire',
-            'PCA',
-            'Chargé à la communication',
-            'Consultant',
-            'Responsable Commercial',
-            'Conducteur tricycle',
-            'Responsable de la ferme',
-            'Collectrice & Chargée d\'entretien Bureau',
-            'Femme de tri (Présidente)',
-            'Femme de tri',
-            'Sécurité'
+            'client',
+            'personnel',
         ];
         // $roles = array('admin', 'agent','comptable','secretaire','volontaire');
         foreach($roles as $role){

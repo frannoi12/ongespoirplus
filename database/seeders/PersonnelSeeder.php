@@ -54,17 +54,17 @@ class PersonnelSeeder extends Seeder
 
         foreach ($personnelsData as $data) {
             $user = $users->where('email', $data['user_email'])->first();
-            $role = $roles->where('name', $data['role'])->first();
+            // $role = $roles->where('name', $data['role'])->first();
 
-            if ($user && $role) {
+            if ($user) {
                 Personnel::create([
                     'user_id' => $user->id,
                     'lieu_de_provenance' => $data['lieu_de_provenance'],
                     'etat' => $data['etat'],
-                    'role' => $role->name,
+                    'role' => $data['role'],
                 ]);
 
-                $user->assignRole($role->name);
+                $user->assignRole($roles[2]);
             }
         }
 

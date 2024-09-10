@@ -79,17 +79,34 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-Route::post('/paiements/store', [PaiementController::class, 'store'])->name('paiements.store');
 
-Route::get('/paiements/create/{menageId}', [PaiementController::class, 'createMenageLigne'])->name('paiements.create');
+Route::middleware('client')->group(function(){
+    Route::post('/paiements/store', [PaiementController::class, 'store'])->name('paiements.store');
 
-Route::get('/payment', [CinetPayController::class, 'showPaymentForm'])->name('cinetpay.payment');
+    Route::get('/paiements/create/{menageId}', [PaiementController::class, 'createMenageLigne'])->name('paiements.create');
 
-Route::post('/payment/process', [CinetPayController::class, 'processPayment'])->name('cinetpay.process');
+    Route::get('/payment', [CinetPayController::class, 'showPaymentForm'])->name('cinetpay.payment');
 
-Route::get('/payment/callback', [CinetPayController::class, 'callback'])->name('cinetpay.callback');
+    Route::post('/payment/process', [CinetPayController::class, 'processPayment'])->name('cinetpay.process');
 
-Route::post('/payment/notify', [CinetPayController::class, 'notify'])->name('cinetpay.notify');
+    Route::get('/payment/callback', [CinetPayController::class, 'callback'])->name('cinetpay.callback');
+
+    Route::post('/payment/notify', [CinetPayController::class, 'notify'])->name('cinetpay.notify');
 
 
-Route::get('/mobileMoneys/create', [MobileMoneyController::class, 'createEnligne'])->name('mobiles.create_or_update');
+    Route::get('/mobileMoneys/create', [MobileMoneyController::class, 'createEnligne'])->name('mobiles.create_or_update');
+});
+
+
+
+
+// Route::prefix('menages')->group(function () {
+//     Route::get('/', [MenageController::class, 'indexGrid'])->name('menage.index');
+//     Route::get('/L',[MenageController::class,'indexList'])->name('menage.index.list');
+//     Route::get('/create', [MenageController::class, 'create'])->name('menage.create');
+//     Route::post('/save', [MenageController::class, 'store'])->name('menage.store');
+//     Route::delete('/delete/{menage}', [MenageController::class, 'destroy'])->name('menage.delete');
+//     Route::get('/edit/{menage}', [MenageController::class, 'edit'])->name('menage.edit');
+//     Route::get('/show/{menage}', [MenageController::class, 'show'])->name('menage.show');
+//     Route::patch('/update/{menage}', [MenageController::class, 'update'])->name('menage.update');
+// });
