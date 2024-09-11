@@ -22,10 +22,11 @@ class PaiementController extends Controller
      * Show the form for creating a new resource.
      */
 
-     public function createMenageLigne($id){
+    public function createMenageLigne($id){
         $menage = Menage::findOrFail($id);
         return view('paiements.createEnLigne', compact('menage'))->with('succes', 'Processus de paiement en cours'); // Assure-toi que cette vue existe et affiche un formulaire de paiement
     }
+
     public function create($id)
     {
         // dd($id);
@@ -92,6 +93,12 @@ class PaiementController extends Controller
 
         // return redirect()->route('paiements.create')->with('status', 'Paiement enregistré avec succès');
     }
+
+
+    public function storeLigne(Request $request){
+
+    }
+
 
     /**
      * Gère les paiements en liquide.

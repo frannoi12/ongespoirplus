@@ -18,12 +18,14 @@
                     {{ __('Liste des Services') }}
                 </div>
                 <div>
-                    <a href="{{ route('services.create') }}">
-                        <button style="background: green"
-                            class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">
-                            Ajouter
-                        </button>
-                    </a>
+                    @can('service_create')
+                        <a href="{{ route('services.create') }}">
+                            <button style="background: green"
+                                class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">
+                                Ajouter
+                            </button>
+                        </a>
+                    @endcan
                 </div>
             </div>
 

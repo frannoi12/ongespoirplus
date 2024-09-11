@@ -111,12 +111,14 @@
 
 
                         <!-- Bouton pour ajouter un ménage -->
-                        <a href="{{ route('menages.create') }}">
-                            <button style="background: green"
-                                class="bg-green-600 hover:bg-green-500 text-white text-sm px-3 py-2 rounded-md">
-                                Ajouter
-                            </button>
-                        </a>
+                        @hasanyrole('Admin|personnel')
+                            <a href="{{ route('menages.create') }}">
+                                <button style="background: green"
+                                    class="bg-green-600 hover:bg-green-500 text-white text-sm px-3 py-2 rounded-md">
+                                    Ajouter
+                                </button>
+                            </a>
+                        @endhasanyrole
                     </div>
                 </div>
 
@@ -127,7 +129,8 @@
                             <form action="{{ route('menages.index') }}" method="get" class="w-full flex">
                                 <input type="text" name="search" placeholder="Rechercher"
                                     class="flex-grow rounded-md border border-gray-300 px-3 py-2 mr-2">
-                                <button type="submit" class="bg-green-600 hover:bg-green-500 text-white text-sm px-3 py-2 rounded-md">
+                                <button type="submit"
+                                    class="bg-green-600 hover:bg-green-500 text-white text-sm px-3 py-2 rounded-md">
                                     Rechercher
                                 </button>
                             </form>
@@ -162,13 +165,15 @@
                                         <td class="py-3 px-6">{{ $menage->service->type_service }}</td>
                                         <td class="py-3 px-6">{{ $menage->date_abonnement }}</td>
                                         <td class="py-3 px-6">
-                                            <a href="{{ route('menages.edit', $menage->id) }}">
-                                                <button
-                                                    class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">Editer</button>
-                                            </a>
+                                            @can('menage_update')
+                                                <a href="{{ route('menages.edit', $menage->id) }}">
+                                                    <button
+                                                        class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">Editer</button>
+                                                </a>
+                                            @endcan
                                             <a href="{{ route('menages.show', $menage->id) }}">
                                                 <button
-                                                    class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Consulter</button>
+                                                    class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Voir Plus</button>
                                             </a>
                                             @if ($menage->paiements->isEmpty())
                                                 <a href="{{ route('paiements.create', $menage->id) }}">
@@ -177,13 +182,15 @@
                                                     </button>
                                                 </a>
                                             @endif
-                                            <form action="{{ route('menages.destroy', $menage->id) }}" method="POST"
-                                                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce ménage ?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button
-                                                    class="bg-red-600 hover:bg-red-500 text-white text-sm px-3 py-2 rounded-md">Supprimer</button>
-                                            </form>
+                                            @can('menage_delete')
+                                                <form action="{{ route('menages.destroy', $menage->id) }}" method="POST"
+                                                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce ménage ?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button
+                                                        class="bg-red-600 hover:bg-red-500 text-white text-sm px-3 py-2 rounded-md">Supprimer</button>
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @empty

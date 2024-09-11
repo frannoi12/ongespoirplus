@@ -16,19 +16,22 @@
                     <h3 class="text-2xl font-bold mb-4">{{ $tariff->designation }}</h3>
 
                     <div class="flex space-x-4">
-                        <a href="{{ route('tariffs.edit', $tariff->id) }}">
-                            <button class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-4 py-2 rounded-md">
-                                Modifier
-                            </button>
-                        </a>
+                        @can('tariff_create')
+                            <a href="{{ route('tariffs.edit', $tariff->id) }}">
+                                <button class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-4 py-2 rounded-md">
+                                    Modifier
+                                </button>
+                            </a>
 
-                        <form action="{{ route('tariffs.destroy', $tariff->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce tarif ?');">
-                            @csrf
-                            @method('DELETE')
-                            <button class="bg-red-600 hover:bg-red-500 text-white text-sm px-4 py-2 rounded-md">
-                                Supprimer
-                            </button>
-                        </form>
+                            <form action="{{ route('tariffs.destroy', $tariff->id) }}" method="POST"
+                                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce tarif ?');">
+                                @csrf
+                                @method('DELETE')
+                                <button class="bg-red-600 hover:bg-red-500 text-white text-sm px-4 py-2 rounded-md">
+                                    Supprimer
+                                </button>
+                            </form>
+                        @endcan
 
                         <a href="{{ route('tariffs.index') }}">
                             <button class="bg-gray-600 hover:bg-gray-500 text-white text-sm px-4 py-2 rounded-md">

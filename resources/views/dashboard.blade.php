@@ -136,7 +136,7 @@
                     <div class="flex flex-col  justify-content items-center">
                         @role('client')
                             @if (auth()->user()->menage->paiements->isEmpty())
-                                <a href="{{ route('paiements.create', auth()->user()->menage->id) }}">
+                                <a href="{{ route('paiements.createEnLigne', auth()->user()->menage->id) }}">
                                     <button class="bg-green-600 hover:bg-green-500 text-white text-sm px-3 py-2 rounded-md">
                                         payer
                                     </button>
