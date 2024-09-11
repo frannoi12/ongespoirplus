@@ -71,7 +71,13 @@ class PermissionSeeder extends Seeder
             "politique_delete",
             "politique_show",
             "politique_index",
-            ""
+
+            //Services
+            "service_create",
+            "service_update",
+            "service_delete",
+            "service_show",
+            "service_index",
         );
 
         foreach($permissions as $permission){
