@@ -77,7 +77,11 @@
                                         <tr>
                                             <td class="border px-4 py-2">Date de prise d'effet</td>
                                             <td class="border px-4 py-2">
-                                                {{ Auth::user()->menage->date_prise_effet }}
+                                                @if (!auth()->user()->menage->paiements->isEmpty())
+                                                    {{ auth()->user()->menage->date_prise_effet }}
+                                                @else
+                                                    Payer votre adhésion pour la prise d'effet
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -129,6 +133,17 @@
                             <p>Vous n'êtes pas connecté.</p>
                         @endauth
                     </div>
+                    <div class="flex flex-col  justify-content items-center">
+                        @role('client')
+                            @if (auth()->user()->menage->paiements->isEmpty())
+                                <a href="{{ route('paiements.create', auth()->user()->menage->id) }}">
+                                    <button class="bg-green-600 hover:bg-green-500 text-white text-sm px-3 py-2 rounded-md">
+                                        payer
+                                    </button>
+                                </a>
+                            @endif
+                        @endrole
+                    </div>
                 </div>
             </div>
         </div>
@@ -137,8 +152,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Coordonnées du ménage
-            var latitude = {{ $latitude ?? ""}};
-            var longitude = {{ $longitude ?? ""}};
+            var latitude = {{ $latitude ?? '' }};
+            var longitude = {{ $longitude ?? '' }};
 
             // Initialisation de la carte
             var map = L.map('map').setView([latitude, longitude], 18);

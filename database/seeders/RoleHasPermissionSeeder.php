@@ -25,7 +25,7 @@ class RoleHasPermissionSeeder extends Seeder
 
         // $Agent_terrain=$roles[1];
         // $menage = $roles[2];
-        $comptable = $roles[2];
+        $personnel = $roles[2];
         // $secretaire=$roles[3];
         // $Volontaire=$roles[4];
         // dd($menage);
@@ -34,10 +34,22 @@ class RoleHasPermissionSeeder extends Seeder
             "user_create",
             "user_update",
             "user_delete",
+            "personnel_create",
+            "personnel_update",
+            "personnel_delete",
+            "menage_delete",
+            "secteur_delete",
+            "liquide_delete",
+            "tarif_create",
+            "tarif_update",
+            "tarif_delete",
+            "politique_create",
+            "politique_update",
+            "politique_delete",
         ];
         foreach ($permissions as $p) {
             if (!(in_array($p, $rollbak_permissions_client))) {
-                $comptable->syncPermissions($p);
+                $personnel->syncPermissions($p);
             }
         }
     }

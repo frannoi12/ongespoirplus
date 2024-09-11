@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role as ModelsRole;
 
 class RegisteredUserController extends Controller
 {
@@ -39,6 +40,9 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
+        $roles = ModelsRole::all();
+
         $request->validate([
             'name' => ['required', 'string', 'max:255','regex:/^[^0-9]*$/'],
             'prenom' => 'required|string|max:255|regex:/^[^0-9]*$/',
@@ -114,9 +118,10 @@ class RegisteredUserController extends Controller
             ]);
         }
 
-        $menageId = $menage->id; // Récupérer l'ID du nouveau ménage créé
+        // $menageId = $menage->id; // Récupérer l'ID du nouveau ménage créé
         // dd($id);
 
+        $menage->user->assignRole($roles[1]);
 
         event(new Registered($user));
 

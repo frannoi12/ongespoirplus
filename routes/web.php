@@ -35,6 +35,17 @@ Route::get('auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->na
 Route::get('auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback']);
 
 Route::middleware('auth')->group(function () {
+    // Route::get('/menage', [MenageExportController::class, 'exportPdf'])->name('menages.pdf');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+
+
+Route::middleware(['auth','admin'])->group(function(){
     Route::resource('personnels', PersonnelController::class);
     Route::resource('menages', MenageController::class);
     Route::resource('ordures', OrdureController::class);
@@ -68,19 +79,11 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/menage', [MenageExportController::class, 'export'])->name('menages.export');
-    // Route::get('/menage', [MenageExportController::class, 'exportPdf'])->name('menages.pdf');
-
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
 
+Route::middleware(['auth','client'])->group(function(){
 
-
-Route::middleware('client')->group(function(){
     Route::post('/paiements/store', [PaiementController::class, 'store'])->name('paiements.store');
 
     Route::get('/paiements/create/{menageId}', [PaiementController::class, 'createMenageLigne'])->name('paiements.create');

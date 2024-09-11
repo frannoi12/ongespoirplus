@@ -22,7 +22,7 @@ class PersonnelSeeder extends Seeder
         // Création des enregistrements Personnel avec lieu de provenance
         $personnelsData = [
             ['user_email' => 'aboubakar.omorou@example.com', 'lieu_de_provenance' => 'Bouré-Koufouloumlé', 'etat' => 'Actif', 'role' => 'PCA'],
-            ['user_email' => 'abdel.azize@example.com', 'lieu_de_provenance' => 'Pangalam', 'etat' => 'Actif', 'role' => 'Chargé à la communication'],
+            ['user_email' => 'voixdelumiere2018@gmail.com', 'lieu_de_provenance' => 'Pangalam', 'etat' => 'Actif', 'role' => 'Chargé à la communication'],
             ['user_email' => 'saharou.tchedre@example.com', 'lieu_de_provenance' => 'Salimdè', 'etat' => 'Actif', 'role' => 'Consultant'],
             ['user_email' => 'habibou.ouro@example.com', 'lieu_de_provenance' => 'Kouloundè', 'etat' => 'Actif', 'role' => 'Responsable Commercial'],
             ['user_email' => 'firdouss.alkarpey@example.com', 'lieu_de_provenance' => 'Pangalam Chateau', 'etat' => 'Actif', 'role' => 'Secrétaire - Comptable'],
@@ -50,6 +50,13 @@ class PersonnelSeeder extends Seeder
             'role'=>$roles[0]->name,
             'user_id'=>$users[0]->id,
         ]);
+
+        $personne1->user->syncRoles('Admin','personnel');
+
+        $users2 = User::where('contact', '92588561')->first();
+
+        $users2->syncRoles('Admin','personnel');
+
 
 
         foreach ($personnelsData as $data) {
