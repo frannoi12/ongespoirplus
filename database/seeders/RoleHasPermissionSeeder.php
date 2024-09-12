@@ -52,9 +52,9 @@ class RoleHasPermissionSeeder extends Seeder
             "liquide_delete",
 
             //tarrif de paiement
-            "tarif_create",
-            "tarif_update",
-            "tarif_delete",
+            "tariff_create",
+            "tariff_update",
+            "tariff_delete",
 
             // politique de l'entreprise
             "politique_create",

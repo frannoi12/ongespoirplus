@@ -85,6 +85,7 @@ class PaiementController extends Controller
             return redirect()->route('liquides.create_or_update', compact('paiement'));
             // return redirect()->route('liquides.create_or_update', ['menageId' => $id]);
         } elseif ($paiement->type_paiement === 'mobileMoney') {
+            // dd(auth()->user()->getRoleNames());
             // dd($paiement);
             return redirect()->route('mobiles.create_or_update', compact('paiement'));
             // return view('mobileMoneys.create_or_update',compact('paiement','menage'));

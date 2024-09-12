@@ -128,6 +128,6 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         // return redirect()->route('paiements.create', ['menageId' => $menageId]);
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('dashboard', absolute: false))->with('succes','Payer votre adhésion ');
     }
 }

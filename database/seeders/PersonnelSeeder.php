@@ -47,7 +47,7 @@ class PersonnelSeeder extends Seeder
         $personne1=Personnel::create([
             'lieu_de_provenance' => 'Bamadolo',
             'etat'=>'Actif',
-            'role'=>$roles[0]->name,
+            'role'=>'Informaticien',
             'user_id'=>$users[0]->id,
         ]);
 

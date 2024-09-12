@@ -16,9 +16,11 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->hasRole('personnel')) {
+        if (Auth::check() && Auth::user()->hasRole('Admin')) {
             return $next($request);
         }
-        return redirect('/'); // Redirigez l'utilisateur non autorisé
+        else{
+            return redirect('/'); // Redirigez l'utilisateur non autorisé
+       }
     }
 }

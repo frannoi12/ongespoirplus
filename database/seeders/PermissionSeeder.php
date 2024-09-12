@@ -52,11 +52,11 @@ class PermissionSeeder extends Seeder
             "tourne_index",
 
             //tarif
-            "tarif_create",
-            "tarif_update",
-            "tarif_delete",
-            "tarif_show",
-            "tarif_index",
+            "tariff_create",
+            "tariff_update",
+            "tariff_delete",
+            "tariff_show",
+            "tariff_index",
 
             //liquide
             "liquide_create",
