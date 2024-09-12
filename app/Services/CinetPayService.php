@@ -35,7 +35,7 @@ class CinetPayService
             'customer_name' => $customerName,
             'return_url' => route('cinetpay.callback'),
             'notify_url' => route('cinetpay.notify'),
-            'logo_url' => 'https://postimg.cc/wtV67GJ7',
+            'logo_url' => 'https://i.postimg.cc/50cjkc2q/espoirplus.png',
         ];
 
         try {

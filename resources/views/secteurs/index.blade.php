@@ -18,12 +18,14 @@
                     {{ __('Liste des secteurs') }}
                 </div>
                 <div>
-                    <a href="{{ route('secteurs.create') }}">
-                        <button style="background: green"
-                            class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">
-                            Ajouter
-                        </button>
-                    </a>
+                    @can('secteur_create')
+                        <a href="{{ route('secteurs.create') }}">
+                            <button style="background: green"
+                                class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">
+                                Ajouter
+                            </button>
+                        </a>
+                    @endcan
                 </div>
             </div>
             <div
@@ -34,7 +36,8 @@
                             <form action="{{ route('secteurs.index') }}" method="get" class="w-full flex">
                                 <input type="text" name="search" placeholder="Rechercher"
                                     class="flex-grow rounded-md border border-gray-300 px-3 py-2 mr-2">
-                                <button type="submit" class="bg-green-600 hover:bg-green-500 text-white text-sm px-3 py-2 rounded-md">
+                                <button type="submit"
+                                    class="bg-green-600 hover:bg-green-500 text-white text-sm px-3 py-2 rounded-md">
                                     Rechercher
                                 </button>
                             </form>
