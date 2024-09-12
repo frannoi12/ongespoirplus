@@ -21,6 +21,12 @@ class PaiementController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+    public function createMenageLigne($id){
+        $menage = Menage::findOrFail($id);
+        return view('paiements.createEnLigne', compact('menage'))->with('succes', 'Processus de paiement en cours'); // Assure-toi que cette vue existe et affiche un formulaire de paiement
+    }
+
     public function create($id)
     {
         // dd($id);
@@ -79,6 +85,7 @@ class PaiementController extends Controller
             return redirect()->route('liquides.create_or_update', compact('paiement'));
             // return redirect()->route('liquides.create_or_update', ['menageId' => $id]);
         } elseif ($paiement->type_paiement === 'mobileMoney') {
+            // dd(auth()->user()->getRoleNames());
             // dd($paiement);
             return redirect()->route('mobiles.create_or_update', compact('paiement'));
             // return view('mobileMoneys.create_or_update',compact('paiement','menage'));
@@ -87,6 +94,12 @@ class PaiementController extends Controller
 
         // return redirect()->route('paiements.create')->with('status', 'Paiement enregistré avec succès');
     }
+
+
+    public function storeLigne(Request $request){
+
+    }
+
 
     /**
      * Gère les paiements en liquide.

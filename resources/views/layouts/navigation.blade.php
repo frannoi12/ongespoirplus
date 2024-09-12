@@ -4,6 +4,8 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
+                {{-- @if (auth()->user()->hasRole('Admin'))
+                @endif --}}
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
@@ -16,36 +18,38 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('personnels.index')" :active="request()->routeIs('personnels.index')">
-                        {{ __('Personnels') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('menages.index')" :active="request()->routeIs('menages.index')">
-                        {{ __('Menages') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('politiques.index')" :active="request()->routeIs('politiques.index')">
-                        {{ __('Politiques') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('tariffs.index')" :active="request()->routeIs('tariffs.index')">
-                        {{ __('Tariffs') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('services.index')" :active="request()->routeIs('services.index')">
-                        {{ __('Service') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('secteurs.index')" :active="request()->routeIs('secteurs.index')">
-                        {{ __('Secteur') }}
-                    </x-nav-link>
-                </div>
+                @if (auth()->user()->hasRole('Admin') || auth()->user()->hasRole('personnel'))
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('personnels.index')" :active="request()->routeIs('personnels.index')">
+                            {{ __('Personnels') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('menages.index')" :active="request()->routeIs('menages.index')">
+                            {{ __('Menages') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('politiques.index')" :active="request()->routeIs('politiques.index')">
+                            {{ __('Politiques') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('tariffs.index')" :active="request()->routeIs('tariffs.index')">
+                            {{ __('Tariffs') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('services.index')" :active="request()->routeIs('services.index')">
+                            {{ __('Organisme') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('secteurs.index')" :active="request()->routeIs('secteurs.index')">
+                            {{ __('Secteur') }}
+                        </x-nav-link>
+                    </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->

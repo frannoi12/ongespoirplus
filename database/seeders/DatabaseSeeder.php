@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             RoleSeeder::class,
+            PermissionSeeder::class,
+            RoleHasPermissionSeeder::class,
             UserSeeder::class,
             PersonnelSeeder::class,
             SecteurSeeder::class,
@@ -29,8 +31,6 @@ class DatabaseSeeder extends Seeder
             PolitiqueSeeder::class,
             TariffSeeder::class,
             // MenageSeeder::class,
-            PermissionSeeder::class,
-            RoleHasPermissionSeeder::class,
         ]);
     }
 }

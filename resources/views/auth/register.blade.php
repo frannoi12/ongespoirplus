@@ -62,11 +62,11 @@
             </legend> --}}
 
         <div class="mt-4">
-            <x-input-label for="service_id" :value="__('Service')" />
+            <x-input-label for="service_id" :value="__('Organisme')" />
             <select id="service_id" name="service_id"
                 class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                 <option disabled {{ !isset($menage) || !isset($menage->service_id) ? 'selected' : '' }}>
-                    Sélectionnez un service</option>
+                    Sélectionnez un organisme</option>
                 @foreach ($services as $service)
                     <option value="{{ $service->id }}"
                         {{ isset($menage) && $menage->service_id == $service->id ? 'selected' : '' }}>

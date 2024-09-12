@@ -105,7 +105,7 @@
                         <div class="flex items-center justify-end mt-4">
                             <x-primary-button class="ml-4">
                                 {{ isset($mobile) ? __('Modifier le Paiement en ligne') : __('Ajouter le Paiement en Ligne') }}
-                            </x-primary-button>
+                            </x-primary-button> 
                         </div>
                     </form>
                 </div>
