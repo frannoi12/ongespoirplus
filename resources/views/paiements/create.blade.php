@@ -19,48 +19,51 @@
 
                     <!-- Intégrer le formulaire de paiement ici -->
                     {{-- <form action="{{ route('cinetpay.process', $menage->id) }}" method="POST"> --}}
-                        @csrf
-                        <!-- Ajouter ici les détails spécifiques du paiement -->
-                        {{-- <x-primary-button>
+                    @csrf
+                    <!-- Ajouter ici les détails spécifiques du paiement -->
+                    {{-- <x-primary-button>
                             {{ __('Payer') }}
                         </x-primary-button>
                     </form> --}}
 
 
                     @if ($errors->any())
-                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
+                            role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
 
                     <!-- Conteneur des boutons de paiement -->
                     <div class="mt-6 flex space-x-4">
-                        <!-- Bouton pour paiement en liquide -->
-                        <form action="{{ route('paiements.store', $menage->id) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="payment_method" value="liquide">
-                            <input type="hidden" name="menage_id" value="{{ $menage->id }}">
-                            <input type="hidden" name="personnel_id" value="{{ Auth::user()->id }}">
-                            <x-primary-button>
-                                {{ __('Payer en liquide') }}
-                            </x-primary-button>
-                        </form>
+                        @hasanyrole('Admin|personnel')
+                            <!-- Bouton pour paiement en liquide -->
+                            <form action="{{ route('paiements.store', $menage->id) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="payment_method" value="liquide">
+                                <input type="hidden" name="menage_id" value="{{ $menage->id }}">
+                                <input type="hidden" name="personnel_id" value="{{ Auth::user()->id }}">
+                                <x-primary-button>
+                                    {{ __('Payer en liquide') }}
+                                </x-primary-button>
+                            </form>
 
-                        <!-- Bouton pour paiement en ligne -->
-                        <form action="{{ route('paiements.store', $menage->id) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="payment_method" value="mobileMoney">
-                            <input type="hidden" name="menage_id" value="{{ $menage->id }}">
-                            <input type="hidden" name="personnel_id" value="{{ Auth::user()->id }}">
-                            <x-primary-button>
-                                {{ __('Payer en ligne') }}
-                            </x-primary-button>
-                        </form>
+                            <!-- Bouton pour paiement en ligne -->
+                            <form action="{{ route('paiements.store', $menage->id) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="payment_method" value="mobileMoney">
+                                <input type="hidden" name="menage_id" value="{{ $menage->id }}">
+                                <input type="hidden" name="personnel_id" value="{{ Auth::user()->id }}">
+                                <x-primary-button>
+                                    {{ __('Payer en ligne') }}
+                                </x-primary-button>
+                            </form>
+                        @endhasanyrole
                     </div>
 
 
