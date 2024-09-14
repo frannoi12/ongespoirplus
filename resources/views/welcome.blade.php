@@ -82,7 +82,7 @@
 <div id="slideshow" class="relative w-full h-screen overflow-hidden" style="background-color: rgba(255, 255, 255, 0.1);">
     <!-- Diapositive 1 -->
     <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out"
-        style="background-image: url('{{ asset('images/hands-sorting-recyclables-into-labeled-bins-ecofriendly-theme_1039005-13948.jpg') }}');">
+        style="background-image: url('{{ asset('images/fad.jpeg') }}');">
         <!-- Texte explicatif sur l'hygiène -->
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
@@ -93,7 +93,7 @@
 
     <!-- Diapositive 2 -->
     <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out"
-        style="background-image: url('{{ asset('images/welcome.png') }}');">
+        style="background-image: url('{{ asset('images/fran.jpeg') }}');">
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
                 Le respect des règles d'hygiène contribue à un environnement sain et propre.
@@ -143,7 +143,7 @@
 
     <!-- Diapositive 7 -->
     <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out"
-        style="background-image: url('{{ asset('images/IMG-20200529-WA0146-768x432.jpg') }}');">
+        style="background-image: url('{{ asset('images/fille.jpg') }}');">
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
                 La propreté commence par des gestes simples d'hygiène quotidienne.
