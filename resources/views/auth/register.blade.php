@@ -1,8 +1,12 @@
 <x-guest-layout>
     <!-- Ajout de l'image de fond avec Tailwind CSS -->
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+    
+>>>>>>> 0aa5346 (font image de connexion et d'inscription)
     <form method="POST" action="{{ route('register') }}" id="menage-form">
         @csrf
         <!-- Name -->
