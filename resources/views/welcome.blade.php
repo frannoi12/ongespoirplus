@@ -101,6 +101,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         style="background-image: url('{{ asset('images/fad.jpeg') }}');">
 =======
         style="background-image: url('{{ asset('images/hands-sorting-recyclables-into-labeled-bins-ecofriendly-theme_1039005-13948.jpg') }}');">
@@ -111,6 +112,9 @@
 =======
         style="background-image: url('{{ asset('images/hands-sorting-recyclables-into-labeled-bins-ecofriendly-theme_1039005-13948.jpg') }}');">
 >>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
+=======
+        style="background-image: url('{{ asset('images/fad.jpeg') }}');">
+>>>>>>> 2ffe806 (image perso)
         <!-- Texte explicatif sur l'hygiène -->
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
@@ -124,6 +128,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         style="background-image: url('{{ asset('images/fran.jpeg') }}');">
 =======
         style="background-image: url('{{ asset('images/welcome.png') }}');">
@@ -134,6 +139,9 @@
 =======
         style="background-image: url('{{ asset('images/welcome.png') }}');">
 >>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
+=======
+        style="background-image: url('{{ asset('images/fran.jpeg') }}');">
+>>>>>>> 2ffe806 (image perso)
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
                 Le respect des règles d'hygiène contribue à un environnement sain et propre.
@@ -186,6 +194,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         style="background-image: url('{{ asset('images/fille.jpg') }}');">
 =======
         style="background-image: url('{{ asset('images/IMG-20200529-WA0146-768x432.jpg') }}');">
@@ -196,6 +205,9 @@
 =======
         style="background-image: url('{{ asset('images/IMG-20200529-WA0146-768x432.jpg') }}');">
 >>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
+=======
+        style="background-image: url('{{ asset('images/fille.jpg') }}');">
+>>>>>>> 2ffe806 (image perso)
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
                 La propreté commence par des gestes simples d'hygiène quotidienne.
