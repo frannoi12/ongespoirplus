@@ -5,6 +5,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     <form method="POST" action="{{ route('register') }}" id="menage-form">
         @csrf
@@ -33,8 +34,13 @@
 >>>>>>> 320fdfb (font image de connexion et d'inscription)
 =======
 >>>>>>> c620c38 (login et register)
+=======
+>>>>>>> 6c1649d (font image de connexion et d'inscription)
 
 
+=======
+
+>>>>>>> 0aa5346 (font image de connexion et d'inscription)
     <form method="POST" action="{{ route('register') }}" id="menage-form">
         @csrf
         <!-- Name -->
