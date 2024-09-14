@@ -59,12 +59,14 @@
                         </div>
                     </fieldset>
 
-                    <div class="flex justify-end">
-                        <a href="{{ route('personnels.edit', $personnel->id) }}"
-                            class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">
-                            Modifier
-                        </a>
-                    </div>
+                    @can('personnel_update')
+                        <div class="flex justify-end">
+                            <a href="{{ route('personnels.edit', $personnel->id) }}"
+                                class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">
+                                Modifier
+                            </a>
+                        </div>
+                    @endcan
                     <div class="flex justify-begin">
                         <a href="{{ route('personnels.index', $personnel->id) }}"
                             class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">

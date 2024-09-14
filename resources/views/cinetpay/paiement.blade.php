@@ -18,18 +18,18 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('payment.process') }}">
+                    <form method="POST" action="{{ route('cinetpay.process') }}">
                         @csrf
 
                         <!-- Montant -->
                         <div class="mt-4">
-                            <x-label for="amount" :value="__('Montant')" />
-                            <x-input id="amount" class="block mt-1 w-full" type="number" name="amount" value="1000" required autofocus />
+                            <label for="amount" :value="__('Montant')" />
+                            <input id="amount" class="block mt-1 w-full" type="number" name="amount" value="{{$paiement->mobileMoney->montant ?? 1000}}" required autofocus />
                         </div>
 
                         <!-- Devise -->
                         <div class="mt-4">
-                            <x-label for="currency" :value="__('Devise')" />
+                            <label for="currency" :value="__('Devise')" />
                             <select id="currency" name="currency" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="XOF" selected>XOF</option>
                                 <option value="XAF">XAF</option>
@@ -40,9 +40,9 @@
 
                         <!-- Bouton de soumission -->
                         <div class="mt-6 text-center">
-                            <x-button class="bg-green-500 hover:bg-green-700">
+                            <button class="bg-green-500 hover:bg-green-700">
                                 {{ __('Effectuer le paiement') }}
-                            </x-button>
+                            </button>
                         </div>
                     </form>
                 </div>

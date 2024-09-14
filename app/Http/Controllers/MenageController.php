@@ -10,8 +10,12 @@ use App\Models\Secteur;
 use App\Models\Service;
 use App\Models\Tariff;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class MenageController extends Controller
@@ -65,18 +69,20 @@ class MenageController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @throws \Illuminate\Validation\ValidationException
+     *
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
 
         // dd($request);
 
         $request->validate([
-            'name'                 => 'required|string|max:255|regex:/^[^0-9]*$/',
-            'prenom'               => 'required|string|max:255|regex:/^[^0-9]*$/',
-            'email'                => 'required|email',
-            'contact' => 'required|string|min:8|unique:users,contact',
-            'password'             => 'required|string|min:8|confirmed',
+            'name' => ['required', 'string', 'max:255','regex:/^[^0-9]*$/'],
+            'prenom' => 'required|string|max:255|regex:/^[^0-9]*$/',
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'contact' => ['required', 'regex:/^(9[0-36-9]|7[0-36-9])\d{6}$/'],
+            'password' => 'required|string|min:8|confirmed',
             'politique_acceptance' => 'required|boolean', // Accepter 1 ou true comme valeurs valides
             'latitude' => 'required|numeric|between:-90,90', // Valider la latitude
             'longitude' => 'required|numeric|between:-180,180', // Valider la longitude
@@ -92,6 +98,9 @@ class MenageController extends Controller
                 'password' => $request->filled('password') ? Hash::make($request->input('password')) : null,
             ]
         );
+
+
+
         $secteur = Secteur::findOrFail($request->secteur_id);
         $service = Service::findOrFail($request->service_id);
 
@@ -148,10 +157,19 @@ class MenageController extends Controller
             ]);
         }
 
+        if(Auth::user()->personnel){
+            event(new Registered($user));
+            return redirect()->route('menages.index')->with('success', 'Ménage créé avec succès');
+        }else{
+            event(new Registered($user));
+            Auth::login($user);
+            return redirect(route('dashboard', compact('user')));
+        }
+        // event(new Registered($user));
+
 
 
         // return view('paiements.create',compact('menage'))->with('succes','Menage en cours de création');
-        return redirect()->route('menages.index')->with('success', 'Ménage créé avec succès');
     }
 
 
@@ -187,8 +205,8 @@ class MenageController extends Controller
     {
         // Validation des données
         $request->validate([
-            'name'                 => 'required|string|max:255|regex:/^[^0-9]*$/',
-            'prenom'               => 'required|string|max:255|regex:/^[^0-9]*$/',
+            'name'                 => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
+            'prenom'               => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
             'email'                => 'required|string|email|max:255|unique:users,email,' . $menage->user->id,
             'contact'              => 'required|string|min:8',
             'password'             => 'nullable|string|min:8|confirmed',
@@ -264,14 +282,14 @@ class MenageController extends Controller
         // dd($user->personnel);
         // Vérifier si l'utilisateur est lié uniquement à un ménage
         // if ($user->personnel) {
-            // Si l'utilisateur est également un personnel, ne pas supprimer le user
-            // $menage->paiements()->delete();
-            // $menage->delete();
+        // Si l'utilisateur est également un personnel, ne pas supprimer le user
+        // $menage->paiements()->delete();
+        // $menage->delete();
         // } else {
-            // Sinon, supprimer le user et le ménage
-            // $menage->paiements->delete();
-            // $menage->delete();
-            // $user->delete();
+        // Sinon, supprimer le user et le ménage
+        // $menage->paiements->delete();
+        // $menage->delete();
+        // $user->delete();
         // }
 
         return redirect()->route('menages.index')->with('success', 'Ménage supprimé avec succès');

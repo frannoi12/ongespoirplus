@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePolitiqueRequest;
-use App\Http\Requests\UpdatePolitiqueRequest;
+// use App\Http\Requests\StorePolitiqueRequest;
+// use App\Http\Requests\UpdatePolitiqueRequest;
 use App\Models\Politique;
 use App\Models\Personnel;
 use Illuminate\Http\Request;
@@ -46,7 +46,7 @@ class PolitiqueController extends Controller
     {
         // Créer une nouvelle politique à partir des données du formulaire
         $request->validate([
-            'description' => 'required|string|max:1000|regex:/^[^0-9]*$/',
+            'description' => 'required|string|max:1000|regex:/^[\pL\s\-]+$/u',
             'personnel_id' => 'required|exists:personnels,id',
         ]);
 
@@ -85,7 +85,7 @@ class PolitiqueController extends Controller
             // Validation des données entrantes
     //dd($request);
     $request->validate([
-        'description' => 'required|string|max:1000|regex:/^[^0-9]*$/',
+        'description' => 'required|string|max:1000|regex:/^[\pL\s\-]+$/u',
         'personnel_id' => 'required|exists:personnels,id',
     ]);
 

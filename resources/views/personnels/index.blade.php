@@ -18,18 +18,30 @@
                     {{ __('Liste des personnels') }}
                 </div>
                 <div>
-                    <a href="{{ route('personnels.create') }}">
-                        <button style="background: green"
-                            class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">
-                            Ajouter
-                        </button>
-                    </a>
+                    @can('personnel_create')
+                        <a href="{{ route('personnels.create') }}">
+                            <button style="background: green"
+                                class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">
+                                Ajouter
+                            </button>
+                        </a>
+                    @endcan
                 </div>
             </div>
             <div
                 class="bg-white flex items-center justify-between mx-6 px-6 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 w-full space-y-6">
-                    <div class="w-full">
+                    <div class="w-full flex items-center">
+                        <form action="{{ route('personnels.index') }}" method="get" class="w-full flex">
+                            <input type="text" name="search" placeholder="Rechercher"
+                                class="flex-grow rounded-md border border-gray-300 px-3 py-2 mr-2">
+                            <button type="submit"
+                                class="bg-green-600 hover:bg-green-500 text-white text-sm px-3 py-2 rounded-md">
+                                Rechercher
+                            </button>
+                        </form>
+                    </div>
+                    {{-- <div class="w-full flex items-center">
                         <form action="{{ route('personnels.index') }}" method="get">
                             <input type="text" name="search" placeholder="Rechercher"
                                 class="w-2/3 rounded-md border border-gray-300">
@@ -38,7 +50,7 @@
                                 Rechercher
                             </button>
                         </form>
-                    </div>
+                    </div> --}}
                     <table class="w-full text-left">
                         <thead class="text-lg font-semibold bg-gray-300">
                             <th class="py-3 px-6">Nom</th>
@@ -60,8 +72,8 @@
                                         {{ $personnel->user->prenom }}
                                     </td>
                                     {{-- <td class="py-3 px-6">
-                                        {{ $personnel->email }}
-                                    </td> --}}
+                                    {{ $personnel->email }}
+                                </td> --}}
                                     <td class="py-3 px-6">
                                         {{ $personnel->user->contact }}
                                     </td>
@@ -75,23 +87,29 @@
                                         {{ $personnel->role ?? ' ' }}
                                     </td>
                                     <td class="py-3 px-6">
-                                        <a href="{{ route('personnels.edit', $personnel->id) }}">
-                                            <button
-                                                class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">Editer</button>
-                                        </a>
+                                        @can('personnel_update')
+                                            <a href="{{ route('personnels.edit', $personnel->id) }}">
+                                                <button
+                                                    class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">Editer</button>
+                                            </a>
+                                        @endcan
+
                                         <a href="{{ route('personnels.show', $personnel->id) }}">
                                             @csrf
                                             <button
-                                                class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Consulter</button>
+                                                class="bg-yellow-600 hover:bg-yellow-500 text-white text-sm px-3 py-2 rounded-md">Voir
+                                                Plus</button>
                                         </a>
-                                        <form action="{{ route('personnels.destroy', $personnel->id) }}"
-                                            method="POST"
-                                            onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel ?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button
-                                                class="bg-red-600 hover:bg-red-500 text-white text-sm px-3 py-2 rounded-md">Supprimer</button>
-                                        </form>
+
+                                        @can('personnel_delete')
+                                            <form action="{{ route('personnels.destroy', $personnel->id) }}" method="POST"
+                                                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel ?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button
+                                                    class="bg-red-600 hover:bg-red-500 text-white text-sm px-3 py-2 rounded-md">Supprimer</button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty
@@ -99,7 +117,7 @@
                             @endforelse
                         </tbody>
                     </table>
-                    <div>
+                    <div class="w-full flex justify-center">
                         {{ $personnels->links() }}
                     </div>
                 </div>

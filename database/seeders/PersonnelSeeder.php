@@ -22,7 +22,7 @@ class PersonnelSeeder extends Seeder
         // Création des enregistrements Personnel avec lieu de provenance
         $personnelsData = [
             ['user_email' => 'aboubakar.omorou@example.com', 'lieu_de_provenance' => 'Bouré-Koufouloumlé', 'etat' => 'Actif', 'role' => 'PCA'],
-            ['user_email' => 'abdel.azize@example.com', 'lieu_de_provenance' => 'Pangalam', 'etat' => 'Actif', 'role' => 'Chargé à la communication'],
+            ['user_email' => 'voixdelumiere2018@gmail.com', 'lieu_de_provenance' => 'Pangalam', 'etat' => 'Actif', 'role' => 'Chargé à la communication'],
             ['user_email' => 'saharou.tchedre@example.com', 'lieu_de_provenance' => 'Salimdè', 'etat' => 'Actif', 'role' => 'Consultant'],
             ['user_email' => 'habibou.ouro@example.com', 'lieu_de_provenance' => 'Kouloundè', 'etat' => 'Actif', 'role' => 'Responsable Commercial'],
             ['user_email' => 'firdouss.alkarpey@example.com', 'lieu_de_provenance' => 'Pangalam Chateau', 'etat' => 'Actif', 'role' => 'Secrétaire - Comptable'],
@@ -47,24 +47,31 @@ class PersonnelSeeder extends Seeder
         $personne1=Personnel::create([
             'lieu_de_provenance' => 'Bamadolo',
             'etat'=>'Actif',
-            'role'=>$roles[0]->name,
+            'role'=>'Informaticien',
             'user_id'=>$users[0]->id,
         ]);
+
+        $personne1->user->syncRoles('Admin','personnel');
+
+        $users2 = User::where('contact', '92588561')->first();
+
+        $users2->syncRoles('Admin','personnel');
+
 
 
         foreach ($personnelsData as $data) {
             $user = $users->where('email', $data['user_email'])->first();
-            $role = $roles->where('name', $data['role'])->first();
+            // $role = $roles->where('name', $data['role'])->first();
 
-            if ($user && $role) {
+            if ($user) {
                 Personnel::create([
                     'user_id' => $user->id,
                     'lieu_de_provenance' => $data['lieu_de_provenance'],
                     'etat' => $data['etat'],
-                    'role' => $role->name,
+                    'role' => $data['role'],
                 ]);
 
-                $user->assignRole($role->name);
+                $user->assignRole($roles[2]);
             }
         }
 

@@ -6,6 +6,20 @@
     </x-slot>
 
     <div class="py-12">
+        @role('client')
+            <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                role="alert">
+                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                    <span class="font-medium">Payer votre adhésion ! </span>
+                </div>
+            </div>
+        @endrole
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 {{-- <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -17,6 +31,8 @@
                         @auth
                             <table class="table-auto w-full">
                                 <thead>
+
+                                    {{-- {{ dd(Auth::user())}} --}}
                                     {{-- <tr>
                                         <th class="px-4 py-2">Attribut</th>
                                         <th class="px-4 py-2">Valeur</th>
@@ -75,13 +91,53 @@
                                         <tr>
                                             <td class="border px-4 py-2">Date de prise d'effet</td>
                                             <td class="border px-4 py-2">
-                                                {{ Auth::user()->menage->date_prise_effet }}
+                                                @if (!auth()->user()->menage->paiements->isEmpty())
+                                                    {{ auth()->user()->menage->date_prise_effet }}
+                                                @else
+                                                    Payer votre adhésion pour la prise d'effet
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="border px-4 py-2">Secteur</td>
                                             <td class="border px-4 py-2">
                                                 {{ Auth::user()->menage->secteur->nomSecteur }}
+                                            </td>
+                                        </tr>
+                                        @php
+                                            // Décoder la localisation si elle est disponible
+                                            $localisation = isset(Auth::user()->menage->localisation)
+                                                ? json_decode(Auth::user()->menage->localisation, true)
+                                                : null;
+                                            $latitude = old('latitude', $localisation['latitude'] ?? 8.990347);
+                                            $longitude = old('longitude', $localisation['longitude'] ?? 1.130433);
+                                        @endphp
+
+                                        <tr>
+                                            {{-- {{dd(Auth::user()->menage->localisation)}} --}}
+                                            <td class="border px-4 py-2">Localisation</td>
+                                            <td class="border px-4 py-2">
+                                                <div class="mt-4" id="map" style="height: 400px; width: 100%;">
+                                                    <!-- Carte initialisée avec les coordonnées -->
+                                                    <x-maps-leaflet :centerPoint="[
+                                                        'lat' => $latitude,
+                                                        'lng' => $longitude,
+                                                    ]" :zoom="14">
+                                                    </x-maps-leaflet>
+
+                                                    <input type="hidden" id="longitude" name="longitude"
+                                                        value="{{ $longitude }}">
+                                                    <input type="hidden" id="latitude" name="latitude"
+                                                        value="{{ $latitude }}">
+
+                                                    @error('longitude')
+                                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                                    @enderror
+
+                                                    @error('latitude')
+                                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
                                             </td>
                                         </tr>
                                     @endif
@@ -91,8 +147,48 @@
                             <p>Vous n'êtes pas connecté.</p>
                         @endauth
                     </div>
+                    {{-- <div class="flex flex-col  justify-content items-center">
+                        @role('client')
+                            @if (auth()->user()->menage->paiements->isEmpty())
+                                <a href="{{ route('paiements.createEnLigne', auth()->user()->menage->id) }}">
+                                    <button class="bg-green-600 hover:bg-green-500 text-white text-sm px-3 py-2 rounded-md">
+                                        payer
+                                    </button>
+                                </a>
+                            @endif
+                        @endrole
+                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Coordonnées du ménage
+            var latitude = {{ $latitude ?? "" }};
+            var longitude = {{ $longitude  ?? ""}};
+
+            // Initialisation de la carte
+            var map = L.map('map').setView([latitude, longitude], 18);
+
+            // Ajout des tuiles OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Ajout d'un marqueur
+            L.marker([latitude, longitude]).addTo(map)
+                .bindPopup('Latitude: ' + latitude + '<br>Longitude: ' + longitude)
+                .openPopup();
+
+            // Désactivation des interactions avec la carte
+            map.dragging.disable();
+            map.touchZoom.disable();
+            map.doubleClickZoom.disable();
+            map.scrollWheelZoom.disable();
+            map.boxZoom.disable();
+            map.keyboard.disable();
+        });
+    </script>
 </x-app-layout>

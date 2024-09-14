@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Personnel;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -60,15 +62,19 @@ class PersonnelController extends Controller
             'role' => 'required|exists:roles,name|regex:/^[^0-9]*$/',
         ]);
 
-        $user = User::create([
+        $user = User::updateOrCreate([
             'name' => $request->name,
             'prenom' => $request->prenom,
             'email' => $request->email,
             'contact' => $request->contact,
             'password' => Hash::make($request->password),  // hash du mot de passe
         ]);
+        event(new Registered($user));
 
         $user->personnel()->create([
+        Auth::login($user);
+
+        $user->personnel()->updateOrCreate([
             'lieu_de_provenance' => $request->lieu_de_provenance,
             'etat' => $request->etat,
             'role' => $request->role,
@@ -106,6 +112,7 @@ class PersonnelController extends Controller
             'prenom' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $personnel->user_id,
             'contact' => 'required|string|min:8',
+            'lieu_de_provenance' => 'required|string|max:255|regex:/^[^0-9]*$/',
             'etat' => 'required|string|in:actif,inactif',
             'role' => 'required|string|max:255',
         ]);
@@ -118,6 +125,7 @@ class PersonnelController extends Controller
         ]);
 
         $personnel->update([
+            'lieu_de_provenance' => $request->lieu_de_provenance,
             'etat' => $request->etat,
             'role' => $request->role,
         ]);

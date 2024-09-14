@@ -17,17 +17,27 @@
                     <h3 class="text-lg font-semibold">{{ $service->code_service }}</h3>
                     <p>{{ $service->type_service }}</p>
                     <div class="mt-6">
-                        <a href="{{ route('services.edit', $service->id) }}">
-                            <button
-                                class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">Editer</button>
+                        <a href="{{ route('services.index') }}">
+                            <button class="bg-gray-600 hover:bg-gray-500 text-white text-sm px-4 py-2 rounded-md">
+                                Retour à la liste
+                            </button>
                         </a>
-                        <form action="{{ route('services.destroy', $service->id) }}" method="POST"
-                            onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce service ?');">
-                            @csrf
-                            @method('DELETE')
-                            <button
-                                class="bg-red-600 hover:bg-red-500 text-white text-sm px-3 py-2 rounded-md">Supprimer</button>
-                        </form>
+                        @can('service_update')
+                            <a href="{{ route('services.edit', $service->id) }}">
+                                <button
+                                    class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-3 py-2 rounded-md">Editer</button>
+                            </a>
+                        @endcan
+
+                        @can('service_delete')
+                            <form action="{{ route('services.destroy', $service->id) }}" method="POST"
+                                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce service ?');">
+                                @csrf
+                                @method('DELETE')
+                                <button
+                                    class="bg-red-600 hover:bg-red-500 text-white text-sm px-3 py-2 rounded-md">Supprimer</button>
+                            </form>
+                        @endcan
                     </div>
                 </div>
             </div>
