@@ -6,18 +6,12 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-
-
-
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 @if (session('success'))
                     <div class="alert alert-success bg-green-500 text-white p-4 rounded-md">
                         {{ session('success') }}
                     </div>
                 @endif
-
-
 
                 {{-- @if (session('success'))
                     <div class="bg-green-500 text-white p-4 rounded-md">

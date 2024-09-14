@@ -71,6 +71,7 @@ class PersonnelController extends Controller
         ]);
         event(new Registered($user));
 
+        $user->personnel()->create([
         Auth::login($user);
 
         $user->personnel()->updateOrCreate([
