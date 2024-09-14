@@ -25,18 +25,18 @@
         </style>
     </head>
     <body class="antialiased leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
-         <!--Nav-->
-        <nav id="header" class="fixed w-full z-50 top-0 text-white m-auto">
-            <div >
+        <!--Nav-->
+        <nav id="header" class="fixed w-full z-50 top-0 text-white m-auto" style="background-color: rgba(0, 0, 0, 0.7);">
+            <div>
                 @if (Route::has('login'))
                     <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                         @auth
-                            <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                            <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-300 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
                         @else
-                            <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Connexion</a>
-
+                            <a href="{{ route('login') }}" class="font-semibold text-gray-300 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Connexion</a>
+    
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">S'inscrire</a>
+                                <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-300 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">S'inscrire</a>
                             @endif
                         @endauth
                     </div>
@@ -46,7 +46,6 @@
                 <div class="pl-4 flex items-center">
                     <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
                         href="#">
-                        <!--Icon from: http://www.potlabicons.com/ -->
                         <img src="images/espoirplus.png" alt="logo" class="h-12 fill-current inline">
                     </a>
                 </div>
@@ -63,14 +62,14 @@
                     id="nav-content">
                     <ul class="list-reset lg:flex justify-end flex-1 items-center py-2 px-4">
                         <li class="mr-3">
-                            <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="#">Accueil</a>
+                            <a class="inline-block py-2 px-4 text-gray-300 font-bold no-underline" href="#">Accueil</a>
                         </li>
                         <li class="mr-3">
-                            <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
+                            <a class="inline-block text-gray-200 no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
                                 href="#Detail">Détail</a>
                         </li>
                         <li class="mr-3">
-                            <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
+                            <a class="inline-block text-gray-200 no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
                                 href="#Tarif">Tarif</a>
                         </li>
                     </ul>
@@ -78,7 +77,142 @@
             </div>
             <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
         </nav>
-        <!--Hero-->
+    
+       <!--Hero-->
+<div id="slideshow" class="relative w-full h-screen overflow-hidden" style="background-color: rgba(255, 255, 255, 0.1);">
+    <!-- Diapositive 1 -->
+    <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out"
+        style="background-image: url('{{ asset('images/hands-sorting-recyclables-into-labeled-bins-ecofriendly-theme_1039005-13948.jpg') }}');">
+        <!-- Texte explicatif sur l'hygiène -->
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
+                Respecter l'hygiène est essentiel pour préserver notre santé et l'environnement.
+            </div>
+        </div>
+    </div>
+
+    <!-- Diapositive 2 -->
+    <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out"
+        style="background-image: url('{{ asset('images/welcome.png') }}');">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
+                Le respect des règles d'hygiène contribue à un environnement sain et propre.
+            </div>
+        </div>
+    </div>
+
+    <!-- Diapositive 3 -->
+    <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out"
+        style="background-image: url('{{ asset('images/vibrant-recycling-station-promoting-effective-environmental-awareness_1039005-13843.jpg') }}');">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
+                Chaque geste compte pour maintenir la propreté et protéger la planète.
+            </div>
+        </div>
+    </div>
+
+    <!-- Diapositive 4 -->
+    <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out"
+        style="background-image: url('{{ asset('images/IMG-20200529-WA0132-768x432.jpg') }}');">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
+                Protégeons notre communauté en adoptant des pratiques hygiéniques.
+            </div>
+        </div>
+    </div>
+
+    <!-- Diapositive 5 -->
+    <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out"
+        style="background-image: url('{{ asset('images/IMG-20200529-WA0145-768x432.jpg') }}');">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
+                L'hygiène est un pilier fondamental pour une vie en bonne santé.
+            </div>
+        </div>
+    </div>
+
+    <!-- Diapositive 6 -->
+    <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out"
+        style="background-image: url('{{ asset('images/IMG-20220509-WA0015-768x576.jpg') }}');">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
+                Un environnement propre est le reflet d'une société en bonne santé.
+            </div>
+        </div>
+    </div>
+
+    <!-- Diapositive 7 -->
+    <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out"
+        style="background-image: url('{{ asset('images/IMG-20200529-WA0146-768x432.jpg') }}');">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
+                La propreté commence par des gestes simples d'hygiène quotidienne.
+            </div>
+        </div>
+    </div>
+
+    <!-- Diapositive 8 -->
+    <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0"
+        style="background-image: url('{{ asset('images/groupe-volontaires-africains-heureux-sacs-ordures-zone-nettoyage-dans-parc-afrique-benevolat-charite-personnes-concept-ecologique_627829-13629.jpg') }}');">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
+                Ensemble, nous pouvons améliorer les conditions d'hygiène pour tous.
+            </div>
+        </div>
+    </div>
+
+    <!-- Diapositive 9 -->
+    <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0"
+        style="background-image: url('{{ asset('images/gens-qui-font-du-service-communautaire-ramassant-ordures-exterieur_23-2149109146.jpg') }}');">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
+                Nettoyer notre environnement est une question de responsabilité partagée.
+            </div>
+        </div>
+    </div>
+
+    <!-- Diapositive 10 -->
+    <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0"
+        style="background-image: url('{{ asset('images/groupe-volontaires-africains-heureux-sacs-ordures-zone-nettoyage-dans-parc-afrique-benevolat-charite-personnes-concept-ecologique_627829-13630.jpg') }}');">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
+                Un environnement propre est un droit pour tous, préservons-le.
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+    
+    <script>
+        // JavaScript for slideshow
+        // Sélectionne toutes les diapositives (éléments avec la classe 'slide' dans le div ayant l'ID 'slideshow')
+        const slides = document.querySelectorAll('#slideshow .slide');
+        
+        // Initialise un compteur pour suivre la diapositive actuellement affichée
+        let currentSlide = 0;
+    
+        // Déclare la durée entre chaque changement de diapositive (ici 30 secondes, soit 30 000 ms)
+        const intervalTime = 10000; // 30 seconds
+    
+        // Fonction qui affiche la diapositive suivante
+        function showNextSlide() {
+            // Masque la diapositive actuelle en ajoutant la classe 'opacity-0' (qui rend la diapositive transparente)
+            slides[currentSlide].classList.add('opacity-0');
+    
+            // Passe à la diapositive suivante. Si on atteint la fin, on revient à la première diapositive grâce à l'opérateur %
+            currentSlide = (currentSlide + 1) % slides.length;
+    
+            // Affiche la nouvelle diapositive en retirant la classe 'opacity-0'
+            slides[currentSlide].classList.remove('opacity-0');
+        }
+    
+        // Lance un changement automatique de diapositive toutes les 30 secondes
+        setInterval(showNextSlide, intervalTime);
+    </script>
+    
+
+        
         <div class="pt-24">
             <div class="container px-24 mx-auto flex flex-wrap flex-col md:flex-row  items-center">
                 <!--Left Col-->
