@@ -18,6 +18,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <body class="font-sans text-gray-10000 antialiased">
     <div class="min-h-screen grid-cols-1 md:grid-cols-2 bg-cover bg-center" style="background-image: url('{{ asset('images/IMG-20200529-WA0154-768x432.jpg') }}');">
         <div class="flex flex-col justify-center items-center dark:bg-gray-900 bg-opacity-50 p-6">
@@ -137,6 +138,11 @@
 >>>>>>> 0aa5346 (font image de connexion et d'inscription)
 =======
 >>>>>>> 4552cd5 (login et register)
+=======
+<body class="font-sans text-gray-10000 antialiased">
+    <div class="min-h-screen grid-cols-1 md:grid-cols-2 bg-cover bg-center" style="background-image: url('{{ asset('images/IMG-20200529-WA0154-768x432.jpg') }}');">
+        <div class="flex flex-col justify-center items-center dark:bg-gray-900 bg-opacity-50 p-6">
+>>>>>>> 0aa5346 (font image de connexion et d'inscription)
             <div>
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />

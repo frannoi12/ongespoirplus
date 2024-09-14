@@ -13,6 +13,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     <form method="POST" action="{{ route('register') }}" id="menage-form">
         @csrf
@@ -29,6 +30,11 @@
     <form method="POST" action="{{ route('register') }}" id="menage-form">
         @csrf
 >>>>>>> 476a151 (font image de connexion et d'inscription)
+=======
+    
+    <form method="POST" action="{{ route('register') }}" id="menage-form">
+        @csrf
+>>>>>>> 0aa5346 (font image de connexion et d'inscription)
 =======
     
     <form method="POST" action="{{ route('register') }}" id="menage-form">
