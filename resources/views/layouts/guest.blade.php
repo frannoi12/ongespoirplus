@@ -14,18 +14,17 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<<<<<<< HEAD
-<<<<<<< HEAD
 <body class="font-sans text-gray-900 antialiased">
 
     <!-- Container principal avec une grille à deux colonnes -->
+
     <div class="min-h-screen grid-cols-1 md:grid-cols-2 bg-cover bg-center" style="background-image: url('{{ asset('images/hollywood-md.jpg') }}');">
+
+    <!--div class="min-h-screen grid grid-cols-1 "-->
 
         <!-- Section de l'image -->
         {{-- <div class="hidden md:block">
-        {{-- <div class="hidden md:block">
             <img src="{{ asset('images/images.jpeg') }}" alt="Description de l'image" class="object-cover w-full h-full">
-        </div> --}}
         </div> --}}
 
         <!-- Section du formulaire de connexion -->

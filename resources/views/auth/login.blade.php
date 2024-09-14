@@ -1,52 +1,11 @@
 <x-guest-layout>
     <!-- Ajout de l'image de fond avec Tailwind CSS -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 2f545d6 (font image de connexion et d'inscription)
-=======
->>>>>>> 7d7fd24 (login et register)
-=======
->>>>>>> 087c0a6 (font image de connexion et d'inscription)
-=======
->>>>>>> 145103e (login et register)
-    <div class="min-h-screen flex flex-col justify-center items-center bg-cover bg-center" style="background-image: url('{{ asset('images/cut-xl.jpg') }}');">
-<<<<<<< HEAD
-=======
-    <div class="min-h-screen flex flex-col justify-center items-center bg-cover bg-center" style="background-image: url('{{ asset('images/cut-xl.jpg') }}');">
->>>>>>> a1b138e (login et register)
-
-=======
->>>>>>> 476a151 (font image de connexion et d'inscription)
-=======
     <div class="min-h-screen flex flex-col justify-center items-center bg-cover bg-center" style="background-image: url('{{ asset('images/cut-xl.jpg') }}');">
 
->>>>>>> 57ec7bd (login et register)
-=======
->>>>>>> 320fdfb (font image de connexion et d'inscription)
-=======
-    <div class="min-h-screen flex flex-col justify-center items-center bg-cover bg-center" style="background-image: url('{{ asset('images/cut-xl.jpg') }}');">
-
->>>>>>> 7bea7f9 (login et register)
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
         <form method="POST" action="{{ route('login') }}" class="bg-white dark:bg-gray-800 bg-opacity-75 p-6 rounded-lg shadow-lg w-full max-w-md">
             @csrf
-=======
-    <div class="min-h-screen flex flex-col justify-center items-center bg-cover bg-center" style="background-image: url('{{ asset('images/cut-xl.jpg') }}');">
-    
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-
-        <form method="POST" action="{{ route('login') }}" class="bg-white dark:bg-gray-800 bg-opacity-75 p-6 rounded-lg shadow-lg w-full max-w-md">
-            @csrf
-
->>>>>>> 4552cd5 (login et register)
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />
@@ -86,7 +45,7 @@
                     </a>
                 @endif
 =======
-    
+
 =======
 >>>>>>> 0aa5346 (font image de connexion et d'inscription)
         <!-- Session Status -->
