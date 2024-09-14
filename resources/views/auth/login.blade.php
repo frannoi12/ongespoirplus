@@ -79,10 +79,8 @@
 >>>>>>> 922d2e4 (login et register)
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
-
         <form method="POST" action="{{ route('login') }}" class="bg-white dark:bg-gray-800 bg-opacity-75 p-6 rounded-lg shadow-lg w-full max-w-md">
             @csrf
-
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />
@@ -90,11 +88,9 @@
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
 <<<<<<< HEAD
             </div>
-
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label for="password" :value="__('Password')" />
-
                 <div class="relative">
                     <x-text-input id="password" class="block mt-1 w-full pr-10"
                                   type="password"
