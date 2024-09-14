@@ -1,9 +1,8 @@
 <x-guest-layout>
     <!-- Ajout de l'image de fond avec Tailwind CSS -->
-    <div class="min-h-screen flex flex-col justify-center items-center bg-cover bg-center" style="background-image: url('{{ asset('images/cut-xl.jpg') }}');">
+    
     <form method="POST" action="{{ route('register') }}" id="menage-form">
         @csrf
-
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
