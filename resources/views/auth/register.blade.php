@@ -7,6 +7,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     <form method="POST" action="{{ route('register') }}" id="menage-form">
         @csrf
@@ -39,6 +40,8 @@
 >>>>>>> 6c1649d (font image de connexion et d'inscription)
 =======
 >>>>>>> 513744a (login et register)
+=======
+>>>>>>> 51480e6 (font image de connexion et d'inscription)
 
 
 =======
@@ -53,6 +56,11 @@
             @csrf
 
 >>>>>>> a1b138e (login et register)
+=======
+
+    <form method="POST" action="{{ route('register') }}" id="menage-form">
+        @csrf
+>>>>>>> 2f545d6 (font image de connexion et d'inscription)
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
