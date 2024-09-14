@@ -42,8 +42,10 @@
 <body class="font-sans text-gray-900 antialiased">
 
     <!-- Container principal avec une grille à deux colonnes -->
+
     <div class="min-h-screen grid-cols-1 md:grid-cols-2 bg-cover bg-center" style="background-image: url('{{ asset('images/hollywood-md.jpg') }}');">
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> a1b138e (login et register)
@@ -53,14 +55,18 @@
 >>>>>>> 2f545d6 (font image de connexion et d'inscription)
 =======
 >>>>>>> 7d7fd24 (login et register)
+=======
+    <!--div class="min-h-screen grid grid-cols-1 "-->
+
+>>>>>>> 087c0a6 (font image de connexion et d'inscription)
         <!-- Section de l'image -->
-        {{-- <div class="hidden md:block">
         {{-- <div class="hidden md:block">
             <img src="{{ asset('images/images.jpeg') }}" alt="Description de l'image" class="object-cover w-full h-full">
         </div> --}}
 
         <!-- Section du formulaire de connexion -->
         <div class="flex flex-col justify-center items-center bg-gray-100 dark:bg-gray-900 bg-opacity-50 p-6">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -78,6 +84,8 @@
 =======
 >>>>>>> 4d888ba (login et register)
 =======
+>>>>>>> 0147184 (font image de connexion et d'inscription)
+=======
 <body class="font-sans text-gray-10000 antialiased">
     <div class="min-h-screen grid-cols-1 md:grid-cols-2 bg-cover bg-center" style="background-image: url('{{ asset('images/IMG-20200529-WA0154-768x432.jpg') }}');">
         <div class="flex flex-col justify-center items-center dark:bg-gray-900 bg-opacity-50 p-6">
@@ -93,7 +101,12 @@
 =======
         <div class="flex flex-col justify-center items-center bg-gray-100 dark:bg-gray-900 bg-opacity-50 p-6">
 >>>>>>> 7d7fd24 (login et register)
+<<<<<<< HEAD
 >>>>>>> 4d888ba (login et register)
+=======
+=======
+>>>>>>> 087c0a6 (font image de connexion et d'inscription)
+>>>>>>> 0147184 (font image de connexion et d'inscription)
             <div>
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
