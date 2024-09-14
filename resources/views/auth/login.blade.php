@@ -1,6 +1,7 @@
 <x-guest-layout>
     <!-- Ajout de l'image de fond avec Tailwind CSS -->
 <<<<<<< HEAD
+<<<<<<< HEAD
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
         <form method="POST" action="{{ route('login') }}" class="bg-white dark:bg-gray-800 bg-opacity-75 p-6 rounded-lg shadow-lg w-full max-w-md">
@@ -122,23 +123,21 @@
 =======
     <div class="min-h-screen flex flex-col justify-center items-center bg-cover bg-center" style="background-image: url('{{ asset('images/cut-xl.jpg') }}');">
 
+=======
+>>>>>>> 476a151 (font image de connexion et d'inscription)
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
-
         <form method="POST" action="{{ route('login') }}" class="bg-white dark:bg-gray-800 bg-opacity-75 p-6 rounded-lg shadow-lg w-full max-w-md">
             @csrf
-
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
-
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label for="password" :value="__('Password')" />
-
                 <div class="relative">
                     <x-text-input id="password" class="block mt-1 w-full pr-10"
                                   type="password"

@@ -1,6 +1,6 @@
 <x-guest-layout>
     <!-- Ajout de l'image de fond avec Tailwind CSS -->
-
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     <form method="POST" action="{{ route('register') }}" id="menage-form">
@@ -12,6 +12,11 @@
             @csrf
 
 >>>>>>> 12a2817 (login et register)
+=======
+
+    <form method="POST" action="{{ route('register') }}" id="menage-form">
+        @csrf
+>>>>>>> 476a151 (font image de connexion et d'inscription)
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
