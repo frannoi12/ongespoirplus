@@ -71,8 +71,13 @@ class PersonnelController extends Controller
         ]);
         event(new Registered($user));
 
+<<<<<<< HEAD
         $user->personnel()->create([
         Auth::login($user);
+=======
+        // $user->personnel()->create([
+        // Auth::login($user);
+>>>>>>> fd37ec8 (personnel)
 
         $user->personnel()->create([
             'etat' => $request->etat,

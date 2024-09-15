@@ -14,6 +14,7 @@
 >>>>>>> 12a2817 (login et register)
 =======
 
+
     <form method="POST" action="{{ route('register') }}" id="menage-form">
         @csrf
 >>>>>>> 476a151 (font image de connexion et d'inscription)
@@ -38,6 +39,16 @@
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
+
+        <!-- Contact -->
+        <div class="mt-4">
+            <x-input-label for="contact" :value="__('Contact')" />
+            <x-text-input id="contact" oninput="validateContact()" class="block mt-1 w-full" type="tel"
+                name="contact" :value="old('contact')" required autocomplete="contact" oninput="validateContact()"/>
+            <span id="contactError" class="text-red-500 text-sm mt-2"></span> <!-- Élement pour afficher les erreurs -->
+            <x-input-error :messages="$errors->get('contact')" class="mt-2" />
+        </div>
+
 
         <!-- Password -->
         <div class="mt-4">
@@ -78,6 +89,20 @@
     </form>
 
     <script>
+
+
+        function validateContact() {
+            const contactInput = document.getElementById('contact').value;
+            const errorElement = document.getElementById('contactError');
+            const regex = /^(9[0-36-9]|7[0-36-9])\d{6}$/;
+
+            if (regex.test(contactInput)) {
+                errorElement.textContent = ''; // Efface le message d'erreur si le contact est valide
+            } else {
+                errorElement.textContent =
+                    'Le numéro de téléphone n\'est pas valide.'; // Affiche un message d'erreur si le contact n'est pas valide
+            }
+        }
         // Initialisation des coordonnées par défaut avec les valeurs récupérées ou anciennes
         var defaultLat = {{ $latitude }};
         var defaultLng = {{ $longitude }};
