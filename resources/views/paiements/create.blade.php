@@ -42,27 +42,53 @@
                     <!-- Conteneur des boutons de paiement -->
                     <div class="mt-6 flex space-x-4">
                         @hasanyrole('Admin|personnel')
-                            <!-- Bouton pour paiement en liquide -->
-                            <form action="{{ route('paiements.store', $menage->id) }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="payment_method" value="liquide">
-                                <input type="hidden" name="menage_id" value="{{ $menage->id }}">
-                                <input type="hidden" name="personnel_id" value="{{ Auth::user()->id }}">
-                                <x-primary-button>
-                                    {{ __('Payer en liquide') }}
-                                </x-primary-button>
-                            </form>
+                            @if (auth()->user()->hasRole('personnel'))
+                                <form action="{{ route('persoPaiements.storep', $menage->id) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="payment_method" value="liquide">
+                                    <input type="hidden" name="menage_id" value="{{ $menage->id }}">
+                                    <input type="hidden" name="personnel_id" value="{{ Auth::user()->personnel->id }}">
+                                    <x-primary-button>
+                                        {{ __('Payer en liquide') }}
+                                    </x-primary-button>
+                                </form>
+                            @else
+                                <!-- Bouton pour paiement en liquide -->
+                                <form action="{{ route('paiements.store', $menage->id) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="payment_method" value="liquide">
+                                    <input type="hidden" name="menage_id" value="{{ $menage->id }}">
+                                    <input type="hidden" name="personnel_id" value="{{ Auth::user()->personnel->id }}">
+                                    <x-primary-button>
+                                        {{ __('Payer en liquide') }}
+                                    </x-primary-button>
+                                </form>
+                            @endif
 
-                            <!-- Bouton pour paiement en ligne -->
-                            <form action="{{ route('paiements.store', $menage->id) }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="payment_method" value="mobileMoney">
-                                <input type="hidden" name="menage_id" value="{{ $menage->id }}">
-                                <input type="hidden" name="personnel_id" value="{{ Auth::user()->id }}">
-                                <x-primary-button>
-                                    {{ __('Payer en ligne') }}
-                                </x-primary-button>
-                            </form>
+                            @if (auth()->user()->hasRole('personnel'))
+                                <!-- Bouton pour paiement en ligne -->
+                                <form action="{{ route('persoPaiements.storep', $menage->id) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="payment_method" value="mobileMoney">
+                                    <input type="hidden" name="menage_id" value="{{ $menage->id }}">
+                                    <input type="hidden" name="personnel_id" value="{{ Auth::user()->personnel->id }}">
+                                    <x-primary-button>
+                                        {{ __('Payer en ligne') }}
+                                    </x-primary-button>
+                                </form>
+                            @else
+                                <!-- Bouton pour paiement en ligne -->
+                                <form action="{{ route('paiements.store', $menage->id) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="payment_method" value="mobileMoney">
+                                    <input type="hidden" name="menage_id" value="{{ $menage->id }}">
+                                    <input type="hidden" name="personnel_id" value="{{ Auth::user()->personnel->id }}">
+                                    <x-primary-button>
+                                        {{ __('Payer en ligne') }}
+                                    </x-primary-button>
+                                </form>
+                            @endif
+
                         @endhasanyrole
                     </div>
 

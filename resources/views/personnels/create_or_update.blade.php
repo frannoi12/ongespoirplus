@@ -107,7 +107,10 @@
                                         Inactif</option>
                                 </select>
                             </div>
-
+                            {{-- @foreach ($roles as $role)
+                                {{ dd($role->name) }}
+                            @endforeach --}}
+                            {{-- {{dd($personnel->role)}} --}}
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                                     for="role">Role</label>
@@ -115,7 +118,9 @@
                                     class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                                     <option disabled {{ old('role', $personnel->role ?? '') == '' ? 'selected' : '' }}>
                                         Sélectionnez un rôle pour se personnel</option>
+                                    {{-- {{dd($personnel->role)}} --}}
                                     @foreach ($roles as $role)
+                                        {{-- {{dd($role)}} --}}
                                         <option value="{{ $role->name }}"
                                             {{ old('role', $personnel->role ?? '') == $role->id ? 'selected' : '' }}>
                                             {{ $role->name }}

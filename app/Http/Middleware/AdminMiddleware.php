@@ -20,7 +20,8 @@ class AdminMiddleware
             return $next($request);
         }
         else{
-            return redirect('/'); // Redirigez l'utilisateur non autorisé
+            abort('401');
+            // return redirect('/'); // Redirigez l'utilisateur non autorisé
        }
     }
 }

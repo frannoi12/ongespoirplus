@@ -66,18 +66,20 @@ class SecteurController extends Controller
      */
     public function edit(Secteur $secteur)
     {
-        return view('secteurs.create_or_update', compact('secteur'));
+        dd($secteur);
+        // return view('secteurs.create_or_update', compact('secteur'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSecteurRequest $request, Secteur $secteur)
+    public function update(Request $request, Secteur $secteur)
     {
-        $request->validate([
-            'nomSecteur' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
-            'personnel_id' => 'required|exists:personnels,id',
-        ]);
+        dd($request,$secteur);
+        // $request->validate([
+        //     'nomSecteur' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
+        //     'personnel_id' => 'required|exists:personnels,id'
+        // ]);
 
         $secteur->fill($request->all());
         $secteur->save();

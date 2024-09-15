@@ -19,6 +19,7 @@ class ClientMiddleware
         if (Auth::check() && Auth::user()->hasRole('client')) {
             return $next($request);
         }
-        return redirect('/'); // Redirigez l'utilisateur non autorisé
+        abort('401');
+        // return redirect('/'); // Redirigez l'utilisateur non autorisé
     }
 }

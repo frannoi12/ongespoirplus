@@ -40,12 +40,12 @@ class TariffController extends Controller
     public function store(Request $request,Tariff $tariff)
     {
         $request->validate([
-            'designation' => 'required|string|max:255|regex:/^[^0-9]*$/',
+            'designation' => 'required|string|max:255',
             'montant'     => 'required|integer',
+            'personnel_id'=> 'required|exists:personnels,id'
         ], [
             'designation.string' => 'La description doit être une chaîne de caractères.',
             'montant.integer'    => 'Le montant doit être un nombre entier.',
-            'designation' => 'required|string|max:1000|regex:/^[\pL\s\-]+$/u',
             'montant' => 'required|integer',
             'personnel_id' => 'required|exists:personnels,id',
         ]);

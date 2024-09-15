@@ -32,6 +32,8 @@
                             @endforeach
                         </select>
                     </div>
+                    
+                    <input hidden type="integer" name="personnel_id" value="{{Auth::user()->personnel->id}}">
 
                     <div class="flex justify-end">
                         <button type="submit" class="bg-green-600 hover:bg-green-500 text-white text-sm px-4 py-2 rounded-md">

@@ -9,7 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Role;
+// use Spatie\Permission\Models\Role;
 
 class PersonnelController extends Controller
 {
@@ -75,11 +75,13 @@ class PersonnelController extends Controller
 
 
 
-        $user->personnel()->updateOrCreate([
+        $personnel = $user->personnel()->updateOrCreate([
             'lieu_de_provenance' => $request->lieu_de_provenance,
             'etat' => $request->etat,
             'role' => $request->role,
         ]);
+
+        $personnel->user->assignRole('personnel');
 
         return redirect()->route('personnels.index')->with('success', 'Personnel ajouté avec succès');
     }
@@ -99,7 +101,7 @@ class PersonnelController extends Controller
     public function edit(Personnel $personnel)
     {
         $personnel = Personnel::findOrFail($personnel->id);
-        $roles = Role::all();
+        $roles = EntrepriseRole::all();
         return view('personnels.create_or_update', compact('personnel', 'roles'))->with('succes', 'Edition d\' un personnel');
     }
 
@@ -115,7 +117,7 @@ class PersonnelController extends Controller
             'contact' => 'required|string|min:8',
             'lieu_de_provenance' => 'required|string|max:255|regex:/^[^0-9]*$/',
             'etat' => 'required|string|in:actif,inactif',
-            'role' => 'required|string|max:255',
+            'role' => 'required|string|max:255|exists:entreprises_role,name',
         ]);
 
         $personnel->user->update([

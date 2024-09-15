@@ -26,6 +26,8 @@
                         </div>
                     </div>
 
+                    <input hidden type="integer" name="personnel_id" value="{{Auth::user()->personnel->id}}">
+
                     <div class="px-4 py-3 text-right flex justify-center sm:px-6">
                         <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500">
                             {{ isset($secteur) ? 'Modifier' : 'Créer' }}

@@ -17,4 +17,5 @@ class EntrepriseRole extends Model
         'name',
     ];
 
+    // public
 }

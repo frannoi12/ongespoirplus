@@ -48,7 +48,7 @@
                                 <input type="email" id="email" name="email"
                                     value="{{ old('email', $menage->user->email ?? '') }}"
                                     class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                                <select id="email" name="email"
+                                {{-- <select id="email" name="email"
                                     class="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                                     <option disabled
                                         {{ !isset($menage) || !isset($menage->service_id) ? 'selected' : '' }}>
@@ -58,8 +58,8 @@
                                             {{ isset($menage) && $menage->service_id == $service->id ? 'selected' : '' }}>
                                             {{ $service->type_service }}</option>
                                     @endforeach
-                                </select>
-                                
+                                </select> --}}
+
                                     @error('email')
                                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                 @enderror
