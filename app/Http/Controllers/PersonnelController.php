@@ -74,8 +74,8 @@ class PersonnelController extends Controller
         // $user->personnel()->create([
         // Auth::login($user);
 
-        $user->personnel()->create([
-        Auth::login($user);
+        // $user->personnel()->create([
+        // Auth::login($user);
 
         $user->personnel()->create([
             'etat' => $request->etat,

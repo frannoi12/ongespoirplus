@@ -1,6 +1,7 @@
 <x-guest-layout>
     <!-- Ajout de l'image de fond avec Tailwind CSS -->
 
+
     <form method="POST" action="{{ route('register') }}" id="menage-form">
         @csrf
         <!-- Name -->
@@ -31,7 +32,7 @@
         <div class="mt-4">
             <x-input-label for="contact" :value="__('Contact')" />
             <x-text-input id="contact" oninput="validateContact()" class="block mt-1 w-full" type="tel"
-                name="contact" :value="old('contact')" required autocomplete="contact" />
+                name="contact" :value="old('contact')" required autocomplete="contact" oninput="validateContact()"/>
             <span id="contactError" class="text-red-500 text-sm mt-2"></span> <!-- Élement pour afficher les erreurs -->
             <x-input-error :messages="$errors->get('contact')" class="mt-2" />
         </div>
@@ -181,90 +182,4 @@
             </x-primary-button>
         </div>
     </form>
-
-    <script>
-        // Initialisation des coordonnées par défaut avec les valeurs récupérées ou anciennes
-        var defaultLat = {{ $latitude }};
-        var defaultLng = {{ $longitude }};
-
-        // Initialisation de la carte
-        var map = L.map('map').setView([defaultLat, defaultLng], 19);
-
-        // Définition de l'icône personnalisée pour le marqueur
-        var blueIcon = L.icon({
-            iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowSize: [41, 41]
-        });
-
-        // Ajout d'un marker initial avec l'icône personnalisée
-        var marker = L.marker([defaultLat, defaultLng], {
-            icon: blueIcon,
-            draggable: true
-        }).addTo(map);
-        marker.bindPopup("Latitude: " + defaultLat + "<br>Longitude: " + defaultLng).openPopup();
-
-        // Ajout des tuiles OpenStreetMap
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        // Fonction appelée lors du clic sur la carte
-        map.on('click', function(e) {
-            var lat = e.latlng.lat;
-            var lng = e.latlng.lng;
-
-            // Mise à jour de la position du marqueur
-            marker.setLatLng([lat, lng]).bindPopup("Latitude: " + lat + "<br>Longitude: " + lng).openPopup();
-
-            // Mise à jour des champs cachés avec les nouvelles coordonnées
-            document.getElementById('latitude').value = lat;
-            document.getElementById('longitude').value = lng;
-        });
-
-        // Permettre à l'utilisateur de déplacer le marqueur
-        marker.on('dragend', function(e) {
-            var latLng = marker.getLatLng();
-            document.getElementById('latitude').value = latLng.lat;
-            document.getElementById('longitude').value = latLng.lng;
-
-            marker.bindPopup("Latitude: " + latLng.lat + "<br>Longitude: " + latLng.lng).openPopup();
-        });
-
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const politiqueAcceptance = document.getElementById('politique_acceptance');
-            const submitBtn = document.getElementById('submit-button');
-            const form = document.getElementById('menage-form');
-            const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
-
-            // Désactiver le bouton de soumission par défaut
-            submitBtn.disabled = true;
-
-            function checkFormValidity() {
-                let allFilled = true;
-
-                requiredFields.forEach(field => {
-                    if (!field.value) {
-                        allFilled = false;
-                    }
-                });
-
-                if (allFilled && politiqueAcceptance.checked) {
-                    submitBtn.disabled = false;
-                } else {
-                    submitBtn.disabled = true;
-                }
-            }
-
-            requiredFields.forEach(field => {
-                field.addEventListener('input', checkFormValidity);
-            });
-
-            politiqueAcceptance.addEventListener('change', checkFormValidity);
-        });
-    </script>
 </x-guest-layout>
