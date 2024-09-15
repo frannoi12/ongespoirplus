@@ -88,6 +88,7 @@ class PersonnelController extends Controller
 >>>>>>> fd37ec8 (personnel)
 >>>>>>> 2957510 (personnel)
 
+<<<<<<< HEAD
         $user->personnel()->create([
 <<<<<<< HEAD
             'lieu_de_provenance' => $request->lieu_de_provenance,
@@ -99,6 +100,10 @@ class PersonnelController extends Controller
 >>>>>>> 7d7fd24 (login et register)
 =======
         Auth::login($user);
+=======
+        // $user->personnel()->create([
+        // Auth::login($user);
+>>>>>>> fe1fa57 (personnel)
 
         $user->personnel()->create([
 >>>>>>> 145103e (login et register)

@@ -138,6 +138,7 @@
 =======
 >>>>>>> 087c0a6 (font image de connexion et d'inscription)
 
+
     <form method="POST" action="{{ route('register') }}" id="menage-form">
         @csrf
         <!-- Name -->
@@ -168,7 +169,7 @@
         <div class="mt-4">
             <x-input-label for="contact" :value="__('Contact')" />
             <x-text-input id="contact" oninput="validateContact()" class="block mt-1 w-full" type="tel"
-                name="contact" :value="old('contact')" required autocomplete="contact" />
+                name="contact" :value="old('contact')" required autocomplete="contact" oninput="validateContact()"/>
             <span id="contactError" class="text-red-500 text-sm mt-2"></span> <!-- Élement pour afficher les erreurs -->
             <x-input-error :messages="$errors->get('contact')" class="mt-2" />
         </div>
@@ -366,6 +367,7 @@
     </form>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     </div>
 >>>>>>> 4552cd5 (login et register)
@@ -459,4 +461,6 @@
         });
     </script>
 >>>>>>> 2957510 (personnel)
+=======
+>>>>>>> fe1fa57 (personnel)
 </x-guest-layout>
