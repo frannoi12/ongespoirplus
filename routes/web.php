@@ -13,11 +13,7 @@ use App\Http\Controllers\TariffController;
 use App\Http\Controllers\MenageExportController;
 use App\Http\Controllers\MobileMoneyController;
 use App\Http\Controllers\Auth\GoogleAuthController;
-
-
-
-
-
+use App\Http\Controllers\EntreprisesRoleController;
 use App\Http\Controllers\PaiementController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +55,7 @@ Route::middleware(['auth','admin'])->group(function(){
     Route::resource('secteurs', SecteurController::class);
     Route::resource('tariffs', TariffController::class);
     Route::resource('services', ServiceController::class);
+    Route::resource('entreprises_roles', EntreprisesRoleController::class);
     // Route::resource('paiements', PaiementController::class);
 
     Route::get('/liquides/create', [LiquideController::class, 'create'])->name('liquides.create_or_update');

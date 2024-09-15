@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EntrepriseRole;
 use App\Models\Personnel;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -42,7 +43,8 @@ class PersonnelController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $roles = EntrepriseRole::all();
+        // dd($roles);
         return view("personnels.create_or_update", compact('roles'))->with('succes', 'Lancement de création d\'un personnel');
     }
 
@@ -59,7 +61,7 @@ class PersonnelController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'lieu_de_provenance' => 'required|string|max:255|regex:/^[^0-9]*$/',
             'etat' => 'required|string|in:actif,inactif|regex:/^[^0-9]*$/',
-            'role' => 'required|exists:roles,name|regex:/^[^0-9]*$/',
+            'role' => 'required|exists:entreprises_role,name|regex:/^[^0-9]*$/',
         ]);
 
         $user = User::updateOrCreate([
@@ -71,8 +73,7 @@ class PersonnelController extends Controller
         ]);
         event(new Registered($user));
 
-        $user->personnel()->create([
-        Auth::login($user);
+
 
         $user->personnel()->updateOrCreate([
             'lieu_de_provenance' => $request->lieu_de_provenance,

@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             PolitiqueSeeder::class,
             TariffSeeder::class,
+            EntrepriseRoleSeeder::class,
             // MenageSeeder::class,
         ]);
     }
