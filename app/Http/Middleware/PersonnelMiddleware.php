@@ -19,6 +19,6 @@ class PersonnelMiddleware
         if (Auth::check() && Auth::user()->hasRole('personnel')) {
             return $next($request);
         }
-        return redirect('/'); // Redirigez l'utilisateur non autorisé
+        abort('401'); // Redirigez l'utilisateur non autorisé
     }
 }

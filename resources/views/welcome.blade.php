@@ -34,7 +34,7 @@
                             <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-300 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
                         @else
                             <a href="{{ route('login') }}" class="font-semibold text-gray-300 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Connexion</a>
-    
+
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-300 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">S'inscrire</a>
                             @endif
@@ -77,7 +77,7 @@
             </div>
             <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
         </nav>
-    
+
        <!--Hero-->
 <div id="slideshow" class="relative w-full h-screen overflow-hidden" style="background-color: rgba(255, 255, 255, 0.1);">
     <!-- Diapositive 1 -->
@@ -183,36 +183,36 @@
 </div>
 
     </body>
-    
+
     <script>
         // JavaScript for slideshow
         // Sélectionne toutes les diapositives (éléments avec la classe 'slide' dans le div ayant l'ID 'slideshow')
         const slides = document.querySelectorAll('#slideshow .slide');
-        
+
         // Initialise un compteur pour suivre la diapositive actuellement affichée
         let currentSlide = 0;
-    
+
         // Déclare la durée entre chaque changement de diapositive (ici 30 secondes, soit 30 000 ms)
         const intervalTime = 10000; // 30 seconds
-    
+
         // Fonction qui affiche la diapositive suivante
         function showNextSlide() {
             // Masque la diapositive actuelle en ajoutant la classe 'opacity-0' (qui rend la diapositive transparente)
             slides[currentSlide].classList.add('opacity-0');
-    
+
             // Passe à la diapositive suivante. Si on atteint la fin, on revient à la première diapositive grâce à l'opérateur %
             currentSlide = (currentSlide + 1) % slides.length;
-    
+
             // Affiche la nouvelle diapositive en retirant la classe 'opacity-0'
             slides[currentSlide].classList.remove('opacity-0');
         }
-    
+
         // Lance un changement automatique de diapositive toutes les 30 secondes
         setInterval(showNextSlide, intervalTime);
     </script>
-    
 
-        
+
+
         <div class="pt-24">
             <div class="container px-24 mx-auto flex flex-wrap flex-col md:flex-row  items-center">
                 <!--Left Col-->
@@ -507,7 +507,7 @@
                     class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                     C'est partie !
                 </button>
-            </a>            
+            </a>
 
         </section>
         <!--Footer-->
@@ -527,7 +527,7 @@
                             <a href="https://www.facebook.com/profile.php?id=61552210329384" target="_blank">
                                 <img src="{{ asset('images/fesbook.png') }}" alt="Facebook" class="w-8 h-8">
                             </a>
-                            
+
                             <a href="https://www.twitter.com" target="_blank">
                                 <img src="{{ asset('images/tiwter.png') }}" alt="Twitter" class="w-8 h-8">
                             </a>
@@ -542,13 +542,13 @@
                             </a>
                             <a href="https://wa.me/22892588651" target="_blank">
                                 <img src="{{ asset('images/whatsapp.jpeg') }}" alt="WhatsApp" class="w-8 h-8">
-                            </a>                            
+                            </a>
                         </div>
                     </div>
                     <div class="w-full md:w-1/3 mt-8 md:mt-0 text-right">
                         <h4 class="text-lg font-semibold">Contact</h4>
-                        <p class="mt-4">+228 90 00 00 00</p>
-                        <p class="mt-2">contact@espoirplus.tg</p>
+                        <p class="mt-4">+228 92 58 86 51</p>
+                        <p class="mt-2">voixdelumiere2018@gmail.com</p>
                         <p class="mt-2">Sokodé, Togo</p>
                     </div>
                 </div>
