@@ -72,9 +72,12 @@ class PersonnelController extends Controller
         event(new Registered($user));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         $user->personnel()->create([
         Auth::login($user);
 =======
+=======
+>>>>>>> 48425e2 (personnel)
         // $user->personnel()->create([
         // Auth::login($user);
 >>>>>>> fd37ec8 (personnel)
@@ -82,6 +85,15 @@ class PersonnelController extends Controller
 <<<<<<< HEAD
         // $user->personnel()->create([
         // Auth::login($user);
+=======
+<<<<<<< HEAD
+        $user->personnel()->create([
+        Auth::login($user);
+=======
+        // $user->personnel()->create([
+        // Auth::login($user);
+>>>>>>> fd37ec8 (personnel)
+>>>>>>> 2957510 (personnel)
 
         $user->personnel()->create([
             'lieu_de_provenance' => $request->lieu_de_provenance,
