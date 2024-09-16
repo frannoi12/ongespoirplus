@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -25,6 +26,9 @@ class UserSeeder extends Seeder
             'contact'=>97607031,
             'password'=>Hash::make('frannois12'),
         ]);
+
+        Auth::login($user); // Connecte l'utilisateur
+
         $user1=User::create([
             'name'=>'DERMANE',
             'prenom'=>'Fad',
@@ -32,6 +36,9 @@ class UserSeeder extends Seeder
             'contact'=>90148882,
             'password'=>Hash::make('F@d-28101998'),
         ]);
+
+        Auth::login($user1); // Connecte l'utilisateur
+
 
         $users = [
             ['name' => 'OMOROU', 'prenom' => 'K. Aboubakar', 'email' => 'aboubakar.omorou@example.com', 'contact' => '90111756', 'password' => Hash::make('password')],
@@ -56,7 +63,9 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($users as $userData) {
-            User::create($userData);
+            $newUser = User::create($userData);
+            // $newUser->assignRole('personnel'); // Assigner un rôle à chaque utilisateur créé
+            //
         }
 
 

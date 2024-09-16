@@ -33,7 +33,7 @@ class SecteurController extends Controller
     public function create()
     {
         //
-        return view('secteurs.create_or_update')->with('succes','');
+        return view('secteurs.create_or_update')->with('succes', 'Secteur créer avec succes');
     }
 
     /**
@@ -41,13 +41,8 @@ class SecteurController extends Controller
      */
     public function store(StoreSecteurRequest $request)
     {
-        $request->validate([
-            'nomSecteur' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
-            'personnel_id' => 'required|exists:personnels,id',
-        ]);
-
         $secteur = new Secteur();
-        $secteur->fill($request->all());
+        $secteur->fill($request->validated()); // Utilisation de validated() pour récupérer uniquement les données validées
         $secteur->save();
 
         return redirect()->route('secteurs.index')->with('success', 'Secteur créé avec succès.');
@@ -74,12 +69,7 @@ class SecteurController extends Controller
      */
     public function update(UpdateSecteurRequest $request, Secteur $secteur)
     {
-        $request->validate([
-            'nomSecteur' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
-            'personnel_id' => 'required|exists:personnels,id',
-        ]);
-
-        $secteur->fill($request->all());
+        $secteur->fill($request->validated());
         $secteur->save();
 
         return redirect()->route('secteurs.index')->with('success', 'Secteur mis à jour avec succès.');
@@ -90,8 +80,11 @@ class SecteurController extends Controller
      */
     public function destroy(Secteur $secteur)
     {
-        $secteur->delete();
-
-        return redirect()->route('secteurs.index')->with('success', 'Secteur supprimé avec succès.');
+        try {
+            $secteur->delete();
+            return redirect()->route('secteurs.index')->with('success', 'Secteur supprimé avec succès.');
+        } catch (\Exception $e) {
+            return redirect()->route('secteurs.index')->with('error', 'Erreur lors de la suppression du secteur.');
+        }
     }
 }

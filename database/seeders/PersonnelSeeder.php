@@ -51,11 +51,15 @@ class PersonnelSeeder extends Seeder
             'user_id'=>$users[0]->id,
         ]);
 
-        $personne1->user->syncRoles('Admin','personnel');
+        $personne1->user->assignRole('Admin','personnel');
+
+        $fad = User::where('contact','90148882')->first();
+
+        $fad->assignRole('Admin','personnel');
 
         $users2 = User::where('contact', '92588561')->first();
 
-        $users2->syncRoles('Admin','personnel');
+        $users2->assignRole('Admin','personnel');
 
 
 
