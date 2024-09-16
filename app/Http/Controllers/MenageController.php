@@ -157,18 +157,7 @@ class MenageController extends Controller
             ]);
         }
 
-        if(Auth::user()->personnel){
-            event(new Registered($user));
-            return redirect()->route('menages.index')->with('success', 'Ménage créé avec succès');
-        }else{
-            event(new Registered($user));
-            Auth::login($user);
-            return redirect(route('dashboard', compact('user')));
-        }
-        // event(new Registered($user));
-
-
-
+        return redirect()->route('menages.index')->with('success', 'Ménage créé avec succès');
         // return view('paiements.create',compact('menage'))->with('succes','Menage en cours de création');
     }
 
@@ -262,9 +251,9 @@ class MenageController extends Controller
             ]),
         ]);
 
-        return view('paiements.create')->with('succes', 'Menage en cours de mise à jour');
+        // return view('paiements.create')->with('succes', 'Menage en cours de mise à jour');
 
-        // return redirect()->route('menages.index')->with('success', 'Ménage mis à jour avec succès');
+        return redirect()->route('menages.index')->with('success', 'Ménage mis à jour avec succès');
     }
 
     /**
