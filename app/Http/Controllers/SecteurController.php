@@ -39,7 +39,7 @@ class SecteurController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSecteurRequest $request)
+    public function store(Request $request)
     {
         $request->validate([
             'nomSecteur' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
@@ -72,7 +72,7 @@ class SecteurController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSecteurRequest $request, Secteur $secteur)
+    public function update(Request $request, Secteur $secteur)
     {
         $request->validate([
             'nomSecteur' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',

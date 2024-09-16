@@ -69,54 +69,16 @@ class PersonnelController extends Controller
             'contact' => $request->contact,
             'password' => Hash::make($request->password),  // hash du mot de passe
         ]);
-        event(new Registered($user));
+        // event(new Registered($user));
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        $user->personnel()->create([
-        Auth::login($user);
-=======
-=======
->>>>>>> 48425e2 (personnel)
-        // $user->personnel()->create([
-        // Auth::login($user);
->>>>>>> fd37ec8 (personnel)
 
-<<<<<<< HEAD
-        // $user->personnel()->create([
-        // Auth::login($user);
-=======
-<<<<<<< HEAD
-        $user->personnel()->create([
-        Auth::login($user);
-=======
-        // $user->personnel()->create([
-        // Auth::login($user);
->>>>>>> fd37ec8 (personnel)
->>>>>>> 2957510 (personnel)
+
+
+
+
 
         $user->personnel()->create([
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             'lieu_de_provenance' => $request->lieu_de_provenance,
-<<<<<<< HEAD
-=======
-        $user->personnel()->create([
->>>>>>> a1b138e (login et register)
-=======
->>>>>>> 7d7fd24 (login et register)
-=======
-        Auth::login($user);
-
-        $user->personnel()->create([
->>>>>>> 145103e (login et register)
-=======
-            'lieu_de_provenance' => $request->lieu_de_provenance,
->>>>>>> 4552cd5 (login et register)
-=======
-            'lieu_de_provenance' => $request->lieu_de_provenance,
->>>>>>> 4552cd5 (login et register)
             'etat' => $request->etat,
             'role' => $request->role,
         ]);

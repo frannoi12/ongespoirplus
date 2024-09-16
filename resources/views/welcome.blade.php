@@ -34,15 +34,6 @@
                             <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-300 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
                         @else
                             <a href="{{ route('login') }}" class="font-semibold text-gray-300 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Connexion</a>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
-=======
-    
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-300 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">S'inscrire</a>
                             @endif
@@ -85,36 +76,11 @@
             </div>
             <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
         </nav>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
-=======
-    
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
        <!--Hero-->
 <div id="slideshow" class="relative w-full h-screen overflow-hidden" style="background-color: rgba(255, 255, 255, 0.1);">
     <!-- Diapositive 1 -->
     <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         style="background-image: url('{{ asset('images/fad.jpeg') }}');">
-=======
-        style="background-image: url('{{ asset('images/hands-sorting-recyclables-into-labeled-bins-ecofriendly-theme_1039005-13948.jpg') }}');">
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
-=======
-        style="background-image: url('{{ asset('images/fad.jpeg') }}');">
->>>>>>> 2ffe806 (image perso)
-=======
-        style="background-image: url('{{ asset('images/hands-sorting-recyclables-into-labeled-bins-ecofriendly-theme_1039005-13948.jpg') }}');">
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
-=======
-        style="background-image: url('{{ asset('images/fad.jpeg') }}');">
->>>>>>> 2ffe806 (image perso)
         <!-- Texte explicatif sur l'hygiène -->
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
@@ -125,23 +91,7 @@
 
     <!-- Diapositive 2 -->
     <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         style="background-image: url('{{ asset('images/fran.jpeg') }}');">
-=======
-        style="background-image: url('{{ asset('images/welcome.png') }}');">
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
-=======
-        style="background-image: url('{{ asset('images/fran.jpeg') }}');">
->>>>>>> 2ffe806 (image perso)
-=======
-        style="background-image: url('{{ asset('images/welcome.png') }}');">
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
-=======
-        style="background-image: url('{{ asset('images/fran.jpeg') }}');">
->>>>>>> 2ffe806 (image perso)
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
                 Le respect des règles d'hygiène contribue à un environnement sain et propre.
@@ -191,23 +141,7 @@
 
     <!-- Diapositive 7 -->
     <div class="slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         style="background-image: url('{{ asset('images/fille.jpg') }}');">
-=======
-        style="background-image: url('{{ asset('images/IMG-20200529-WA0146-768x432.jpg') }}');">
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
-=======
-        style="background-image: url('{{ asset('images/fille.jpg') }}');">
->>>>>>> 2ffe806 (image perso)
-=======
-        style="background-image: url('{{ asset('images/IMG-20200529-WA0146-768x432.jpg') }}');">
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
-=======
-        style="background-image: url('{{ asset('images/fille.jpg') }}');">
->>>>>>> 2ffe806 (image perso)
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-white text-3xl font-bold text-center bg-black bg-opacity-50 p-4 rounded-md">
                 La propreté commence par des gestes simples d'hygiène quotidienne.
@@ -247,21 +181,16 @@
 </div>
 
     </body>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
-=======
-    
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
     <script>
         // JavaScript for slideshow
         // Sélectionne toutes les diapositives (éléments avec la classe 'slide' dans le div ayant l'ID 'slideshow')
         const slides = document.querySelectorAll('#slideshow .slide');
-<<<<<<< HEAD
-<<<<<<< HEAD
+        // Initialise un compteur pour suivre la diapositive actuellement affichée
+        let currentSlide = 0;
+
+        // Déclare la durée entre chaque changement de diapositive (ici 30 secondes, soit 30 000 ms)
+        const intervalTime = 10000; // 30 seconds
+
 
         // Initialise un compteur pour suivre la diapositive actuellement affichée
         let currentSlide = 0;
@@ -269,26 +198,10 @@
         // Déclare la durée entre chaque changement de diapositive (ici 30 secondes, soit 30 000 ms)
         const intervalTime = 10000; // 30 seconds
 
-=======
-=======
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
-        
-        // Initialise un compteur pour suivre la diapositive actuellement affichée
-        let currentSlide = 0;
-    
-        // Déclare la durée entre chaque changement de diapositive (ici 30 secondes, soit 30 000 ms)
-        const intervalTime = 10000; // 30 seconds
-    
-<<<<<<< HEAD
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
-=======
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
         // Fonction qui affiche la diapositive suivante
         function showNextSlide() {
             // Masque la diapositive actuelle en ajoutant la classe 'opacity-0' (qui rend la diapositive transparente)
             slides[currentSlide].classList.add('opacity-0');
-<<<<<<< HEAD
-<<<<<<< HEAD
 
             // Passe à la diapositive suivante. Si on atteint la fin, on revient à la première diapositive grâce à l'opérateur %
             currentSlide = (currentSlide + 1) % slides.length;
@@ -300,30 +213,6 @@
         // Lance un changement automatique de diapositive toutes les 30 secondes
         setInterval(showNextSlide, intervalTime);
     </script>
-
-
-
-=======
-=======
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
-    
-            // Passe à la diapositive suivante. Si on atteint la fin, on revient à la première diapositive grâce à l'opérateur %
-            currentSlide = (currentSlide + 1) % slides.length;
-    
-            // Affiche la nouvelle diapositive en retirant la classe 'opacity-0'
-            slides[currentSlide].classList.remove('opacity-0');
-        }
-    
-        // Lance un changement automatique de diapositive toutes les 30 secondes
-        setInterval(showNextSlide, intervalTime);
-    </script>
-    
-
-        
-<<<<<<< HEAD
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
-=======
->>>>>>> befc9d0 (correction de welcome pour dispositive fofilant)
         <div class="pt-24">
             <div class="container px-24 mx-auto flex flex-wrap flex-col md:flex-row  items-center">
                 <!--Left Col-->
