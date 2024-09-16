@@ -115,52 +115,52 @@ Route::middleware(['auth','admin'])->group(function () {
 
 // Routes pour le personnel
 
-// Route::middleware(['auth','personnel'])->group(function () {
-//     Route::resource('personnels', PersonnelController::class);
-//     Route::resource('menages', MenageController::class);
-//     Route::resource('ordures', OrdureController::class);
-//     Route::resource('politiques', PolitiqueController::class);
-//     // Route::resource('liquides', LiquideController::class);
-//     // Route::resource('secteurs', SecteurController::class);
-//     Route::resource('tariffs', TariffController::class);
-//     Route::resource('services', ServiceController::class);
-//     // Route::resource('paiements', PaiementController::class);
+Route::middleware(['auth','personnel'])->group(function () {
+    Route::resource('personnels', PersonnelController::class);
+    Route::resource('menages', MenageController::class);
+    Route::resource('ordures', OrdureController::class);
+    Route::resource('politiques', PolitiqueController::class);
+    // Route::resource('liquides', LiquideController::class);
+    Route::resource('secteurs', SecteurController::class);
+    Route::resource('tariffs', TariffController::class);
+    Route::resource('services', ServiceController::class);
+    // Route::resource('paiements', PaiementController::class);
 
-//     Route::get('/liquides/personnelCreate', [LiquideController::class, 'create'])->name('liquides.create_or_update');
-//     Route::post('/liquides/personnleStore', [LiquideController::class,'store'])->name('liquides.store');
-//     Route::get('/liquidesP/{id}', [LiquideController::class, 'show'])->name('liquides.show');
-//     Route::get('/liquidesP/pdf/{id}', [LiquideController::class, 'generatePdf'])->name('pdf.generate');
-//     Route::put('/liquidesP/{id}', [LiquideController::class, 'update'])->name('liquides.update');
-//     Route::get('/liquidesP/{id}/edit', [LiquideController::class, 'edit'])->name('liquides.edit');
-
-
-//     Route::get('/mobileMoneys/create', [MobileMoneyController::class, 'create'])->name('mobiles.create_or_update');
-//     Route::post('/mobileMoneys/store', [MobileMoneyController::class,'store'])->name('mobiles.store');
-//     Route::get('/mobileMoney/{id}', [MobileMoneyController::class, 'show'])->name('mobiles.show');
-//     Route::get('/mobilMoneys/pdf/{id}', [MobileMoneyController::class, 'generatePdf'])->name('pdf_ligne.generate');
-//     Route::put('/mobilMoneys/{id}', [MobileMoneyController::class, 'update'])->name('mobiles.update');
-//     Route::get('/mobilMoneys/{id}/edit', [MobileMoneyController::class, 'edit'])->name('mobiles.edit');
+    Route::get('/liquides/personnelCreate', [LiquideController::class, 'create'])->name('liquides.create_or_update');
+    Route::post('/liquides/personnleStore', [LiquideController::class,'store'])->name('liquides.store');
+    Route::get('/liquidesP/{id}', [LiquideController::class, 'show'])->name('liquides.show');
+    Route::get('/liquidesP/pdf/{id}', [LiquideController::class, 'generatePdf'])->name('pdf.generate');
+    Route::put('/liquidesP/{id}', [LiquideController::class, 'update'])->name('liquides.update');
+    Route::get('/liquidesP/{id}/edit', [LiquideController::class, 'edit'])->name('liquides.edit');
 
 
+    Route::get('/mobileMoneys/create', [MobileMoneyController::class, 'create'])->name('mobiles.create_or_update');
+    Route::post('/mobileMoneys/store', [MobileMoneyController::class,'store'])->name('mobiles.store');
+    Route::get('/mobileMoney/{id}', [MobileMoneyController::class, 'show'])->name('mobiles.show');
+    Route::get('/mobilMoneys/pdf/{id}', [MobileMoneyController::class, 'generatePdf'])->name('pdf_ligne.generate');
+    Route::put('/mobilMoneys/{id}', [MobileMoneyController::class, 'update'])->name('mobiles.update');
+    Route::get('/mobilMoneys/{id}/edit', [MobileMoneyController::class, 'edit'])->name('mobiles.edit');
 
 
-//     Route::post('/paiements/personnelStore', [PaiementController::class, 'store'])->name('persoPaiements.storep');
-//     Route::get('/paiements/create/{menageId}', [PaiementController::class, 'create'])->name('paiements.create');
 
 
-//     Route::get('/menage', [MenageExportController::class, 'export'])->name('menages.export');
+    Route::post('/paiements/personnelStore', [PaiementController::class, 'store'])->name('persoPaiements.storep');
+    Route::get('/paiements/create/{menageId}', [PaiementController::class, 'create'])->name('paiements.create');
 
 
-//     Route::get('/payment', [CinetPayController::class, 'showPaymentForm'])->name('cinetpay.payment');
-
-//     Route::post('/payment/process', [CinetPayController::class, 'processPayment'])->name('cinetpay.process');
-
-//     Route::get('/payment/callback', [CinetPayController::class, 'callback'])->name('cinetpay.callback');
-
-//     Route::post('/payment/notify', [CinetPayController::class, 'notify'])->name('cinetpay.notify');
+    Route::get('/menage', [MenageExportController::class, 'export'])->name('menages.export');
 
 
-// });
+    Route::get('/payment', [CinetPayController::class, 'showPaymentForm'])->name('cinetpay.payment');
+
+    Route::post('/payment/process', [CinetPayController::class, 'processPayment'])->name('cinetpay.process');
+
+    Route::get('/payment/callback', [CinetPayController::class, 'callback'])->name('cinetpay.callback');
+
+    Route::post('/payment/notify', [CinetPayController::class, 'notify'])->name('cinetpay.notify');
+
+
+});
 
 
 
