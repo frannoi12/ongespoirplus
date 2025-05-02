@@ -190,7 +190,7 @@ class MenageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMenageRequest $request, Menage $menage)
+    public function update(Request $request, Menage $menage)
     {
         // Validation des données
         $request->validate([

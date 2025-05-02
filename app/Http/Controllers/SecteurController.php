@@ -39,11 +39,17 @@ class SecteurController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSecteurRequest $request)
+    public function store(Request $request)
     {
-        $secteur = new Secteur();
-        $secteur->fill($request->validated()); // Utilisation de validated() pour récupérer uniquement les données validées
-        $secteur->save();
+
+        $request->validate([
+            'nomSecteur' => 'required|string|max:255|regex:/^[^0-9]*$/',
+            'personnel_id' => 'required|exists:personnels,id'
+        ]);
+        $secteur = Secteur::updateOrCreate([
+            'nomSecteur' => $request->nomSecteur,
+            'personnel_id' => $request->personnel_id
+        ]);
 
         return redirect()->route('secteurs.index')->with('success', 'Secteur créé avec succès.');
     }
@@ -67,10 +73,16 @@ class SecteurController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSecteurRequest $request, Secteur $secteur)
+    public function update(Request $request, Secteur $secteur)
     {
-        $secteur->fill($request->validated());
-        $secteur->save();
+        $request->validate([
+            'nomSecteur' => 'required|string|max:255|regex:/^[^0-9]*$/',
+            'personnel_id' => 'required|exists:personnels,id'
+        ]);
+        $secteur = Secteur::updateOrCreate([
+            'nomSecteur' => $request->nomSecteur,
+            'personnel_id' => $request->personnel_id
+        ]);
 
         return redirect()->route('secteurs.index')->with('success', 'Secteur mis à jour avec succès.');
     }
